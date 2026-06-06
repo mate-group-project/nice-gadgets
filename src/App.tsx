@@ -62,6 +62,7 @@ function App() {
               <a
                 href="https://vite.dev/"
                 target="_blank"
+                rel="noreferrer"
               >
                 <img
                   className="logo"
@@ -75,6 +76,7 @@ function App() {
               <a
                 href="https://react.dev/"
                 target="_blank"
+                rel="noreferrer"
               >
                 <img
                   className="button-icon"
@@ -101,6 +103,7 @@ function App() {
               <a
                 href="https://github.com/vitejs/vite"
                 target="_blank"
+                rel="noreferrer"
               >
                 <svg
                   className="button-icon"
@@ -116,6 +119,7 @@ function App() {
               <a
                 href="https://chat.vite.dev/"
                 target="_blank"
+                rel="noreferrer"
               >
                 <svg
                   className="button-icon"
@@ -131,6 +135,7 @@ function App() {
               <a
                 href="https://x.com/vite_js"
                 target="_blank"
+                rel="noreferrer"
               >
                 <svg
                   className="button-icon"
@@ -146,6 +151,7 @@ function App() {
               <a
                 href="https://bsky.app/profile/vite.dev"
                 target="_blank"
+                rel="noreferrer"
               >
                 <svg
                   className="button-icon"
