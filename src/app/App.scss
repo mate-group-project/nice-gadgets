@@ -1,0 +1,19 @@
+.app {
+  .hero {
+    @include container;
+  }
+
+  .models {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .categories {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+}

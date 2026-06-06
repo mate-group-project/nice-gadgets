@@ -1,0 +1,9 @@
+$max-width: 320px;
+$height: 320px;
+
+.category__card {
+  width: 100%;
+  max-width: $max-width;
+  height: $height;
+  background: #83c3c3;
+}

@@ -1,0 +1,7 @@
+.section {
+  @include container;
+
+  &__title {
+    color: #83c3c3;
+  }
+}

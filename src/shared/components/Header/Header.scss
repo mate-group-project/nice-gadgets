@@ -1,0 +1,11 @@
+$height: 64px;
+
+.header {
+  @include container;
+  height: $height;
+  background: #83c3c3;
+
+  @include lg-and-up {
+    max-width: 100%;
+  }
+}
