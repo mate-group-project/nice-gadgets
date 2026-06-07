@@ -1,73 +1,82 @@
-# React + TypeScript + Vite
+# Nice Gadgets
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Nice Gadgets is a React + TypeScript e-commerce project built as a Mate Academy group project.
 
-Currently, two official plugins are available:
+### Links
+Design: [Figma link](https://www.figma.com/design/xMK2Dy0mfBbJJSNctmOuLW/Phone-catalog--V2--Rounded-Style-1?node-id=0-1&p=f)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Demo: [deployed site link](https://nice-gadgets-store.netlify.app/)
 
-## React Compiler
+API: [API link](https://mate-phone-catalog-api.onrender.com/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Clone the repository
+```bash
+git clone https://github.com/mate-group-project/nice-gadgets.git 
+cd nice-gadgets
+```
+2. Install dependencies
+```bash
+npm install
+```
+3. Start the development server
+```bash
+npm run dev
+```
+The app will be available at: http://localhost:5173
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Technologies
+* React
+* TypeScript
+* Vite
+* React Router
+* SCSS
+* Base UI
+* ESLint
+* Prettier
+* Husky
+* lint-staged
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+# Project Workflow
+1. Create a new branch from main.
+
+2. Work on your task in a separate branch.
+
+3. Run fixes before creating a Pull Request:
+```bash
+npm run fix-style
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+4. Create a Pull Request.
+5. Request a review.
+6. Merge only after approval.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+## Team Agreements
+Do not push directly to main or main.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+Use shared components from shared/components when possible.
+
+Use the shared Icon component for icons.
+
+Keep Pull Requests small and focused.
+
+If something is unclear — ask in the team chat.
+
+If a task may block someone else — let the team know.
+
+## Team
+
+Tetiana Linska
+
+Yana Karpovych
+
+Roman Lysunets
+
+Yevhenii Olkhovskyi
+
+Andrii Stetsula
+
+Bohdan Mykhailenko
