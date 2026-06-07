@@ -5,5 +5,5 @@ $height: 320px;
   width: 100%;
   max-width: $max-width;
   height: $height;
-  background: #83c3c3;
+  background: var(--elements);
 }

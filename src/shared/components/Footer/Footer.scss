@@ -3,7 +3,7 @@ $height: 64px;
 .footer {
   @include container;
   height: $height;
-  background: #83c3c3;
+  background: var(--elements);
   margin-top: $height;
 
   @include lg-and-up {

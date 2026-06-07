@@ -2,6 +2,6 @@
   @include container;
 
   &__title {
-    color: #83c3c3;
+    color: var(--primary);
   }
 }

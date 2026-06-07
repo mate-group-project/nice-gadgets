@@ -2,5 +2,5 @@ $height: 400px;
 
 .carousel {
   height: $height;
-  background: #83c3c3;
+  background: var(--elements);
 }
