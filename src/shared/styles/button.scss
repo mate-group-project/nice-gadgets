@@ -1,0 +1,110 @@
+$height: 40px;
+$width: 60px;
+$icon-size: 32px;
+$icon-size-lg: 40px;
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: $height;
+  min-width: $width;
+
+  border-radius: 50px;
+  border: 1px solid var(--accent);
+
+  color: var(--white);
+  background-color: var(--accent);
+
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0;
+
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+
+  &:not(:disabled):hover {
+    cursor: pointer;
+
+    box-shadow: 0 3px 13px 0 #17203166;
+  }
+
+  &:not(:disabled):active {
+    color: var(--accent);
+
+    background-color: var(--white);
+
+    border-color: var(--elements);
+  }
+
+  &:disabled {
+    background-color: var(--white);
+    color: var(--icons);
+    border-color: var(--elements);
+  }
+
+  &.is-active {
+    color: var(--accent);
+
+    background-color: var(--white);
+
+    border-color: var(--elements);
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: $icon-size;
+    height: $icon-size;
+
+    border-radius: 50%;
+    border: 1px solid var(--elements);
+
+    color: var(--primary);
+    background-color: var(--white);
+
+    overflow: hidden;
+    padding: 2px;
+
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0;
+
+    transition-property: color, background-color, border-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+
+    &.button--lg {
+      width: $icon-size-lg;
+      height: $icon-size-lg;
+    }
+
+    &:not(:disabled):hover {
+      cursor: pointer;
+
+      border: 1px solid var(--primary);
+    }
+
+    &:not(:disabled):active {
+      color: var(--white);
+
+      background-color: var(--primary);
+    }
+
+    &:disabled {
+      color: var(--icons);
+    }
+
+    &.is-active {
+      color: var(--white);
+
+      background-color: var(--primary);
+
+      border: 1px solid var(--primary);
+    }
+  }
+}

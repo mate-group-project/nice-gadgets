@@ -3,10 +3,12 @@ import { Carousel } from '@/shared/components/Carousel';
 import { Section } from '@/shared/components/Section';
 import { ProductCard } from '@/features/products/components/ProductCard';
 import { CategoryCard } from '@/features/categories/components/CategoryCard';
+import { UIKIT } from '@/shared/components/UIKIT.tsx';
 
 export const HomePage: React.FC = () => {
   return (
     <>
+      <UIKIT />
       <div className="hero">
         <h1>Welcome to Nice Gadgets store!</h1>
         <Carousel />

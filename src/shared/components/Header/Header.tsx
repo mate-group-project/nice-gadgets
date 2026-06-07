@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.scss';
+import { Icon } from '@/shared/components/Icon';
 
 export const Header: React.FC = () => {
   return (
@@ -11,8 +12,12 @@ export const Header: React.FC = () => {
         <a href="/catalog?category=accessories">Accessories</a>
       </div>
       <div className="nav">
-        <a href="/favorites">Fav</a>
-        <a href="/cart">Cart</a>
+        <a href="/favorites">
+          <Icon name="heart" />
+        </a>
+        <a href="/cart">
+          <Icon name="bag" />
+        </a>
       </div>
     </div>
   );

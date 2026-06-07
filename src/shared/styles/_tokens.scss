@@ -5,18 +5,20 @@ $bp-md: 768px;
 $bp-lg: 1200px;
 
 :root {
-  --primary: #0F0F11;
-  --secondary: #89939A;
-  --accent: #4219D0;
-  --accent-secondary: #F4BA47;
-  --icons: #B4BDC3;
-  --elements: #E2E6E9;
-  --hover: #FAFBFC;
-  --white: #FFFFFF;
-  --green: #27AE60;
-  --red: #EB5757;
+  --primary: #0f0f11;
+  --secondary: #89939a;
+  --accent: #4219d0;
+  --accent-secondary: #f4ba47;
+  --icons: #b4bdc3;
+  --elements: #e2e6e9;
+  --hover: #fafbfc;
+  --white: #ffffff;
+  --green: #27ae60;
+  --red: #eb5757;
   --font-main: 'Mont', sans-serif;
   --font-secondary: 'Manrope', sans-serif;
 }
 
-$column-width: 200px;
+.text--accent-secondary {
+  color: var(--accent-secondary);
+}
