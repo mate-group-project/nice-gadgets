@@ -1,4 +1,19 @@
 .app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  &__header, &__footer {
+    width: 100%;
+  }
+
+  &__content {
+    flex-grow: 1;
+  }
+
+
+
+  // подумати де це варто прописувати
   .hero {
     @include container;
   }

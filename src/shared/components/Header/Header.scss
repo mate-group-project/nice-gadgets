@@ -4,8 +4,16 @@ $height: 64px;
   @include container;
   height: $height;
   background: #83c3c3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   @include lg-and-up {
     max-width: 100%;
   }
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
 }
