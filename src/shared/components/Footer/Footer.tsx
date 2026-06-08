@@ -8,11 +8,11 @@ export const Footer: React.FC = () => {
     <div className="footer">
       <div className="logo">
         <a href="#">
-        <img
-          src="/logo.png"
-          className="log"
-          alt="logo"
-        />
+          <img
+            src="/logo.png"
+            className="log"
+            alt="logo"
+          />
         </a>
       </div>
 
@@ -45,7 +45,14 @@ export const Footer: React.FC = () => {
         >
           Back to top
         </a>
-          <Button className="button__icon button--lg" onClick={() => {}} disabled > <Icon name="chevronUp" /> </Button>
+        <Button
+          className="button__icon button--lg"
+          onClick={() => {}}
+          disabled
+        >
+          {' '}
+          <Icon name="chevronUp" />{' '}
+        </Button>
       </div>
     </div>
   );
