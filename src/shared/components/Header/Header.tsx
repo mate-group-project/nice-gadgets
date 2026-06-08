@@ -10,6 +10,7 @@ export const Header: React.FC = () => {
         <a href="/catalog?category=phones">Phones</a>
         <a href="/catalog?category=tablets">Tablets</a>
         <a href="/catalog?category=accessories">Accessories</a>
+        test
       </div>
       <div className="nav">
         <a href="/favorites">
