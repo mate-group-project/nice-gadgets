@@ -2,7 +2,9 @@ import './App.scss';
 import { Header } from '@/shared/components/Header';
 
 import { Footer } from '@/shared/components/Footer';
-import { Outlet } from 'react-router-dom';
+// import { Outlet } from 'react-router-dom';
+import { ProductPage } from '@/pages/ProductPage';
+import { UIKIT } from '@/shared/components/UIKIT';
 
 function App() {
   return (
@@ -12,11 +14,12 @@ function App() {
       </div>
 
       <div className="app__content">
-       <Outlet />
+        <ProductPage />
       </div>
       <div className="app__footer">
         <Footer />
       </div>
+      <UIKIT />
     </div>
   );
 }
