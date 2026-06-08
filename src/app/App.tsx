@@ -2,7 +2,7 @@ import './App.scss';
 import { Header } from '@/shared/components/Header';
 
 import { Footer } from '@/shared/components/Footer';
-import { HomePage } from '@/pages/HomePage.tsx';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
@@ -12,9 +12,7 @@ function App() {
       </div>
 
       <div className="app__content">
-        ------------- content from pages here // use Outlet instead HomePage
-        -------------
-        <HomePage />
+       <Outlet />
       </div>
       <div className="app__footer">
         <Footer />
