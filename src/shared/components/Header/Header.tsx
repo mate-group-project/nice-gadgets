@@ -1,24 +1,25 @@
 import React from 'react';
 import './Header.scss';
 import { Icon } from '@/shared/components/Icon';
+import { NavLink } from 'react-router-dom';
 
 export const Header: React.FC = () => {
   return (
     <div className="header">
       <div className="nav">
-        <a href="/">Home</a>
-        <a href="/catalog?category=phones">Phones</a>
-        <a href="/catalog?category=tablets">Tablets</a>
-        <a href="/catalog?category=accessories">Accessories</a>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/catalog?category=phones">Phones</NavLink>
+        <NavLink to="/catalog?category=tablets">Tablets</NavLink>
+        <NavLink to="/catalog?category=accessories">Accessories</NavLink>
         test
       </div>
       <div className="nav">
-        <a href="/favorites">
+        <NavLink to="/favorites">
           <Icon name="heart" />
-        </a>
-        <a href="/cart">
+        </NavLink>
+        <NavLink to="/cart">
           <Icon name="bag" />
-        </a>
+        </NavLink>
       </div>
     </div>
   );
