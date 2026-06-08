@@ -8,7 +8,6 @@ import { UIKIT } from '@/shared/components/UIKIT.tsx';
 export const HomePage: React.FC = () => {
   return (
     <>
-      <UIKIT />
       <div className="hero">
         <h1 className="hero_title">Welcome to Nice Gadgets store!</h1>
         <Carousel />
@@ -42,6 +41,7 @@ export const HomePage: React.FC = () => {
           <ProductCard />
         </div>
       </Section>
+      <UIKIT />
     </>
   );
 };

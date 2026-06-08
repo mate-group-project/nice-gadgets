@@ -18,15 +18,11 @@ export const Carousel: React.FC = () => {
   return (
     <div className="carousel">
       <div className="swiper_wrapper">
-        <button
-          className="button__icon carousel__btn carousel__btn--prev"
-        >
+        <button className="button__icon carousel__btn carousel__btn--prev">
           <Icon name="chevronLeft" />
         </button>
 
-        <button
-          className="button__icon carousel__btn carousel__btn--next"
-        >
+        <button className="button__icon carousel__btn carousel__btn--next">
           <Icon name="chevronRight" />
         </button>
 
@@ -45,32 +41,58 @@ export const Carousel: React.FC = () => {
           scrollbar={{ draggable: true }}
         >
           <SwiperSlide>
-
             {/* We will change it for routes later */}
 
             <picture>
-              <source media="(min-width: 1200px)" srcSet={heroBannerLg} />
-              <source media="(min-width: 640px)" srcSet={heroBannerMd} />
+              <source
+                media="(min-width: 1200px)"
+                srcSet={heroBannerLg}
+              />
+              <source
+                media="(min-width: 640px)"
+                srcSet={heroBannerMd}
+              />
 
-              <img src={heroBannerSm} alt="Hero banner" />
+              <img
+                src={heroBannerSm}
+                alt="Hero banner"
+              />
             </picture>
           </SwiperSlide>
 
           <SwiperSlide>
             <picture>
-              <source media="(min-width: 1200px)" srcSet={heroBannerLg} />
-              <source media="(min-width: 640px)" srcSet={heroBannerMd} />
+              <source
+                media="(min-width: 1200px)"
+                srcSet={heroBannerLg}
+              />
+              <source
+                media="(min-width: 640px)"
+                srcSet={heroBannerMd}
+              />
 
-              <img src={heroBannerSm} alt="Hero banner" />
+              <img
+                src={heroBannerSm}
+                alt="Hero banner"
+              />
             </picture>
           </SwiperSlide>
 
           <SwiperSlide>
             <picture>
-              <source media="(min-width: 1200px)" srcSet={heroBannerLg} />
-              <source media="(min-width: 640px)" srcSet={heroBannerMd} />
+              <source
+                media="(min-width: 1200px)"
+                srcSet={heroBannerLg}
+              />
+              <source
+                media="(min-width: 640px)"
+                srcSet={heroBannerMd}
+              />
 
-              <img src={heroBannerSm} alt="Hero banner" />
+              <img
+                src={heroBannerSm}
+                alt="Hero banner"
+              />
             </picture>
           </SwiperSlide>
         </Swiper>

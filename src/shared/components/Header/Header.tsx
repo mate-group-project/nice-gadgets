@@ -1,26 +1,37 @@
 import React from 'react';
 import './Header.scss';
-import { Icon } from '@/shared/components/Icon';
 import { NavLink } from 'react-router-dom';
+import { Navigation } from '@/shared/components/Header/Navigation.tsx';
+import { Actions } from '@/shared/components/Header/Actions.tsx';
+import { Menu } from '@/shared/components/Header/Menu.tsx';
 
 export const Header: React.FC = () => {
   return (
-    <div className="header">
-      <div className="nav">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/catalog?category=phones">Phones</NavLink>
-        <NavLink to="/catalog?category=tablets">Tablets</NavLink>
-        <NavLink to="/catalog?category=accessories">Accessories</NavLink>
-        test
+    <header className="header">
+      <NavLink
+        to="/"
+        className="header__logo logo__link"
+      >
+        <img
+          src="/logo.png"
+          alt="logo"
+          width="404"
+          height="145"
+          className="logo__image"
+        />
+      </NavLink>
+
+      <div className="header__nav">
+        <Navigation />
       </div>
-      <div className="nav">
-        <NavLink to="/favorites">
-          <Icon name="heart" />
-        </NavLink>
-        <NavLink to="/cart">
-          <Icon name="bag" />
-        </NavLink>
+
+      <div className="header__actions">
+        <Actions />
       </div>
-    </div>
+
+      <div className="header__menu">
+        <Menu />
+      </div>
+    </header>
   );
 };
