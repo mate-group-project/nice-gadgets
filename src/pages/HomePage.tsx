@@ -8,9 +8,8 @@ import { UIKIT } from '@/shared/components/UIKIT.tsx';
 export const HomePage: React.FC = () => {
   return (
     <>
-      <UIKIT />
       <div className="hero">
-        <h1>Welcome to Nice Gadgets store!</h1>
+        <h1 className="hero_title">Welcome to Nice Gadgets store!</h1>
         <Carousel />
       </div>
       <Section title="Brand new models">
@@ -23,9 +22,15 @@ export const HomePage: React.FC = () => {
       </Section>
       <Section title="Shop by category">
         <div className="categories">
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
+          <CategoryCard 
+          image="https://i.ibb.co/gFwSBpht/Phones.png"
+          />
+          <CategoryCard 
+          image="https://i.ibb.co/zHD5rcYd/Tablets.png"
+          />
+          <CategoryCard 
+          image="https://i.ibb.co/DyL6gQR/Accessories.png"
+          />
         </div>
       </Section>
       <Section title="Hot prices">
@@ -36,6 +41,7 @@ export const HomePage: React.FC = () => {
           <ProductCard />
         </div>
       </Section>
+      <UIKIT />
     </>
   );
 };

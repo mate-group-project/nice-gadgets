@@ -1,3 +1,5 @@
+@use 'transition' as *;
+
 $height: 40px;
 $width: 60px;
 $icon-size: 32px;
@@ -21,9 +23,8 @@ $icon-size-lg: 40px;
   font-size: 14px;
   letter-spacing: 0;
 
+  @include transition;
   transition-property: color, background-color, border-color, box-shadow;
-  transition-duration: 0.3s;
-  transition-timing-function: ease-in-out;
 
   &:not(:disabled):hover {
     cursor: pointer;
@@ -47,9 +48,7 @@ $icon-size-lg: 40px;
 
   &.is-active {
     color: var(--accent);
-
     background-color: var(--white);
-
     border-color: var(--elements);
   }
 
@@ -74,8 +73,7 @@ $icon-size-lg: 40px;
     font-size: 14px;
     letter-spacing: 0;
 
-    transition-property: color, background-color, border-color;
-    transition-duration: 0.3s;
+    @include transition;
     transition-timing-function: ease-in-out;
 
     &.button--lg {
@@ -101,9 +99,7 @@ $icon-size-lg: 40px;
 
     &.is-active {
       color: var(--white);
-
       background-color: var(--primary);
-
       border: 1px solid var(--primary);
     }
   }
