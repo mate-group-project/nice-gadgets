@@ -5,6 +5,7 @@ import { CatalogPage } from '@/pages/CatalogPage';
 import { FavoritesPage } from '@/pages/FavoritesPage';
 import { CartPage } from '@/pages/CartPage';
 
+// routes
 export const router = createBrowserRouter([
   {
     path: '/',
