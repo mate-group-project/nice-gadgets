@@ -15,6 +15,21 @@
   // подумати де це варто прописувати
   .hero {
     @include container;
+
+    &_title {
+      font-size: 32px;
+      font-weight: 800;
+      margin: 24px 0;
+
+      @include sm-and-up {
+        font-size: 48px;
+        margin: 32px 0;
+      }
+
+      @include lg-and-up {
+        margin: 56px 0;
+      }
+    }
   }
 
   .models {
