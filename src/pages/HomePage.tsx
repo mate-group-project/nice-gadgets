@@ -10,7 +10,7 @@ export const HomePage: React.FC = () => {
     <>
       <UIKIT />
       <div className="hero">
-        <h1>Welcome to Nice Gadgets store!</h1>
+        <h1 className="hero_title">Welcome to Nice Gadgets store!</h1>
         <Carousel />
       </div>
       <Section title="Brand new models">
