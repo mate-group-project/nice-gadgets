@@ -1,0 +1,90 @@
+$header-size: 48px;
+$header-size-lg: 64px;
+
+$space-x: 16px;
+$space-x-lg: 26px;
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+
+  @include sm-and-up {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  @include lg-and-up {
+    gap: $space-x;
+  }
+
+  &__link {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    height: 100%;
+    min-height: 48px;
+
+    padding: 0 $space-x;
+
+    @include transition;
+    transition-property: color;
+    z-index: 0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      height: 0;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      opacity: 0;
+      background-color: var(--elements);
+      z-index: -1;
+      @include transition;
+      transition-property: height, opacity;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: $space-x;
+
+      width: calc(100% - (2 * $space-x));
+      height: 0;
+      background-color: var(--primary);
+      opacity: 0;
+
+      @include transition;
+      transition-property: height, opacity;
+    }
+
+    &:hover {
+      &::before {
+        height: 100%;
+        opacity: 1;
+      }
+    }
+
+    &--active {
+      color: var(--primary);
+
+      &::after {
+        height: 4px;
+        opacity: 1;
+      }
+    }
+
+    @include lg-and-up {
+      padding: 0 $space-x-lg;
+
+      &::after {
+        left: $space-x-lg;
+        width: calc(100% - (2 * $space-x-lg));
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+.menu {
+  height: 100%;
+  width: 48px;
+  border-radius: 0;
+  border: none;
+  border-left: 1px solid var(--elements);
+  background-color: var(--white);
+
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgb(0 0 0 / 0.3);
+  }
+
+  &__popup {
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+
+    background: #fff;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    height: 48px;
+    border-bottom: 1px solid var(--elements);
+
+    .logo {
+      display: block;
+      width: 64px;
+      height: 22px;
+      margin: auto 16px;
+    }
+  }
+
+  &__close {
+    width: 48px;
+    border-radius: 0;
+    border: none;
+    border-left: 1px solid var(--elements);
+    background-color: var(--white);
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__body {
+    height: 100%;
+  }
+}
