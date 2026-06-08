@@ -22,14 +22,14 @@ export const router = createBrowserRouter([
       },
 
       {
-      path: 'favorites',
+        path: 'favorites',
         element: <FavoritesPage />,
       },
 
       {
         path: 'cart',
-        element: <CartPage />
-      }
+        element: <CartPage />,
+      },
     ],
   },
 ]);

@@ -4,38 +4,27 @@ $header-size-lg: 64px;
 $space-x: 16px;
 $space-x-lg: 26px;
 
-.nav {
+.actions {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 24px 16px;
-  gap: 16px;
+  height: 100%;
+  color: var(--primary);
 
-  @include sm-and-up {
-    height: 100%;
-    flex-direction: row;
-    align-items: stretch;
-    padding: 0;
-    gap: 0;
-  }
-
-  @include lg-and-up {
-    gap: $space-x;
+  &__item {
+    flex-grow: 1;
   }
 
   &__link {
     position: relative;
-
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 100%;
-    min-height: 48px;
-
-    padding: 0 $space-x;
-
-    @include transition;
-    transition-property: color;
+    border-left: 1px solid var(--elements);
     z-index: 0;
+
+    @include sm-and-up {
+      width: $header-size;
+    }
 
     &::before {
       content: '';
@@ -55,9 +44,9 @@ $space-x-lg: 26px;
       content: '';
       position: absolute;
       bottom: 0;
-      left: $space-x;
+      left: 0;
 
-      width: calc(100% - (2 * $space-x));
+      width: 100%;
       height: 0;
       background-color: var(--primary);
       opacity: 0;
@@ -74,8 +63,6 @@ $space-x-lg: 26px;
     }
 
     &--active {
-      color: var(--primary);
-
       &::after {
         height: 4px;
         opacity: 1;
@@ -83,12 +70,7 @@ $space-x-lg: 26px;
     }
 
     @include lg-and-up {
-      padding: 0 $space-x-lg;
-
-      &::after {
-        left: $space-x-lg;
-        width: calc(100% - (2 * $space-x-lg));
-      }
+      width: $header-size-lg;
     }
   }
 }

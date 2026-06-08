@@ -36,7 +36,9 @@ export const Menu = ({ className = '' }: Props) => {
           </div>
           <div className="menu__body">
             <Navigation />
-            <Actions />
+            <div className="menu__footer">
+              <Actions />
+            </div>
           </div>
         </Dialog.Popup>
       </Dialog.Portal>
