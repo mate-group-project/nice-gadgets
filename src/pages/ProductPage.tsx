@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './styles/ProductPage.scss';
+import './styles/productPage.scss';
 
 import { Gallery } from '../features/products/components/productPage/Gallery';
 import { ProductActions } from '../features/products/components/productPage/ProductActions';
