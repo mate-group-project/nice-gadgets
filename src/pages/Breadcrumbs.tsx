@@ -1,3 +1,4 @@
+import React from 'react';
 import { Icon } from '@/shared/components/Icon';
 import { Link } from 'react-router-dom';
 import './Breadcrumbs.scss';

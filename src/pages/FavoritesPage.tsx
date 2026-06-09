@@ -1,16 +1,14 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { Product } from '@/features/products/types/Product';
-import { favouritesApi } from '@/features/favorites/api/favoritesApi';
 import { Breadcrumbs } from './Breadcrumbs';
 import './FavouritesPage.scss';
 
 export const FavoritesPage: React.FC = () => {
-  const [favourites, setFavourites] = useState<Product[]>([]);
-
-  useEffect(() => {
-    favouritesApi.getAll().then(setFavourites);
-  }, []);
+  const [favourites] = useState<Product[]>(() => {
+    const stored = localStorage.getItem('favorites');
+    return stored ? JSON.parse(stored) : [];
+  });
 
   return (
     <>
