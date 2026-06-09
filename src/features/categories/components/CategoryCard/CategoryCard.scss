@@ -1,5 +1,3 @@
-
-
 .category__card {
   height: 443px;
   flex: 1;
@@ -13,16 +11,14 @@
   object-fit: cover;
 }
 
+.categories {
+  display: flex;
+  justify-content: flex-start;
+  gap: 16px;
+}
 
- .categories {
-    display: flex;
-    justify-content: flex-start;
-    gap: 16px;
+@media (max-width: 768px) {
+  .categories {
+    flex-direction: column;
   }
-
-
-  @media (max-width: 768px) {
-    .categories {
-      flex-direction: column;
-    }
-  } 
+}

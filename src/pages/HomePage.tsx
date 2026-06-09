@@ -23,15 +23,9 @@ export const HomePage: React.FC = () => {
       </Section>
       <Section title="Shop by category">
         <div className="categories">
-          <CategoryCard 
-          image="https://i.ibb.co/gFwSBpht/Phones.png"
-          />
-          <CategoryCard 
-          image="https://i.ibb.co/zHD5rcYd/Tablets.png"
-          />
-          <CategoryCard 
-          image="https://i.ibb.co/DyL6gQR/Accessories.png"
-          />
+          <CategoryCard image="https://i.ibb.co/gFwSBpht/Phones.png" />
+          <CategoryCard image="https://i.ibb.co/zHD5rcYd/Tablets.png" />
+          <CategoryCard image="https://i.ibb.co/DyL6gQR/Accessories.png" />
         </div>
       </Section>
       <Section title="Hot prices">
