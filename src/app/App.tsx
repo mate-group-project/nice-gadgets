@@ -2,8 +2,7 @@ import './App.scss';
 import { Header } from '@/shared/components/Header';
 
 import { Footer } from '@/shared/components/Footer';
-// import { Outlet } from 'react-router-dom';
-import { ProductPage } from '@/pages/ProductPage';
+import { Outlet } from 'react-router-dom';
 import { UIKIT } from '@/shared/components/UIKIT';
 
 function App() {
@@ -14,7 +13,7 @@ function App() {
       </div>
 
       <div className="app__content">
-       <Outlet />
+        <Outlet />
       </div>
       <div className="app__footer">
         <Footer />

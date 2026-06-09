@@ -10,7 +10,6 @@ export const ProductPage: React.FC = () => {
   return (
     <section className="product-page">
       <div className="product-page__container">
-
         <h1 className="product-page__title">
           Apple iPhone 11 Pro Max 64GB Gold (iMT9G2FS/A)
         </h1>
@@ -18,48 +17,100 @@ export const ProductPage: React.FC = () => {
         <div className="product-page__content">
           <div className="product-page__main-info">
             <div className="product-page__gallery gallery">
-
               <div className="gallery__thumbnails">
-                <a href="#" className="gallery__thumb">
-                  <img src={thumb} alt="Thumbnail 1" />
+                <a
+                  href="#"
+                  className="gallery__thumb"
+                >
+                  <img
+                    src={thumb}
+                    alt="Thumbnail 1"
+                  />
                 </a>
-                <a href="#" className="gallery__thumb">
-                  <img src={thumb} alt="Thumbnail 2" />
+                <a
+                  href="#"
+                  className="gallery__thumb"
+                >
+                  <img
+                    src={thumb}
+                    alt="Thumbnail 2"
+                  />
                 </a>
-                <a href="#" className="gallery__thumb">
-                  <img src={thumb} alt="Thumbnail 3" />
+                <a
+                  href="#"
+                  className="gallery__thumb"
+                >
+                  <img
+                    src={thumb}
+                    alt="Thumbnail 3"
+                  />
                 </a>
-                <a href="#" className="gallery__thumb">
-                  <img src={thumb} alt="Thumbnail 4" />
+                <a
+                  href="#"
+                  className="gallery__thumb"
+                >
+                  <img
+                    src={thumb}
+                    alt="Thumbnail 4"
+                  />
                 </a>
-                <a href="#" className="gallery__thumb">
-                  <img src={thumb} alt="Thumbnail 5" />
+                <a
+                  href="#"
+                  className="gallery__thumb"
+                >
+                  <img
+                    src={thumb}
+                    alt="Thumbnail 5"
+                  />
                 </a>
               </div>
 
               <div className="gallery__main">
-                <img className="gallery__main-image" src={mainPhoto} alt="Apple iPhone 11 Pro Max" />
+                <img
+                  className="gallery__main-image"
+                  src={mainPhoto}
+                  alt="Apple iPhone 11 Pro Max"
+                />
               </div>
-
             </div>
 
             <div className="product-page__actions product-actions">
               <div className="product-actions__content">
                 <div className="product-actions__selection">
                   <div className="product-actions__selection-header">
-                    <span className="product-actions__selection-title">Available colors</span>
+                    <span className="product-actions__selection-title">
+                      Available colors
+                    </span>
                     <span className="product-actions__id">ID: 802390</span>
                   </div>
                   <div className="product-actions__color-options">
-                    <a href="#" className="product-actions__color-option product-actions__color-option--pink" title="Pink"></a>
-                    <a href="#" className="product-actions__color-option product-actions__color-option--dark-green" title="Dark Green"></a>
-                    <a href="#" className="product-actions__color-option product-actions__color-option--dark-grey" title="Dark Grey"></a>
-                    <a href="#" className="product-actions__color-option product-actions__color-option--light-grey" title="Light Grey"></a>
+                    <a
+                      href="#"
+                      className="product-actions__color-option product-actions__color-option--pink"
+                      title="Pink"
+                    ></a>
+                    <a
+                      href="#"
+                      className="product-actions__color-option product-actions__color-option--dark-green"
+                      title="Dark Green"
+                    ></a>
+                    <a
+                      href="#"
+                      className="product-actions__color-option product-actions__color-option--dark-grey"
+                      title="Dark Grey"
+                    ></a>
+                    <a
+                      href="#"
+                      className="product-actions__color-option product-actions__color-option--light-grey"
+                      title="Light Grey"
+                    ></a>
                   </div>
                 </div>
 
                 <div className="product-actions__selection">
-                  <span className="product-actions__selection-title">Select capacity</span>
+                  <span className="product-actions__selection-title">
+                    Select capacity
+                  </span>
 
                   <div className="product-actions__capacity-options">
                     <a
@@ -101,7 +152,7 @@ export const ProductPage: React.FC = () => {
 
                     <Button
                       className="button__icon button--lg"
-                      onClick={() => { }}
+                      onClick={() => {}}
                     >
                       <Icon name="heart" />
                     </Button>
@@ -120,7 +171,9 @@ export const ProductPage: React.FC = () => {
                     </li>
                     <li className="short-specs__item">
                       <span className="short-specs__name">Processor</span>
-                      <span className="short-specs__value">Apple A12 Bionic</span>
+                      <span className="short-specs__value">
+                        Apple A12 Bionic
+                      </span>
                     </li>
                     <li className="short-specs__item">
                       <span className="short-specs__name">RAM</span>
@@ -140,30 +193,41 @@ export const ProductPage: React.FC = () => {
                 <article className="about__item">
                   <h3 className="about__subtitle">And then there was Pro</h3>
                   <p className="about__text about__history-text">
-                    A transformative triple‑camera system that adds tons of capability without complexity.
+                    A transformative triple‑camera system that adds tons of
+                    capability without complexity.
                   </p>
                   <p className="about__text">
-                    An unprecedented leap in battery life. And a mind‑blowing chip that doubles down on machine learning
-                    and pushes the boundaries of what a smartphone can do. Welcome to the first iPhone powerful enough to be called Pro.
+                    An unprecedented leap in battery life. And a mind‑blowing
+                    chip that doubles down on machine learning and pushes the
+                    boundaries of what a smartphone can do. Welcome to the first
+                    iPhone powerful enough to be called Pro.
                   </p>
                 </article>
 
                 <article className="about__item">
                   <h3 className="about__subtitle">Camera</h3>
                   <p className="about__text">
-                    Meet the first triple‑camera system to combine cutting‑edge technology with the legendary simplicity of iPhone.
-                    Capture up to four times more scene. Get beautiful images in drastically lower light.
-                    Shoot the highest‑quality video in a smartphone — then edit with the same tools you love for photos.
-                    You’ve never shot with anything like it.
+                    Meet the first triple‑camera system to combine cutting‑edge
+                    technology with the legendary simplicity of iPhone. Capture
+                    up to four times more scene. Get beautiful images in
+                    drastically lower light. Shoot the highest‑quality video in
+                    a smartphone — then edit with the same tools you love for
+                    photos. You’ve never shot with anything like it.
                   </p>
                 </article>
 
                 <article className="about__item">
-                  <h3 className="about__subtitle">Shoot it. Flip it. Zoom it. Crop it. Cut it. Light it. Tweak it. Love it.</h3>
+                  <h3 className="about__subtitle">
+                    Shoot it. Flip it. Zoom it. Crop it. Cut it. Light it. Tweak
+                    it. Love it.
+                  </h3>
                   <p className="about__text">
-                    iPhone 11 Pro lets you capture videos that are beautifully true to life, with greater detail and smoother motion.
-                    Epic processing power means it can shoot 4K video with extended dynamic range and cinematic video stabilization
-                    — all at 60 fps. You get more creative control, too, with four times more scene and powerful new editing tools to play with.
+                    iPhone 11 Pro lets you capture videos that are beautifully
+                    true to life, with greater detail and smoother motion. Epic
+                    processing power means it can shoot 4K video with extended
+                    dynamic range and cinematic video stabilization — all at 60
+                    fps. You get more creative control, too, with four times
+                    more scene and powerful new editing tools to play with.
                   </p>
                 </article>
               </div>
@@ -194,7 +258,9 @@ export const ProductPage: React.FC = () => {
                 </li>
                 <li className="tech-specs__item">
                   <span className="tech-specs__name">Camera</span>
-                  <span className="tech-specs__value">12 Mp + 12 Mp + 12 Mp (Triple)</span>
+                  <span className="tech-specs__value">
+                    12 Mp + 12 Mp + 12 Mp (Triple)
+                  </span>
                 </li>
                 <li className="tech-specs__item">
                   <span className="tech-specs__name">Zoom</span>
@@ -209,7 +275,6 @@ export const ProductPage: React.FC = () => {
           </div>
         </div>
       </div>
-
     </section>
   );
 };

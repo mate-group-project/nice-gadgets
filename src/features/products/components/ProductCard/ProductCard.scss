@@ -50,7 +50,7 @@ $card-image-height: 196px;
     }
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       bottom: 0;
@@ -71,7 +71,7 @@ $card-image-height: 196px;
     display: flex;
     justify-content: space-between;
 
-     &-label {
+    &-label {
       color: var(--secondary);
       font-weight: 600;
       font-size: 12px;
