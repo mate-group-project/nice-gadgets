@@ -1,0 +1,76 @@
+.product-page {
+  padding: 0 16px;
+  font-family: 'Mont', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @include md-and-up {
+    padding: 0 32px;
+  }
+
+  &__title {
+    font-size: 22px;
+    line-height: 140%;
+    font-weight: bold;
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+
+    @include md-and-up {
+      font-size: 42px;
+      line-height: 42px;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @include md-and-up {
+      gap: 64px;
+    }
+
+    @include lg-and-up {
+      display: grid;
+      grid-template-columns: 7fr 5fr;
+      gap: 64px;
+    }
+  }
+
+  &__main-info {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @include md-and-up {
+      display: grid;
+      grid-template-columns: 7fr 5fr;
+      gap: 18px;
+    }
+
+    @include lg-and-up {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: subgrid;
+      gap: 64px;
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @include md-and-up {
+      gap: 64px;
+    }
+
+    @include lg-and-up {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: subgrid;
+      gap: 64px;
+    }
+  }
+}

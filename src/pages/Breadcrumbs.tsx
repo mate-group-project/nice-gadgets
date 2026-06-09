@@ -12,7 +12,10 @@ export const Breadcrumbs: React.FC<Props> = ({ page }) => {
     <div className="breadcrumbs">
       <div className="container">
         <Link to="/">
-          <Icon name="home" />
+          <Icon
+            className="s"
+            name="home"
+          />
         </Link>
         <span className="icon">›</span>
         <span className="page">{page}</span>

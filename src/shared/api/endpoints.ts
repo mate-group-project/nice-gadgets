@@ -1,9 +1,9 @@
-export const BASE_URL = 'https://6a1bec4a8858a003817b523b.mockapi.io/api';
+export const BASE_URL = 'https://nice-gadgets-api-jj1e.onrender.com';
 
 export const ENDPOINTS = {
   categories: '/categories',
-  products: '/productsAggregated',
-  product: '/products',
+  products: '/products',
+  product: '/product',
   users: '/users',
   cart: '/cart',
   favorites: '/favorites',

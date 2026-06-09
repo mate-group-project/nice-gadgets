@@ -1,19 +1,80 @@
-$height: 64px;
+$header-size: 48px;
+$header-size-lg: 64px;
+
+$space-x: 16px;
+$space-x-lg: 26px;
 
 .header {
-  @include container;
-  height: $height;
-  background: var(--elements);
+  position: relative;
+  height: $header-size;
+  background-color: var(--white);
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
+  border-bottom: 1px solid var(--elements);
+
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 4%;
+  text-transform: uppercase;
+
+  color: var(--secondary);
 
   @include lg-and-up {
+    height: $header-size-lg;
     max-width: 100%;
+  }
+
+  &__menu {
+    display: block;
+    height: 100%;
+
+    @include sm-and-up {
+      display: none;
+    }
+  }
+
+  &__nav {
+    display: none;
+
+    @include sm-and-up {
+      display: block;
+      height: 100%;
+      margin-right: auto;
+    }
+  }
+
+  &__actions {
+    display: none;
+
+    @include sm-and-up {
+      display: block;
+      height: 100%;
+    }
   }
 }
 
-.nav {
-  display: flex;
-  gap: 20px;
+.logo {
+  &__link {
+    display: flex;
+    align-items: center;
+
+    padding: 0 $space-x;
+
+    @include lg-and-up {
+      padding: 0 $space-x-lg;
+    }
+  }
+
+  &__image {
+    display: block;
+
+    width: 64px;
+    height: 22px;
+
+    @include lg-and-up {
+      width: 80px;
+      height: 28px;
+    }
+  }
 }
