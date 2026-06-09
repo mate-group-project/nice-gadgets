@@ -1,0 +1,26 @@
+.catalog {
+  @include container;
+
+  &_title {
+    font-size: 32px;
+    font-weight: 800;
+    margin-top: 24px;
+    margin-bottom: 8px;
+
+    @include sm-and-up {
+      font-size: 48px;
+      margin-top: 40px;
+    }
+  }
+
+  &_count {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--secondary);
+    margin-bottom: 32px;
+
+    @include sm-and-up {
+      margin-bottom: 40px;
+    }
+  }
+}
