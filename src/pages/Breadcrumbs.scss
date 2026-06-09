@@ -1,0 +1,26 @@
+:root {
+  --color-breadcrumbs: #B4BDC3;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon {
+  color: var(--color-breadcrumbs);
+  width: 16px;
+  height: 16px;
+  margin-bottom: 10px;
+  margin-left: 4px;
+}
+
+.page {
+  color: var(--color-breadcrumbs);
+  margin-top:-2px;
+}
+
+.container {
+    margin-top: 20px;
+}
