@@ -23,4 +23,15 @@
       margin-bottom: 40px;
     }
   }
+
+  &_filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+
+    .dropdown:first-child {
+      min-width: 160px;
+    }
+  }
 }
