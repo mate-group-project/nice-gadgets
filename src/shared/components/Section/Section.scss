@@ -16,4 +16,17 @@
     display: flex;
     gap: 16px;
   }
+
+  .swiper {
+    align-items: stretch;
+  }
+
+  .swiper-slide {
+    height: auto;
+    display: flex;
+  }
+
+  .swiper-slide > * {
+    height: 100%;
+  }
 }
