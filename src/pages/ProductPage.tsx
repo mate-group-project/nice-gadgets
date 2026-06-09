@@ -1,4 +1,3 @@
-import { ProductCard } from '@/features/products/components/ProductCard/ProductCard';
 import * as React from 'react';
 import './ProductPage.scss';
 import { Button } from '@base-ui/react';
@@ -208,30 +207,6 @@ export const ProductPage: React.FC = () => {
               </ul>
             </div>
           </div>
-        </div>
-
-        <div className="product-page__recommendations recommendations">
-
-          <div className="recommendations__header">
-            <h2 className="recommendations__title">You may also like</h2>
-
-            <div className="recommendations__controls">
-              <button className="recommendations__slider-btn recommendations__slider-btn--prev">
-                {'<'}
-              </button>
-              <button className="recommendations__slider-btn recommendations__slider-btn--next">
-                {'>'}
-              </button>
-            </div>
-          </div>
-
-          <div className="recommendations__list">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-          </div>
-
         </div>
       </div>
 
