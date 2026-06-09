@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './ProductPage.scss';
+import './productPage.scss';
 import { Button } from '@base-ui/react';
 
 import mainPhoto from '@/assets/img/category-phones.png';
