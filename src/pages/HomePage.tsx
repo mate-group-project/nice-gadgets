@@ -4,8 +4,11 @@ import { Section } from '@/shared/components/Section';
 import { ProductCard } from '@/features/products/components/ProductCard';
 import { CategoryCard } from '@/features/categories/components/CategoryCard';
 import { UIKIT } from '@/shared/components/UIKIT.tsx';
+import { useProductsList } from '@/features/products/hooks/useProductsList.ts';
 
 export const HomePage: React.FC = () => {
+  const { products } = useProductsList();
+
   return (
     <>
       <div className="hero">
@@ -17,14 +20,9 @@ export const HomePage: React.FC = () => {
         title="Brand new models"
         isSlide
       >
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {products.map((product) => (
+          <ProductCard key={product.id} />
+        ))}
       </Section>
       <Section title="Shop by category">
         <div className="categories">
