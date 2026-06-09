@@ -14,7 +14,7 @@ function App() {
       </div>
 
       <div className="app__content">
-        <ProductPage />
+       <Outlet />
       </div>
       <div className="app__footer">
         <Footer />

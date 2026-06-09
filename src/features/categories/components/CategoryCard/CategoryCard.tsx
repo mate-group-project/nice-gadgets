@@ -1,6 +1,15 @@
 import React from 'react';
 import './CategoryCard.scss';
 
-export const CategoryCard: React.FC = () => {
-  return <article className="category__card">category card info</article>;
+
+type Props = {
+  image: string,
+};
+
+export const CategoryCard: React.FC<Props> = ({image}) => {
+  return (
+     <article className="category__card">
+        <img src={image} className='phone'/>
+     </article>
+  )
 };
