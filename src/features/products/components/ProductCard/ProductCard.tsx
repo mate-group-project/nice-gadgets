@@ -6,11 +6,16 @@ import { Icon } from '@/shared/components/Icon';
 export const ProductCard: React.FC = () => {
   return (
     <article className="product__card">
+      <img
+        src="src/assets/img/category-phones.png"
+        alt="Apple iPhone Xs 64GB Silver (iMT9G2FS/A)"
+        className="product__card__image"
+      />
 
-      <img src="src/assets/img/category-phones.png" alt="Apple iPhone Xs 64GB Silver (iMT9G2FS/A)" className="product__card__image" />
-      
-      <h3 className="product__card__title">Apple iPhone Xs 64GB Silver (iMT9G2FS/A)</h3>
-      
+      <h3 className="product__card__title">
+        Apple iPhone Xs 64GB Silver (iMT9G2FS/A)
+      </h3>
+
       <p className="product__card__price">
         <span className="product__card__price-current">$799</span>
         <span className="product__card__price-old">$899</span>
@@ -34,19 +39,14 @@ export const ProductCard: React.FC = () => {
       </section>
 
       <div className="product__card__actions">
-          <Button
-            className="button product__card__button"
-          >
-            Add to cart
-          </Button>
-          <Button
+        <Button className="button product__card__button">Add to cart</Button>
+        <Button
           className="button__icon button--lg product__card__icon-button"
           onClick={() => {}}
         >
           <Icon name="heart" />
         </Button>
-        </div>
-
+      </div>
     </article>
   );
 };

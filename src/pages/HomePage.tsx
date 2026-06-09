@@ -13,7 +13,7 @@ export const HomePage: React.FC = () => {
         <Carousel />
       </div>
 
-      <Section 
+      <Section
         title="Brand new models"
         isSlide
       >

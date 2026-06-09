@@ -39,8 +39,8 @@ export const Section: React.FC<SectionProps> = ({
         )}
       </div>
 
-      {isSlide ? (
-        <Swiper 
+      {isSlide ?
+        <Swiper
           spaceBetween={16}
           modules={[Navigation]}
           navigation={{
@@ -63,9 +63,7 @@ export const Section: React.FC<SectionProps> = ({
             <SwiperSlide key={index}>{child}</SwiperSlide>
           ))}
         </Swiper>
-      ) : (
-        children
-      )}
+      : children}
     </section>
   );
 };
