@@ -4,6 +4,7 @@ import { HomePage } from '@/pages/HomePage';
 import { CatalogPage } from '@/pages/CatalogPage';
 import { FavoritesPage } from '@/pages/FavoritesPage';
 import { CartPage } from '@/pages/CartPage';
+import { ProductPage } from '@/pages/ProductPage.tsx';
 
 // routes
 export const router = createBrowserRouter([
@@ -19,6 +20,11 @@ export const router = createBrowserRouter([
       {
         path: 'catalog',
         element: <CatalogPage />,
+      },
+
+      {
+        path: 'product/:slug',
+        element: <ProductPage />,
       },
 
       {
