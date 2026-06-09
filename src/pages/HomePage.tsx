@@ -12,13 +12,19 @@ export const HomePage: React.FC = () => {
         <h1 className="hero_title">Welcome to Nice Gadgets store!</h1>
         <Carousel />
       </div>
-      <Section title="Brand new models">
-        <div className="models">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-        </div>
+
+      <Section 
+        title="Brand new models"
+        isSlide
+      >
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
       </Section>
       <Section title="Shop by category">
         <div className="categories">

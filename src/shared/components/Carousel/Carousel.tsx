@@ -16,7 +16,7 @@ import 'swiper/css/pagination';
 
 export const Carousel: React.FC = () => {
   return (
-    <div className="carousel">
+    <div className="carousel carousel-hero">
       <div className="swiper_wrapper">
         <button className="button__icon carousel__btn carousel__btn--prev">
           <Icon name="chevronLeft" />
@@ -31,8 +31,8 @@ export const Carousel: React.FC = () => {
           spaceBetween={50}
           slidesPerView={1}
           navigation={{
-            prevEl: '.carousel__btn--prev',
-            nextEl: '.carousel__btn--next',
+            prevEl: '.carousel-hero .carousel__btn--prev',
+            nextEl: '.carousel-hero .carousel__btn--next',
           }}
           pagination={{
             el: '.carousel__pagination',
