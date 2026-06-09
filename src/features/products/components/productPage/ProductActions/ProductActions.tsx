@@ -102,9 +102,7 @@ export const ProductActions: React.FC = () => {
             </li>
             <li className="short-specs__item">
               <span className="short-specs__name">Processor</span>
-              <span className="short-specs__value">
-                Apple A12 Bionic
-              </span>
+              <span className="short-specs__value">Apple A12 Bionic</span>
             </li>
             <li className="short-specs__item">
               <span className="short-specs__name">RAM</span>

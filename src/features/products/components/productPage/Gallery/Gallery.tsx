@@ -7,20 +7,50 @@ export const Gallery: React.FC = () => {
   return (
     <div className="product-page__gallery gallery">
       <div className="gallery__thumbnails">
-        <a href="#" className="gallery__thumb">
-          <img src={thumb} alt="Thumbnail 1" />
+        <a
+          href="#"
+          className="gallery__thumb"
+        >
+          <img
+            src={thumb}
+            alt="Thumbnail 1"
+          />
         </a>
-        <a href="#" className="gallery__thumb">
-          <img src={thumb} alt="Thumbnail 2" />
+        <a
+          href="#"
+          className="gallery__thumb"
+        >
+          <img
+            src={thumb}
+            alt="Thumbnail 2"
+          />
         </a>
-        <a href="#" className="gallery__thumb">
-          <img src={thumb} alt="Thumbnail 3" />
+        <a
+          href="#"
+          className="gallery__thumb"
+        >
+          <img
+            src={thumb}
+            alt="Thumbnail 3"
+          />
         </a>
-        <a href="#" className="gallery__thumb">
-          <img src={thumb} alt="Thumbnail 4" />
+        <a
+          href="#"
+          className="gallery__thumb"
+        >
+          <img
+            src={thumb}
+            alt="Thumbnail 4"
+          />
         </a>
-        <a href="#" className="gallery__thumb">
-          <img src={thumb} alt="Thumbnail 5" />
+        <a
+          href="#"
+          className="gallery__thumb"
+        >
+          <img
+            src={thumb}
+            alt="Thumbnail 5"
+          />
         </a>
       </div>
 
