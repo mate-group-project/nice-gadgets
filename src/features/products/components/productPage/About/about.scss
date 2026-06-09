@@ -1,0 +1,47 @@
+.about {
+  &__item {
+    margin-bottom: 32px;
+  }
+  &__title {
+    position: relative;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 32px;
+
+    @include md-and-up {
+      font-size: 22px;
+      line-height: 41px;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--elements);
+    }
+  }
+
+  &__subtitle {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 100%;
+    margin: 0 0 16px 0;
+  }
+
+  &__history-text {
+    margin-bottom: 18px;
+  }
+
+  &__text {
+    color: var(--secondary);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    margin-bottom: 24px;
+  }
+}
