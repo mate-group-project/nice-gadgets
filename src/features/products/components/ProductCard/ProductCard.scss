@@ -21,6 +21,8 @@ $font-weight-bold: 700;
 $font-weight-extrabold: 800;
 
 .product__card {
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   width: 100%;
   max-width: $card-max-width-sm;
@@ -49,6 +51,7 @@ $font-weight-extrabold: 800;
     font-weight: $font-weight-semibold;
     font-size: $font-size-sm;
     line-height: 21px;
+    flex-grow: 1;
   }
 
   &__price {
@@ -73,7 +76,7 @@ $font-weight-extrabold: 800;
     }
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       bottom: 0;
@@ -94,7 +97,7 @@ $font-weight-extrabold: 800;
     display: flex;
     justify-content: space-between;
 
-     &-label {
+    &-label {
       color: var(--secondary);
       font-weight: $font-weight-semibold;
       font-size: $font-size-xs;

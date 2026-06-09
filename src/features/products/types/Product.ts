@@ -13,7 +13,7 @@ export type Product = {
   image: string;
 };
 
-export type ProductAggregated = {
+export type ProductDetails = {
   id: string;
   name: string;
   image: string;
