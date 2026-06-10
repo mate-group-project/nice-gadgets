@@ -15,6 +15,7 @@ const TITLES = {
   accessories: 'Accessories',
 } as const;
 
+
 export const CatalogPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
