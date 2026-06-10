@@ -19,44 +19,15 @@ export const CatalogPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const category = searchParams.get('category') || 'phones';
-  const perPage = searchParams.get('perPage') || 'all';
-  const sort = searchParams.get('sort') || 'newest';
+  const perPage = searchParams.get('_per_page') || 'all';
+  const sort = searchParams.get('_sort') || '-year';
+  // const page = Number(searchParams.get('_page') || 1);
 
-  const { products, isLoading, error } =
-    useProductsList(category as ProductCategory);
+  const { products, total, isLoading, error } = useProductsList({
+    category: category as ProductCategory,
+  });
 
-  const sortedProducts = [...products];
-
-  switch (sort) {
-    case 'name':
-      sortedProducts.sort((a, b) =>
-        a.name.localeCompare(b.name),
-      );
-      break;
-
-    case 'price':
-      sortedProducts.sort((a, b) =>
-        a.price - b.price,
-      );
-      break;
-
-    case 'discount':
-      sortedProducts.sort(
-        (a, b) =>
-          (b.fullPrice - b.price) - (a.fullPrice - a.price),
-      );
-      break;
-
-    default:
-      sortedProducts.sort((a, b) =>
-        b.year - a.year,
-      );
-  }
-
-  const visibleProducts =
-    perPage === 'all'
-      ? sortedProducts
-      : sortedProducts.slice(0, Number(perPage));
+  console.log(products)
 
   return (
     <div className="catalog">
@@ -67,7 +38,7 @@ export const CatalogPage: React.FC = () => {
       </h1>
 
       <p className="catalog_count">
-        {products.length} models
+        {total} models
       </p>
 
       <div className="catalog_filters">
@@ -75,14 +46,14 @@ export const CatalogPage: React.FC = () => {
           label="Sort by"
           value={sort}
           options={[
-            { label: 'Newest', value: 'newest' },
+            { label: 'Newest', value: '-year' },
             { label: 'Alphabetically', value: 'name' },
             { label: 'Cheapest', value: 'price' },
-            { label: 'Biggest discount', value: 'discount' },
+            { label: 'Biggest discount', value: 'fullPrice' },
           ]}
           onChange={(value) => {
             const params = new URLSearchParams(searchParams);
-            params.set('sort', value);
+            params.set('_sort', value);
             setSearchParams(params);
           }}
         />
@@ -98,7 +69,7 @@ export const CatalogPage: React.FC = () => {
           ]}
           onChange={(value) => {
             const params = new URLSearchParams(searchParams);
-            params.set('perPage', value);
+            params.set('_per_page', value);
             setSearchParams(params);
           }}
         />
@@ -111,7 +82,7 @@ export const CatalogPage: React.FC = () => {
 
         {!isLoading &&
           !error &&
-            visibleProducts.map(product => (
+            products.map(product => (
               <ProductCard
                 key={product.id}
                 product={product}
