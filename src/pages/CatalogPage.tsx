@@ -15,7 +15,6 @@ const TITLES = {
   accessories: 'Accessories',
 } as const;
 
-
 export const CatalogPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -44,8 +43,7 @@ export const CatalogPage: React.FC = () => {
     case 'discount':
       sortedProducts.sort(
         (a, b) =>
-          (b.fullPrice - b.price) -
-          (a.fullPrice - a.price),
+          (b.fullPrice - b.price) - (a.fullPrice - a.price),
       );
       break;
 
@@ -69,7 +67,7 @@ export const CatalogPage: React.FC = () => {
       </h1>
 
       <p className="catalog_count">
-         {products.length} models
+        {products.length} models
       </p>
 
       <div className="catalog_filters">
