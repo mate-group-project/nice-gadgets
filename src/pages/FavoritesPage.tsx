@@ -20,7 +20,10 @@ export const FavoritesPage: React.FC = () => {
 
       <div className="favourites__grid">
         {favourites.map((product) => (
-          <ProductCard key={product.id} />
+          <ProductCard
+            key={product.id}
+            product={product}
+          />
         ))}
       </div>
     </>
