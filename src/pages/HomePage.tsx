@@ -21,7 +21,7 @@ export const HomePage: React.FC = () => {
         isSlide
       >
         {products.map((product) => (
-          <ProductCard key={product.id} />
+          <ProductCard product={product} key={product.id} />
         ))}
       </Section>
       <Section title="Shop by category">
