@@ -10,66 +10,59 @@ type Props = {
   product: Product;
 }
 
-import { useSyncExternalStore } from 'react';
 import { Link } from 'react-router-dom';
-
-type ProductId = string | number;
-
-interface UseCartResult {
-  cart: ProductId[];
-  saveCart: (updatedCart: ProductId[]) => void;
-}
-
-const subscribe = (callback: () => void): (() => void) => {
-  window.addEventListener('cart-updated', callback);
-  return () => window.removeEventListener('cart-updated', callback);
-};
-
-const getSnapshot = (): string => {
-  return localStorage.getItem('cart') || '[]';
-};
-
-const useCart = (): UseCartResult => {
-  const cartString = useSyncExternalStore(subscribe, getSnapshot);
-  
-  const cart: ProductId[] = JSON.parse(cartString);
-
-  const saveCart = (updatedCart: ProductId[]): void => {
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-    window.dispatchEvent(new Event('cart-updated'));
-  };
-
-  return { cart, saveCart };
-};
+import { useCart, useFavorites } from '../../hooks/useLocalStorageList';
 
 export const ProductCard: React.FC<Props> = ({ product }) => {
-  const { cart, saveCart } = useCart();
-  
-  if (!product) return;
-  
-  const isProductAdded = cart.includes(product.id);
+  const { items: cart, saveItems } = useCart();
 
-  const handleAddToCart = () => {
-    if (isProductAdded) return;
+  const { items: favorites, saveItems: saveFavorites } =
+    useFavorites();
+  
+  const isAdded = cart.includes(product.id);
 
-    const updated = [...cart, product.id];
-    saveCart(updated); 
+  const addToCart = () => {
+    if (cart.includes(product.id)) return;
+
+    saveItems([
+      ...cart,
+      product.id,
+    ]);
+  };
+  
+  const isFavorite = favorites.includes(product.id);
+
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      saveFavorites(
+        favorites.filter(id => id !== product.id)
+      );
+
+      return;
+    }
+
+  saveFavorites([
+    ...favorites,
+    product.id,
+  ]);
   };
   
   return (
     <article className="product__card">
 
-      <Link to={`product/${product.itemId}`}>
-        <img src={`${BASE_URL}/${product.image}`} alt={`${product.name} (iMT9G2FS/A)`} className="product__card__image" />
+      <Link to={`product/${product.id}`}>
+        <img src={`${BASE_URL}/${product.image}`} alt={product.name} className="product__card__image" />
       </Link>
       
-      <Link to={`product/${product.itemId}`}>
-        <h3 className="product__card__title">{`${product.name} (iMT9G2FS/A)`}</h3>
+      <Link to={`product/${product.id}`}>
+        <h3 className="product__card__title">{product.name}</h3>
       </Link>
       
       <p className="product__card__price">
         <span className="product__card__price-current">{`$${product.price}`}</span>
-        <span className="product__card__price-old">{`$${product.fullPrice}`}</span>
+        {product.price !== product.fullPrice && (
+          <span className="product__card__price-old">{`$${product.fullPrice}`}</span>
+        )}
       </p>
 
       <section className="product__card__specs">
@@ -91,16 +84,18 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
       <div className="product__card__actions">
         <Button className={classNames('button product__card__button', {
-          'is-active': isProductAdded
+          'is-active': isAdded,
         })}
-          onClick={handleAddToCart}
+          onClick={addToCart}
         >
           Add to cart</Button>
         <Button
-          className="button__icon button--lg product__card__icon-button"
-          onClick={() => {}}
+            className="button__icon button--lg product__card__icon-button"
+            onClick={toggleFavorite}
         >
-          <Icon name="heart" />
+          <Icon
+            name={isFavorite ? "heartFilled" : "heart"}
+            className={classNames({'text--accent-secondary': isFavorite})} />
         </Button>
       </div>
     </article>
