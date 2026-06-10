@@ -33,10 +33,9 @@ export const HomePage: React.FC = () => {
       </Section>
       <Section title="Hot prices">
         <div className="models">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {products.map((product) => (
+          <ProductCard product={product} key={product.id} />
+        ))}
         </div>
       </Section>
       <UIKIT />
