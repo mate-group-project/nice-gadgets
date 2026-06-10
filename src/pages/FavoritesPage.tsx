@@ -19,9 +19,9 @@ export const FavoritesPage: React.FC = () => {
       <h1 className="favourites">Favourites</h1>
       <p>{favourites.length} items</p>
 
-      {favourites.map((product) => (
+      {/* {favourites.map((product) => (
         <div key={product.id}>{product.name}</div>
-      ))}
+      ))} */}
     </>
   );
 };
