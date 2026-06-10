@@ -1,3 +1,4 @@
+import React from 'react';
 import { Icon } from '@/shared/components/Icon';
 import { Link } from 'react-router-dom';
 import './Breadcrumbs.scss';
@@ -11,7 +12,10 @@ export const Breadcrumbs: React.FC<Props> = ({ page }) => {
     <div className="breadcrumbs">
       <div className="container">
         <Link to="/">
-          <Icon name="home" />
+          <Icon
+            className="container__icon"
+            name="home"
+          />
         </Link>
         <span className="icon">›</span>
         <span className="page">{page}</span>

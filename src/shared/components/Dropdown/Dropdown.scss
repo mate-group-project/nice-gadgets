@@ -43,6 +43,8 @@
     border-radius: 8px;
     background-color: var(--white);
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+
+    white-space: nowrap;
   }
 
   &__item {
