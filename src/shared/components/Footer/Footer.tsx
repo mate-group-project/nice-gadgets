@@ -38,7 +38,7 @@ export const Footer: React.FC = () => {
           rights
         </a>
       </div>
-      <div className="container">
+      <div className="footer__container">
         <a
           href="#"
           className="back"
