@@ -18,11 +18,9 @@ export const FavoritesPage: React.FC = () => {
       <h1 className="favourites">Favourites</h1>
       <p className="favourites__count">{favourites.length} items</p>
 
-      <div className="favourites__grid">
-        {favourites.map((product) => (
-          <ProductCard key={product.id} />
-        ))}
-      </div>
+      {/* {favourites.map((product) => (
+        <div key={product.id}>{product.name}</div>
+      ))} */}
     </>
   );
 };
