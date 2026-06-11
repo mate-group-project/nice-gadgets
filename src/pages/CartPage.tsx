@@ -3,9 +3,13 @@ import { CartList } from '../features/cart/components/CartList/CartList';
 import { CartSummary } from '../features/cart/components/CartSummary/CartSummary';
 import type { CartItemType } from '../features/cart/types';
 import '../features/cart/CartPage.scss';
+import { useCartProducts } from '@/features/cart/hooks/useCartProducts.ts';
 
 //Заглушка
 export const CartPage: React.FC = () => {
+  const { cartProducts } = useCartProducts();
+  console.log(cartProducts);
+
   const [cartItems, setCartItems] = useState<CartItemType[]>([
     {
       id: '1',
