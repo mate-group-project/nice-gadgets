@@ -40,7 +40,8 @@ export const Footer: React.FC = () => {
       </div>
       <div className="footer__container">
         <a
-          href="#"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          style={{ cursor: 'pointer' }}
           className="back"
         >
           Back to top
