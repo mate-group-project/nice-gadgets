@@ -7,6 +7,7 @@ export const useFavoriteProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
+
   useEffect(() => {
     const favoritesLocal = JSON.parse(
       localStorage.getItem('favorites') || '[]',
@@ -36,6 +37,7 @@ export const useFavoriteProducts = () => {
 
     loadProductCart().then(() => {});
   }, []);
+
 
   return {
     cartProducts: favoritesProducts,
