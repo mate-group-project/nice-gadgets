@@ -5,6 +5,7 @@ import { ProductCard } from '@/features/products/components/ProductCard';
 import { CategoryCard } from '@/features/categories/components/CategoryCard';
 import { UIKIT } from '@/shared/components/UIKIT.tsx';
 import { useProductsList } from '@/features/products/hooks/useProductsList.ts';
+import { Link } from 'react-router-dom';
 
 export const HomePage: React.FC = () => {
   const { products } = useProductsList();
@@ -45,9 +46,24 @@ export const HomePage: React.FC = () => {
 
       <Section title="Shop by category">
         <div className="categories">
-          <CategoryCard image="https://i.ibb.co/gFwSBpht/Phones.png" />
-          <CategoryCard image="https://i.ibb.co/zHD5rcYd/Tablets.png" />
-          <CategoryCard image="https://i.ibb.co/DyL6gQR/Accessories.png" />
+          <Link
+            to="/catalog?category=phones"
+            style={{ flex: 1 }}
+          >
+            <CategoryCard image="https://i.ibb.co/gFwSBpht/Phones.png" />
+          </Link>
+          <Link
+            to="http://localhost:5173/catalog?category=tablets"
+            style={{ flex: 1 }}
+          >
+            <CategoryCard image="https://i.ibb.co/zHD5rcYd/Tablets.png" />
+          </Link>
+          <Link
+            to="http://localhost:5173/catalog?category=accessories"
+            style={{ flex: 1 }}
+          >
+            <CategoryCard image="https://i.ibb.co/DyL6gQR/Accessories.png" />
+          </Link>
         </div>
       </Section>
 

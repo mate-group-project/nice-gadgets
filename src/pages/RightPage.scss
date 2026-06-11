@@ -1,0 +1,21 @@
+.rights {
+  padding: 40px 120px;
+
+  &__title {
+    margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 32px;
+  }
+
+  &__text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #89939a;
+  }
+}
+
+@media (max-width: 768px) {
+  .rights {
+    padding: 24px 16px;
+  }
+}
