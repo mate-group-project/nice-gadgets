@@ -19,11 +19,13 @@ export const useProductsList = ({
   const [error, setError] = useState('');
 
   const [total, setTotal] = useState(0);
+  const [pages, setPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    const perPage = searchParams.get('_per_page') || 'all';
+    const perPage = searchParams.get('_per_page') || '12';
     const sort = searchParams.get('_sort') || 'newest';
     const page = Number(searchParams.get('_page') || 1);
 
@@ -41,6 +43,8 @@ export const useProductsList = ({
 
         setProducts(productsFromServer.data);
         setTotal(productsFromServer.items);
+        setPages(productsFromServer.pages);
+        setCurrentPage(page);
       } catch {
         setError('Unable to load products');
       } finally {
@@ -51,5 +55,5 @@ export const useProductsList = ({
     loadProducts().then(() => {});
   }, [category, searchParams]);
 
-  return { products, total, isLoading, error };
+  return { products, total, pages, currentPage, isLoading, error };
 };

@@ -46,9 +46,21 @@
   }
 
   .models {
-    display: flex;
-    justify-content: space-between;
-    gap: 4px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
+    justify-items: center;
+    gap: 16px;
+
+    // @include sm-and-up {
+    //   grid-template-columns: repeat(2, 1fr);
+    // }
+
+    // @include md-and-up {
+    //   grid-template-columns: repeat(3, 1fr);
+    // }
+
+    // @include lg-and-up {
+    //   grid-template-columns: repeat(4, 1fr);
+    // }
   }
 }
