@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import './Section.scss';
 import { Icon } from '../Icon';
 
@@ -21,6 +21,8 @@ export const Section: React.FC<SectionProps> = ({
 }) => {
   const childrenArray = React.Children.toArray(children);
 
+  const id = useId();
+
   return (
     <section className="section section-products">
       <div className="section__header">
@@ -28,11 +30,15 @@ export const Section: React.FC<SectionProps> = ({
 
         {isSlide && (
           <div className="section__buttons">
-            <button className="button__icon carousel__btn carousel__btn--prev">
+            <button 
+              className={`button__icon carousel__btn carousel__btn--prev prev-${id}`}
+            >
               <Icon name="chevronLeft" />
             </button>
 
-            <button className="button__icon carousel__btn carousel__btn--next">
+            <button 
+              className={`button__icon carousel__btn carousel__btn--next next-${id}`}
+            >
               <Icon name="chevronRight" />
             </button>
           </div>
@@ -44,8 +50,8 @@ export const Section: React.FC<SectionProps> = ({
           spaceBetween={16}
           modules={[Navigation]}
           navigation={{
-            prevEl: '.section-products .carousel__btn--prev',
-            nextEl: '.section-products .carousel__btn--next',
+            prevEl: `.prev-${id}`,
+            nextEl: `.next-${id}`,
           }}
           breakpoints={{
             320: {

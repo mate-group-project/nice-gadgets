@@ -5,6 +5,8 @@ import { CatalogPage } from '@/pages/CatalogPage';
 import { FavoritesPage } from '@/pages/FavoritesPage';
 import { CartPage } from '@/pages/CartPage';
 import { ProductPage } from '@/pages/ProductPage.tsx';
+import { NotFoundPage } from '@/pages/NotFoundPage';
+import { RightPage } from '@/pages/RightPage';
 
 // routes
 export const router = createBrowserRouter([
@@ -35,6 +37,16 @@ export const router = createBrowserRouter([
       {
         path: 'cart',
         element: <CartPage />,
+      },
+
+      {
+        path: '*',
+        element: <NotFoundPage />,
+      },
+
+      {
+        path: 'rights',
+        element: <RightPage />,
       },
     ],
   },
