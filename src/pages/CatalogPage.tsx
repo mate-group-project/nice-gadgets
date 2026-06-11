@@ -27,19 +27,17 @@ export const CatalogPage: React.FC = () => {
     category: category as ProductCategory,
   });
 
-  console.log(products)
+  console.log(products);
 
   return (
     <div className="catalog">
-      <Breadcrumbs page={TITLES[category as keyof typeof TITLES]} />  
+      <Breadcrumbs page={TITLES[category as keyof typeof TITLES]} />
 
       <h1 className="catalog_title">
         {TITLES[category as keyof typeof TITLES]}
       </h1>
 
-      <p className="catalog_count">
-        {total} models
-      </p>
+      <p className="catalog_count">{total} models</p>
 
       <div className="catalog_filters">
         <Dropdown
@@ -82,12 +80,12 @@ export const CatalogPage: React.FC = () => {
 
         {!isLoading &&
           !error &&
-            products.map(product => (
-              <ProductCard
-                key={product.id}
-                product={product}
-              />
-            ))}
+          products.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+            />
+          ))}
       </div>
     </div>
   );

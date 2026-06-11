@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
         </a>
 
         <a
-          href="#"
+          href="../contacts"
           className="contact"
         >
           contacts
