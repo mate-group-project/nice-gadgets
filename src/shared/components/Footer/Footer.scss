@@ -1,8 +1,10 @@
 $height: 74px;
 
 :root {
+  scroll-behavior: smooth;
   --color-contacts: #89939a;
 }
+
 
 .footer {
   @include container;

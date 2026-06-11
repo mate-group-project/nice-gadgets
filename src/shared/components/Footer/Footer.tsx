@@ -18,21 +18,21 @@ export const Footer: React.FC = () => {
 
       <div className="info">
         <a
-          href="#"
+          href="https://github.com/mate-group-project/nice-gadgets/tree/main"
           className="contact"
         >
           github
         </a>
 
         <a
-          href="#"
+          href="/contact"
           className="contact"
         >
           contacts
         </a>
 
         <a
-          href="#"
+          href="/rights"
           className="contact"
         >
           rights
@@ -47,8 +47,7 @@ export const Footer: React.FC = () => {
         </a>
         <Button
           className="button__icon button--lg"
-          onClick={() => {}}
-          disabled
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           {' '}
           <Icon name="chevronUp" />{' '}
