@@ -38,9 +38,9 @@ $font-weight-extrabold: 800;
     height: $card-image-height-sm;
     object-fit: contain;
 
-      @include lg-and-up {
-        width: $card-image-width-lg;
-        height: $card-image-height-lg;
+    @include lg-and-up {
+      width: $card-image-width-lg;
+      height: $card-image-height-lg;
     }
   }
 
