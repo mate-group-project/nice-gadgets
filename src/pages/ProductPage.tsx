@@ -33,7 +33,7 @@ export const ProductPage: React.FC = () => {
 
         <div className="product-page__content">
           <div className="product-page__main-info">
-            <Gallery />
+            <Gallery product={product} key={product.id}/>
             <ProductActions product={product} />
           </div>
 

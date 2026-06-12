@@ -31,6 +31,19 @@
     }
   }
 
+  &__cart-button.button {
+    width: 230px;
+    height: 48px;
+
+    @include md-and-up {
+      width: 180px;
+    }
+
+    @include lg-and-up {
+      width: 260px;
+    }
+  }
+
   &__selection-header {
     display: flex;
     justify-content: space-between;

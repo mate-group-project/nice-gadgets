@@ -3,9 +3,11 @@ import { Icon } from '@/shared/components/Icon';
 import './productAction.scss';
 import type { ProductDetails } from '@/features/products/types/Product';
 import { formatProdductSpecs } from '@/features/products/utils/productSpecs';
-;
+import '../../ProductCard/ProductCard.scss';
+
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import { useCart, useFavorites } from '../../../hooks/useLocalStorageList';
 
 type ProductActionsProps = {
   product: ProductDetails;
@@ -30,7 +32,27 @@ const PRODUCT_COLORS: Record<string, string> = {
 };
 
 export const ProductActions = ({ product }: ProductActionsProps) => {
+  const { items: cart, saveItems } = useCart();
+  const { items: favorites, saveItems: saveFavorites } = useFavorites();
   const specsConfig = formatProdductSpecs(product);
+
+  const isAdded = cart.includes(product.id);
+  const isFavorite = favorites.includes(product.id);
+
+  const addToCart = () => {
+    if (cart.includes(product.id)) return;
+
+    saveItems([...cart, product.id]);
+  };
+
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      saveFavorites(favorites.filter((id) => id !== product.id));
+      return;
+    }
+
+    saveFavorites([...favorites, product.id]);
+  };
 
   return (
     <div className="product-page__actions product-actions">
@@ -100,17 +122,22 @@ export const ProductActions = ({ product }: ProductActionsProps) => {
 
           <div className="purchase__controls">
             <Button
-              className="button"
-              style={{ width: '260px' }}
+              className={classNames('button product-actions__cart-button', {
+                'is-active': isAdded,
+              })}
+              onClick={addToCart}
             >
-              Add to cart
+              {isAdded ? 'Added to cart' : 'Add to cart'}
             </Button>
 
             <Button
-              className="button__icon button--lg"
-              onClick={() => { }}
+              className="button__icon button--lg product-actions__favorite-button"
+              onClick={toggleFavorite}
             >
-              <Icon name="heart" />
+              <Icon
+                name={isFavorite ? 'heartFilled' : 'heart'}
+                className={classNames({ 'text--accent-secondary': isFavorite })}
+              />
             </Button>
           </div>
         </div>
@@ -130,3 +157,4 @@ export const ProductActions = ({ product }: ProductActionsProps) => {
     </div>
   );
 };
+
