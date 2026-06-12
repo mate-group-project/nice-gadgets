@@ -96,6 +96,7 @@ export const Contacts: React.FC = () => {
                 <a
                   className="contact__card-info-value"
                   href={person.github}
+                  target="blank"
                 >
                   GitHub profile
                 </a>
@@ -105,6 +106,7 @@ export const Contacts: React.FC = () => {
                 <a
                   className="contact__card-info-value"
                   href={person.linkedin}
+                  target="blank"
                 >
                   LinkedIn profile
                 </a>
