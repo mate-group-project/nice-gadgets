@@ -5,12 +5,15 @@ import { ProductCard } from '@/features/products/components/ProductCard';
 import { CategoryCard } from '@/features/categories/components/CategoryCard';
 import { useProductsList } from '@/features/products/hooks/useProductsList.ts';
 import { Link } from 'react-router-dom';
+import { ProductCartSkeleton } from '@/features/products/components/ProductCard/ProductCartSkeleton.tsx';
 
 export const HomePage: React.FC = () => {
   const { products } = useProductsList();
 
+  const maxYear = Math.max(...products.map((p) => p.year));
+
   const brandNewProducts = products.filter(
-    (product) => product.price === product.fullPrice,
+    (product) => product.year === maxYear,
   );
 
   const hotPriceProducts = [...products]
@@ -22,6 +25,10 @@ export const HomePage: React.FC = () => {
       return discountB - discountA;
     });
 
+  const loader = Array(4)
+    .fill(null)
+    .map((_, i) => <ProductCartSkeleton key={i} />);
+
   return (
     <>
       <div className="hero">
@@ -29,7 +36,7 @@ export const HomePage: React.FC = () => {
         <Carousel />
       </div>
 
-      {brandNewProducts.length > 0 && (
+      {brandNewProducts.length > 0 ?
         <Section
           title="Brand new models"
           isSlide
@@ -41,7 +48,7 @@ export const HomePage: React.FC = () => {
             />
           ))}
         </Section>
-      )}
+      : <Section>{loader}</Section>}
 
       <Section title="Shop by category">
         <div className="categories">
@@ -66,7 +73,7 @@ export const HomePage: React.FC = () => {
         </div>
       </Section>
 
-      {hotPriceProducts.length > 0 && (
+      {hotPriceProducts.length > 0 ?
         <Section
           title="Hot prices"
           isSlide
@@ -78,7 +85,7 @@ export const HomePage: React.FC = () => {
             />
           ))}
         </Section>
-      )}
+      : <Section>{loader}</Section>}
     </>
   );
 };

@@ -13,6 +13,7 @@ $height: 74px;
   align-items: center;
   justify-content: space-between;
   padding: 0 120px;
+  gap: 40px;
 
   @include lg-and-up {
     max-width: 100%;
@@ -28,7 +29,8 @@ $height: 74px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
+  flex: 1;
   gap: 106px;
 }
 
@@ -75,12 +77,37 @@ $height: 74px;
 
   .info {
     flex-direction: column;
-    gap: 16px;
+    gap:16px;
   }
 
   .container {
     align-self: center;
     justify-content: center;
     width: 100%;
+  }
+}
+
+.logo,
+.footer__container {
+  flex-shrink: 0; 
+}
+
+
+@media (min-width:1281px) {
+  .info {
+    gap:106px;
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 640px) {
+  .info {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .info {
+    flex-direction: column;
+    gap:16px;
   }
 }
