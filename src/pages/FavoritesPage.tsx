@@ -1,28 +1,26 @@
 import * as React from 'react';
 import { Breadcrumbs } from './Breadcrumbs';
-import { ProductCard } from '@/features/products/components/ProductCard';
 import { useFavoriteProducts } from '@/features/favorites/hooks/useFavoriteProducts';
 import './FavouritesPage.scss';
+import { ProductList } from '@/features/products/components/ProductList/ProductList.tsx';
 
 export const FavoritesPage: React.FC = () => {
   const { cartProducts, isLoading, error } = useFavoriteProducts();
 
   return (
-    <>
+    <div className="favourites">
       <Breadcrumbs page={'Favourites'} />
 
-      <h1 className="favourites">Favourites</h1>
+      <h1 className="favourites__title">Favourites</h1>
       <p className="favourites__count">{cartProducts.length} items</p>
-      {isLoading && <div>Loading...</div>}
-      {error && <div>{error}</div>}
-      <div className="favourites__grid">
-        {cartProducts.filter(Boolean).map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-          />
-        ))}
+
+      <div className="favourites__items">
+        <ProductList
+          products={cartProducts}
+          isLoading={isLoading}
+          errorMessage={error}
+        />
       </div>
-    </>
+    </div>
   );
 };
