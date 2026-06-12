@@ -15,10 +15,6 @@ export type Person = {
   email: string;
 };
 
-export type Props = {
-  people: Person[];
-};
-
 const people = [
   {
     id: 1,
@@ -76,7 +72,7 @@ const people = [
   },
 ];
 
-export const Contacts: React.FC<Props> = () => {
+export const Contacts: React.FC = () => {
   return (
     <main className="contacts">
       <h1 className="contacts__title">Contacts</h1>
