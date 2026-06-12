@@ -11,9 +11,7 @@ type Params = {
   page?: number;
 };
 
-export const useProductsList = ({
-  category
-}: Params = {}) => {
+export const useProductsList = ({ category }: Params = {}) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');

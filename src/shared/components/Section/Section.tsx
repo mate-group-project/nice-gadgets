@@ -30,13 +30,13 @@ export const Section: React.FC<SectionProps> = ({
 
         {isSlide && (
           <div className="section__buttons">
-            <button 
+            <button
               className={`button__icon carousel__btn carousel__btn--prev prev-${id}`}
             >
               <Icon name="chevronLeft" />
             </button>
 
-            <button 
+            <button
               className={`button__icon carousel__btn carousel__btn--next next-${id}`}
             >
               <Icon name="chevronRight" />
