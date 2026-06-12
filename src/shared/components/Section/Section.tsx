@@ -72,7 +72,7 @@ export const Section: React.FC<SectionProps> = ({
             <SwiperSlide key={index}>{child}</SwiperSlide>
           ))}
         </Swiper>
-      : <div className="models">{childrenArray}</div>}
+      : <div className="items">{childrenArray}</div>}
     </section>
   );
 };

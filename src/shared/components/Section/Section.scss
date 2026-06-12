@@ -30,4 +30,12 @@
   .swiper-slide > * {
     height: 100%;
   }
+
+  .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
+    justify-items: center;
+    gap: 16px;
+    width: 100%;
+  }
 }
