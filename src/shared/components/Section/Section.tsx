@@ -15,14 +15,14 @@ interface SectionProps {
 }
 
 export const Section: React.FC<SectionProps> = ({
-  title = 'Some title',
+  title = '',
   isSlide = false,
   children,
 }) => {
   const childrenArray = React.Children.toArray(children);
   const slidesCount = childrenArray.length;
-  
-  const isSliderActive = isSlide && slidesCount > 4; 
+
+  const isSliderActive = isSlide && slidesCount > 4;
 
   const id = useId();
 
@@ -49,34 +49,30 @@ export const Section: React.FC<SectionProps> = ({
       </div>
 
       {isSliderActive ?
-          <Swiper
-            spaceBetween={16}
-            modules={[Navigation]}
-            navigation={{
-              prevEl: `.prev-${id}`,
-              nextEl: `.next-${id}`,
-            }}
-            breakpoints={{
-              320: {
-                slidesPerView: 1.2,
-              },
-              640: {
-                slidesPerView: 2.2,
-              },
-              1024: {
-                slidesPerView: 4,
-              },
-            }}
-          >
-            {childrenArray.map((child, index) => (
-              <SwiperSlide key={index}>{child}</SwiperSlide>
-            ))}
-          </Swiper>
-        : (
-          <div className="models">
-            {childrenArray}
-          </div>
-        )}
+        <Swiper
+          spaceBetween={16}
+          modules={[Navigation]}
+          navigation={{
+            prevEl: `.prev-${id}`,
+            nextEl: `.next-${id}`,
+          }}
+          breakpoints={{
+            320: {
+              slidesPerView: 1.2,
+            },
+            640: {
+              slidesPerView: 2.2,
+            },
+            1024: {
+              slidesPerView: 4,
+            },
+          }}
+        >
+          {childrenArray.map((child, index) => (
+            <SwiperSlide key={index}>{child}</SwiperSlide>
+          ))}
+        </Swiper>
+      : <div className="models">{childrenArray}</div>}
     </section>
   );
 };

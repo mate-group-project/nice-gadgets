@@ -81,13 +81,11 @@ export const CatalogPage: React.FC = () => {
         />
       </div>
 
-      <div className="models">
-        <ProductList
-          products={products}
-          isLoading={isLoading}
-          errorMessage={error}
-        />
-      </div>
+      <ProductList
+        products={products}
+        isLoading={isLoading}
+        errorMessage={error}
+      />
 
       {pages > 1 && (
         <Pagination
