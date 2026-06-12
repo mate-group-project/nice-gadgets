@@ -26,13 +26,4 @@
 .container {
   width: 100%;
   margin-top: 40px;
-  padding: 0 120px;
-
-  @media (max-width: 1200px) {
-    padding: 0 40px;
-  }
-
-  @media (max-width: 640px) {
-    padding: 0 16px;
-  }
 }
