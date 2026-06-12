@@ -75,8 +75,8 @@ const people = [
 export const Contacts: React.FC = () => {
   return (
     <main className="contacts">
-      <h1 className="contacts__title">Contacts</h1>
-
+      <div className="contacts__container">
+        <h1 className="contacts__title">Contacts</h1>
       <div className="contacts__list">
         {people.map((person) => (
           <article
@@ -96,7 +96,8 @@ export const Contacts: React.FC = () => {
                 <a
                   className="contact__card-info-value"
                   href={person.github}
-                  target="blank"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   GitHub profile
                 </a>
@@ -106,7 +107,8 @@ export const Contacts: React.FC = () => {
                 <a
                   className="contact__card-info-value"
                   href={person.linkedin}
-                  target="blank"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   LinkedIn profile
                 </a>
@@ -132,6 +134,7 @@ export const Contacts: React.FC = () => {
             </ul>
           </article>
         ))}
+      </div>
       </div>
     </main>
   );

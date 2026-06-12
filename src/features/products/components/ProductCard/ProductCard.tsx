@@ -5,23 +5,27 @@ import { Icon } from '@/shared/components/Icon';
 import type { Product } from '../../types/Product';
 import { BASE_URL } from '@/shared/api/endpoints';
 import classNames from 'classnames';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCart, useFavorites } from '../../hooks/useLocalStorageList';
 
 type Props = {
   product: Product;
 };
-
-import { Link } from 'react-router-dom';
-import { useCart, useFavorites } from '../../hooks/useLocalStorageList';
 
 export const ProductCard: React.FC<Props> = ({ product }) => {
   const { items: cart, saveItems } = useCart();
 
   const { items: favorites, saveItems: saveFavorites } = useFavorites();
 
+  const navigate = useNavigate();
+
   const isAdded = cart.includes(product.id);
 
   const addToCart = () => {
-    if (cart.includes(product.id)) return;
+    if (cart.includes(product.id)) {
+      navigate('cart');
+      return;
+    }
 
     saveItems([...cart, product.id]);
   };
@@ -40,7 +44,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
   return (
     <article className="product__card">
-      <Link to={`/product/${product.id}`}>
+      <Link to={`product/${product.id}`}>
         <img
           src={`${BASE_URL}/${product.image}`}
           alt={product.name}
@@ -48,7 +52,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
         />
       </Link>
 
-      <Link to={`/product/${product.id}`}>
+      <Link to={`/product/${product.id}`} target="_blank" rel="noreferrer">
         <h3 className="product__card__title">{product.name}</h3>
       </Link>
 
@@ -83,7 +87,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
           })}
           onClick={addToCart}
         >
-          Add to cart
+          {isAdded ? 'Go to cart' : 'Add to cart'}
         </Button>
         <Button
           className="button__icon button--lg product__card__icon-button"
