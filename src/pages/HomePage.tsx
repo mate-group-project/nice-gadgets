@@ -33,7 +33,7 @@ export const HomePage: React.FC = () => {
       {brandNewProducts.length > 0 && (
         <Section
           title="Brand new models"
-          isSlide
+          // isSlide
         >
           {brandNewProducts.map((product) => (
             <ProductCard
