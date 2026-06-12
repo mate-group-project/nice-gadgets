@@ -59,7 +59,8 @@
     height: 32px;
     border-radius: 50%;
     cursor: pointer;
-    border: 2px solid transparent;
+    border: 1px solid var(--secondary);
+    box-shadow: 0 0 0 2px var(--white) inset;
     transition:
       transform 0.2s ease,
       border-color 0.2s ease;
@@ -67,25 +68,9 @@
     &:hover {
       transform: scale(1.1);
     }
-    &--pink {
-      background-color: var(--pink);
-      border-color: var(--secondary);
-    }
-    &--dark-green {
-      background-color: var(--dark-green);
-      border-color: var(--secondary);
-    }
-    &--dark-grey {
-      background-color: var(--dark-grey);
-      border-color: var(--secondary);
-    }
-    &--light-grey {
-      background-color: var(--light-grey);
-      border-color: var(--secondary);
-    }
+
     &--active {
       border-color: var(--primary);
-      box-shadow: 0 0 0 2px var(--white) inset;
     }
   }
 

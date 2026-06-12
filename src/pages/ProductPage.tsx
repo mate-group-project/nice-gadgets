@@ -7,10 +7,14 @@ import { About } from '../features/products/components/productPage/About';
 import { TechSpecs } from '../features/products/components/productPage/TechSpecs';
 import { useParams } from 'react-router-dom';
 import { useProduct } from '@/features/products/hooks/useProduct';
+import { Section } from '@/shared/components/Section';
 
 export const ProductPage: React.FC = () => {
-  const { productId } = useParams<{ productId: string }>();
-  const { product, isLoading, error } = useProduct(productId);
+  const { slug } = useParams<{ slug: string }>();
+  const { product, isLoading, error } = useProduct(slug);
+
+  console.log('Product ID from URL:', slug);
+  console.log('Product details:', product);
 
   if (isLoading) {
     return <div className="product-page__loading">Loading...</div>;
@@ -19,8 +23,6 @@ export const ProductPage: React.FC = () => {
   if (error || !product) {
     return <div className="product-page__error">Error loading product details.</div>; 
   }
-
-
 
   return (
     <section className="product-page">
@@ -31,7 +33,7 @@ export const ProductPage: React.FC = () => {
 
         <div className="product-page__content">
           <div className="product-page__main-info">
-            <Gallery images={product.images} />
+            <Gallery />
             <ProductActions product={product} />
           </div>
 
@@ -41,6 +43,8 @@ export const ProductPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <Section title='You may also like'/>
     </section>
   );
 };

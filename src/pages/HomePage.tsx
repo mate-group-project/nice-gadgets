@@ -9,6 +9,19 @@ import { useProductsList } from '@/features/products/hooks/useProductsList.ts';
 export const HomePage: React.FC = () => {
   const { products } = useProductsList();
 
+  const brandNewProducts = products.filter(
+    product => product.price === product.fullPrice,
+  );
+
+  const hotPriceProducts = [...products]
+    .filter(product => product.fullPrice > product.price)
+    .sort((a, b) => {
+      const discountA = a.fullPrice - a.price;
+      const discountB = b.fullPrice - b.price;
+
+      return discountB - discountA;
+  });
+
   return (
     <>
       <div className="hero">
@@ -16,14 +29,16 @@ export const HomePage: React.FC = () => {
         <Carousel />
       </div>
 
-      <Section
-        title="Brand new models"
-        isSlide
-      >
-        {products.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
-      </Section>
+      {brandNewProducts.length > 0 && 
+        <Section
+          title="Brand new models"
+          isSlide
+        >
+          {brandNewProducts.map((product) => (
+            <ProductCard product={product} key={product.id} />
+          ))}
+        </Section>}
+
       <Section title="Shop by category">
         <div className="categories">
           <CategoryCard image="https://i.ibb.co/gFwSBpht/Phones.png" />
@@ -31,13 +46,17 @@ export const HomePage: React.FC = () => {
           <CategoryCard image="https://i.ibb.co/DyL6gQR/Accessories.png" />
         </div>
       </Section>
-      <Section title="Hot prices">
-        <div className="models">
-          {products.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
-        </div>
-      </Section>
+
+      {hotPriceProducts.length > 0 && 
+        <Section 
+          title="Hot prices"
+          isSlide
+        >
+          {hotPriceProducts.map((product) => (
+            <ProductCard product={product} key={product.id} />
+          ))}
+        </Section>}
+
       <UIKIT />
     </>
   );
