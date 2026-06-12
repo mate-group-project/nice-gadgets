@@ -24,7 +24,7 @@ export const CatalogPage: React.FC = () => {
   const sort = searchParams.get('_sort') || '-year';
 
   const currentPage = Number(searchParams.get('_page') || 1);
-  
+
   const { products, total, pages, isLoading, error } = useProductsList({
     category: category as ProductCategory,
   });
