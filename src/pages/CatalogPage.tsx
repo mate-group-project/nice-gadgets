@@ -2,13 +2,13 @@ import * as React from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import './CatalogPage.scss';
-import { ProductCard } from '@/features/products/components/ProductCard/ProductCard';
 import type { ProductCategory } from '@/features/products/api/products';
 
 import { useProductsList } from '@/features/products/hooks/useProductsList';
 import { Breadcrumbs } from './Breadcrumbs';
 import { Dropdown } from '@/shared/components/Dropdown/Dropdown';
 import { Pagination } from '@/shared/components/Pagination';
+import { ProductList } from '@/features/products/components/ProductList/ProductList.tsx';
 
 const TITLES = {
   phones: 'Mobile phones',
@@ -83,20 +83,11 @@ export const CatalogPage: React.FC = () => {
         />
       </div>
 
-      <div className="models">
-        {isLoading && <div>Loading...</div>}
-
-        {error && <div>{error}</div>}
-
-        {!isLoading &&
-          !error &&
-          products.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-            />
-          ))}
-      </div>
+      <ProductList
+        products={products}
+        isLoading={isLoading}
+        errorMessage={error}
+      />
 
       {pages > 1 && (
         <Pagination

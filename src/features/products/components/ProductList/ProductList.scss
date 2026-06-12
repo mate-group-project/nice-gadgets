@@ -1,0 +1,19 @@
+.models {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 16px;
+  width: 100%;
+
+  @include sm-and-up {
+    grid-template-columns: 1fr;
+  }
+
+  @include md-and-up {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @include lg-and-up {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}

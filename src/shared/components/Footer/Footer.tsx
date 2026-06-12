@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
         </a>
 
         <a
-          href="/contact"
+          href="/contacts"
           className="contact"
         >
           contacts

@@ -1,5 +1,3 @@
-$card-max-width-sm: 237px;
-$card-max-width-lg: 272px;
 $card-image-width-sm: 172px;
 $card-image-width-lg: 208px;
 $card-image-height-sm: 202px;
@@ -25,18 +23,24 @@ $font-weight-extrabold: 800;
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
-  max-width: $card-max-width-sm;
+  //max-width: 70vw;
   background-color: var(--white);
   font-family: var(--font-main);
   border-radius: 8px;
   padding: $space-32;
   border: 1px solid var(--elements);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   &__image {
     display: block;
     width: $card-image-width-sm;
     height: $card-image-height-sm;
     object-fit: contain;
+    margin: 0 auto;
 
     @include lg-and-up {
       width: $card-image-width-lg;
@@ -118,9 +122,5 @@ $font-weight-extrabold: 800;
 
   &__button {
     width: 160px;
-  }
-
-  @include lg-and-up {
-    max-width: $card-max-width-lg;
   }
 }

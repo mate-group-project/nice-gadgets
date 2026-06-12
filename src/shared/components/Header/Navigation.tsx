@@ -4,9 +4,10 @@ import './Navigation.scss';
 
 interface Props {
   className?: string;
+  onNavigate?: () => void;
 }
 
-export const Navigation = ({ className = '' }: Props) => {
+export const Navigation = ({ className = '', onNavigate }: Props) => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category');
 
@@ -20,6 +21,7 @@ export const Navigation = ({ className = '' }: Props) => {
               'nav__link--active': isActive,
             })
           }
+          onClick={onNavigate}
         >
           Home
         </NavLink>
@@ -30,6 +32,7 @@ export const Navigation = ({ className = '' }: Props) => {
           className={cn('nav__link', {
             'nav__link--active': category === 'phones',
           })}
+          onClick={onNavigate}
         >
           Phones
         </NavLink>
@@ -40,6 +43,7 @@ export const Navigation = ({ className = '' }: Props) => {
           className={cn('nav__link', {
             'nav__link--active': category === 'tablets',
           })}
+         onClick={onNavigate}
         >
           Tablets
         </NavLink>
@@ -50,6 +54,7 @@ export const Navigation = ({ className = '' }: Props) => {
           className={cn('nav__link', {
             'nav__link--active': category === 'accessories',
           })}
+          onClick={onNavigate}
         >
           Accessories
         </NavLink>

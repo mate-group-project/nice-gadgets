@@ -15,11 +15,14 @@ interface SectionProps {
 }
 
 export const Section: React.FC<SectionProps> = ({
-  title = 'Some title',
+  title = '',
   isSlide = false,
   children,
 }) => {
   const childrenArray = React.Children.toArray(children);
+  const slidesCount = childrenArray.length;
+
+  const isSliderActive = isSlide && slidesCount > 4;
 
   const id = useId();
 
@@ -28,7 +31,7 @@ export const Section: React.FC<SectionProps> = ({
       <div className="section__header">
         <h2 className="section__title">{title}</h2>
 
-        {isSlide && (
+        {isSliderActive && (
           <div className="section__buttons">
             <button
               className={`button__icon carousel__btn carousel__btn--prev prev-${id}`}
@@ -45,7 +48,7 @@ export const Section: React.FC<SectionProps> = ({
         )}
       </div>
 
-      {isSlide ?
+      {isSliderActive ?
         <Swiper
           spaceBetween={16}
           modules={[Navigation]}
@@ -69,7 +72,7 @@ export const Section: React.FC<SectionProps> = ({
             <SwiperSlide key={index}>{child}</SwiperSlide>
           ))}
         </Swiper>
-      : children}
+      : <div className="items">{childrenArray}</div>}
     </section>
   );
 };
