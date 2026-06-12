@@ -2,24 +2,29 @@ import React from 'react';
 import './Footer.scss';
 import { Button } from '@base-ui/react';
 import { Icon } from '../Icon';
+import { NavLink } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
   return (
     <div className="footer">
       <div className="logo">
-        <a href="#">
+        <NavLink
+          to="/"
+          onClick={() => window.scrollTo(0, 0)}
+        >
           <img
             src="/logo.png"
             className="log"
             alt="logo"
           />
-        </a>
+        </NavLink>
       </div>
 
       <div className="info">
         <a
           href="https://github.com/mate-group-project/nice-gadgets/tree/main"
           className="contact"
+          target="blank"
         >
           github
         </a>

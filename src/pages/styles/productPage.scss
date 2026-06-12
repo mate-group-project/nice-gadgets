@@ -5,8 +5,23 @@
   margin: 0 auto;
 
   @include md-and-up {
-    padding: 0 32px;
+    padding: 16px 32px 0;
   }
+
+  &__container {
+    margin-bottom: 56px;
+
+    @include md-and-up {
+      margin-bottom: 64px;
+    }
+
+    @include lg-and-up {
+      margin-bottom: 60px;
+    }
+  }
+
+
+
 
   &__title {
     font-size: 22px;

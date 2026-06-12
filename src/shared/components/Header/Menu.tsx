@@ -1,5 +1,6 @@
 import { Dialog } from '@base-ui/react/dialog';
 import cn from 'classnames';
+import { useState, useEffect  } from 'react';
 
 import { Icon } from '@/shared/components/Icon';
 
@@ -12,8 +13,24 @@ interface Props {
 }
 
 export const Menu = ({ className = '' }: Props) => {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+    window.addEventListener('resize', handleClose);
+    window.addEventListener('orientationchange', handleClose);
+
+    return () => {
+      window.removeEventListener('resize', handleClose);
+      window.removeEventListener('orientationchange', handleClose);
+    };
+  }, []);
+
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger className={cn('menu', className)}>
         <Icon name="menu" />
       </Dialog.Trigger>
@@ -35,9 +52,9 @@ export const Menu = ({ className = '' }: Props) => {
             </Dialog.Close>
           </div>
           <div className="menu__body">
-            <Navigation />
+            <Navigation onNavigate={() => setOpen(false)} />
             <div className="menu__footer">
-              <Actions />
+              <Actions onNavigate={() => setOpen(false)} />
             </div>
           </div>
         </Dialog.Popup>

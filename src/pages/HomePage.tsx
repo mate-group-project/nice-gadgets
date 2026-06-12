@@ -3,9 +3,9 @@ import { Carousel } from '@/shared/components/Carousel';
 import { Section } from '@/shared/components/Section';
 import { ProductCard } from '@/features/products/components/ProductCard';
 import { CategoryCard } from '@/features/categories/components/CategoryCard';
-import { UIKIT } from '@/shared/components/UIKIT.tsx';
 import { useProductsList } from '@/features/products/hooks/useProductsList.ts';
 import { Link } from 'react-router-dom';
+import { ProductCartSkeleton } from '@/features/products/components/ProductCard/ProductCartSkeleton.tsx';
 
 export const HomePage: React.FC = () => {
   const { products } = useProductsList();
@@ -23,6 +23,10 @@ export const HomePage: React.FC = () => {
       return discountB - discountA;
     });
 
+  const loader = Array(4)
+    .fill(null)
+    .map((_, i) => <ProductCartSkeleton key={i} />);
+
   return (
     <>
       <div className="hero">
@@ -30,10 +34,10 @@ export const HomePage: React.FC = () => {
         <Carousel />
       </div>
 
-      {brandNewProducts.length > 0 && (
+      {brandNewProducts.length > 0 ?
         <Section
           title="Brand new models"
-          // isSlide
+          isSlide
         >
           {brandNewProducts.map((product) => (
             <ProductCard
@@ -42,7 +46,7 @@ export const HomePage: React.FC = () => {
             />
           ))}
         </Section>
-      )}
+      : <Section>{loader}</Section>}
 
       <Section title="Shop by category">
         <div className="categories">
@@ -67,7 +71,7 @@ export const HomePage: React.FC = () => {
         </div>
       </Section>
 
-      {hotPriceProducts.length > 0 && (
+      {hotPriceProducts.length > 0 ?
         <Section
           title="Hot prices"
           isSlide
@@ -79,9 +83,7 @@ export const HomePage: React.FC = () => {
             />
           ))}
         </Section>
-      )}
-
-      <UIKIT />
+      : <Section>{loader}</Section>}
     </>
   );
 };

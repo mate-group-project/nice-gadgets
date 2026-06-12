@@ -1,0 +1,83 @@
+.product__card--skeleton {
+  min-height: 400px;
+  pointer-events: none;
+
+  .product__card__image,
+  .product__card__title,
+  .product__card__price,
+  .product__card__spec-label,
+  .product__card__spec-value,
+  .product__card__button,
+  .product__card__icon-button {
+    background: linear-gradient(60deg, #eaeded 25%, #f3f4f6 50%, #eaeded 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 2s infinite;
+    border-radius: 12px;
+  }
+
+  .product__card__image {
+    width: 100%;
+    aspect-ratio: 1;
+  }
+
+  .product__card__title {
+    height: 40px;
+    margin-top: 16px;
+  }
+
+  .product__card__price {
+    width: 120px;
+    height: 32px;
+    margin-top: 8px;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .product__card__specs {
+    margin-top: 16px;
+  }
+
+  .product__card__spec {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .product__card__spec-label {
+    width: 60px;
+    height: 14px;
+  }
+
+  .product__card__spec-value {
+    width: 80px;
+    height: 14px;
+  }
+
+  .product__card__actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .product__card__button {
+    flex: 1;
+    height: 40px;
+  }
+
+  .product__card__icon-button {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@keyframes skeleton-loading {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
