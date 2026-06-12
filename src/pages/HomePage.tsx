@@ -10,8 +10,10 @@ import { ProductCartSkeleton } from '@/features/products/components/ProductCard/
 export const HomePage: React.FC = () => {
   const { products } = useProductsList();
 
+  const maxYear = Math.max(...products.map((p) => p.year));
+
   const brandNewProducts = products.filter(
-    (product) => product.price === product.fullPrice,
+    (product) => product.year === maxYear,
   );
 
   const hotPriceProducts = [...products]
