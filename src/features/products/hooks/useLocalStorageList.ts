@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore } from 'react';
 
 type Id = string | number;
 
@@ -21,22 +21,14 @@ const createStorageListHook = (key: string) => {
   };
 
   return function useStorageList(): StorageListResult {
-    const data = useSyncExternalStore(
-      subscribe,
-      getSnapshot
-    );
+    const data = useSyncExternalStore(subscribe, getSnapshot);
 
     const items: Id[] = JSON.parse(data);
 
     const saveItems = (updated: Id[]) => {
-      localStorage.setItem(
-        key,
-        JSON.stringify(updated)
-      );
+      localStorage.setItem(key, JSON.stringify(updated));
 
-      window.dispatchEvent(
-        new Event(`${key}-updated`)
-      );
+      window.dispatchEvent(new Event(`${key}-updated`));
     };
 
     return {

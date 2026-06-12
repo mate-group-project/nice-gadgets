@@ -8,7 +8,7 @@ import classNames from 'classnames';
 
 type Props = {
   product: Product;
-}
+};
 
 import { Link } from 'react-router-dom';
 import { useCart, useFavorites } from '../../hooks/useLocalStorageList';
@@ -16,48 +16,42 @@ import { useCart, useFavorites } from '../../hooks/useLocalStorageList';
 export const ProductCard: React.FC<Props> = ({ product }) => {
   const { items: cart, saveItems } = useCart();
 
-  const { items: favorites, saveItems: saveFavorites } =
-    useFavorites();
-  
+  const { items: favorites, saveItems: saveFavorites } = useFavorites();
+
   const isAdded = cart.includes(product.id);
 
   const addToCart = () => {
     if (cart.includes(product.id)) return;
 
-    saveItems([
-      ...cart,
-      product.id,
-    ]);
+    saveItems([...cart, product.id]);
   };
-  
+
   const isFavorite = favorites.includes(product.id);
 
   const toggleFavorite = () => {
     if (isFavorite) {
-      saveFavorites(
-        favorites.filter(id => id !== product.id)
-      );
+      saveFavorites(favorites.filter((id) => id !== product.id));
 
       return;
     }
 
-  saveFavorites([
-    ...favorites,
-    product.id,
-  ]);
+    saveFavorites([...favorites, product.id]);
   };
-  
+
   return (
     <article className="product__card">
-
       <Link to={`product/${product.id}`}>
-        <img src={`${BASE_URL}/${product.image}`} alt={product.name} className="product__card__image" />
+        <img
+          src={`${BASE_URL}/${product.image}`}
+          alt={product.name}
+          className="product__card__image"
+        />
       </Link>
-      
+
       <Link to={`product/${product.id}`}>
         <h3 className="product__card__title">{product.name}</h3>
       </Link>
-      
+
       <p className="product__card__price">
         <span className="product__card__price-current">{`$${product.price}`}</span>
         {product.price !== product.fullPrice && (
@@ -83,19 +77,22 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
       </section>
 
       <div className="product__card__actions">
-        <Button className={classNames('button product__card__button', {
-          'is-active': isAdded,
-        })}
+        <Button
+          className={classNames('button product__card__button', {
+            'is-active': isAdded,
+          })}
           onClick={addToCart}
         >
-          Add to cart</Button>
+          Add to cart
+        </Button>
         <Button
-            className="button__icon button--lg product__card__icon-button"
-            onClick={toggleFavorite}
+          className="button__icon button--lg product__card__icon-button"
+          onClick={toggleFavorite}
         >
           <Icon
-            name={isFavorite ? "heartFilled" : "heart"}
-            className={classNames({'text--accent-secondary': isFavorite})} />
+            name={isFavorite ? 'heartFilled' : 'heart'}
+            className={classNames({ 'text--accent-secondary': isFavorite })}
+          />
         </Button>
       </div>
     </article>
