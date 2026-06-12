@@ -6,6 +6,7 @@ import { FavoritesPage } from '@/pages/FavoritesPage';
 import { CartPage } from '@/pages/CartPage';
 import { ProductPage } from '@/pages/ProductPage.tsx';
 import { NotFoundPage } from '@/pages/NotFoundPage';
+import { Contacts } from '@/pages/ContactsPage/Contacts';
 import { RightPage } from '@/pages/RightPage';
 
 // routes
@@ -37,6 +38,11 @@ export const router = createBrowserRouter([
       {
         path: 'cart',
         element: <CartPage />,
+      },
+
+      {
+        path: 'contacts',
+        element: <Contacts />,
       },
 
       {
