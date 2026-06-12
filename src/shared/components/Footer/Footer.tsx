@@ -24,6 +24,7 @@ export const Footer: React.FC = () => {
         <a
           href="https://github.com/mate-group-project/nice-gadgets/tree/main"
           className="contact"
+          target="blank"
         >
           github
         </a>
