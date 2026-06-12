@@ -3,7 +3,6 @@ import { Carousel } from '@/shared/components/Carousel';
 import { Section } from '@/shared/components/Section';
 import { ProductCard } from '@/features/products/components/ProductCard';
 import { CategoryCard } from '@/features/categories/components/CategoryCard';
-import { UIKIT } from '@/shared/components/UIKIT.tsx';
 import { useProductsList } from '@/features/products/hooks/useProductsList.ts';
 import { Link } from 'react-router-dom';
 
@@ -33,7 +32,7 @@ export const HomePage: React.FC = () => {
       {brandNewProducts.length > 0 && (
         <Section
           title="Brand new models"
-          // isSlide
+          isSlide
         >
           {brandNewProducts.map((product) => (
             <ProductCard
@@ -80,8 +79,6 @@ export const HomePage: React.FC = () => {
           ))}
         </Section>
       )}
-
-      <UIKIT />
     </>
   );
 };
