@@ -3,7 +3,6 @@ import { Header } from '@/shared/components/Header';
 
 import { Footer } from '@/shared/components/Footer';
 import { Outlet } from 'react-router-dom';
-import { UIKIT } from '@/shared/components/UIKIT';
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
       <div className="app__footer">
         <Footer />
       </div>
-      <UIKIT />
     </div>
   );
 }

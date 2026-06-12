@@ -2,13 +2,13 @@ import * as React from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import './CatalogPage.scss';
-import { ProductCard } from '@/features/products/components/ProductCard/ProductCard';
 import type { ProductCategory } from '@/features/products/api/products';
 
 import { useProductsList } from '@/features/products/hooks/useProductsList';
 import { Breadcrumbs } from './Breadcrumbs';
 import { Dropdown } from '@/shared/components/Dropdown/Dropdown';
 import { Pagination } from '@/shared/components/Pagination';
+import { ProductList } from '@/features/products/components/ProductList/ProductList.tsx';
 
 const TITLES = {
   phones: 'Mobile phones',
@@ -24,7 +24,7 @@ export const CatalogPage: React.FC = () => {
   const sort = searchParams.get('_sort') || '-year';
 
   const currentPage = Number(searchParams.get('_page') || 1);
-  
+
   const { products, total, pages, isLoading, error } = useProductsList({
     category: category as ProductCategory,
   });
@@ -38,15 +38,13 @@ export const CatalogPage: React.FC = () => {
 
   return (
     <div className="catalog">
-      <Breadcrumbs page={TITLES[category as keyof typeof TITLES]} />  
+      <Breadcrumbs page={TITLES[category as keyof typeof TITLES]} />
 
       <h1 className="catalog_title">
         {TITLES[category as keyof typeof TITLES]}
       </h1>
 
-      <p className="catalog_count">
-        {total} models
-      </p>
+      <p className="catalog_count">{total} models</p>
 
       <div className="catalog_filters">
         <Dropdown
@@ -84,18 +82,11 @@ export const CatalogPage: React.FC = () => {
       </div>
 
       <div className="models">
-        {isLoading && <div>Loading...</div>}
-
-        {error && <div>{error}</div>}
-
-        {!isLoading &&
-          !error &&
-            products.map(product => (
-              <ProductCard
-                key={product.id}
-                product={product}
-              />
-            ))}
+        <ProductList
+          products={products}
+          isLoading={isLoading}
+          errorMessage={error}
+        />
       </div>
 
       {pages > 1 && (
