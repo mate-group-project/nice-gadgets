@@ -1,9 +1,59 @@
-import * as React from 'react';
 import { Button } from '@base-ui/react';
 import { Icon } from '@/shared/components/Icon';
 import './productAction.scss';
+import type { ProductDetails } from '@/features/products/types/Product';
+import { formatProdductSpecs } from '@/features/products/utils/productSpecs';
+import '../../ProductCard/ProductCard.scss';
 
-export const ProductActions: React.FC = () => {
+import classNames from 'classnames';
+import { Link } from 'react-router-dom';
+import { useCart, useFavorites } from '../../../hooks/useLocalStorageList';
+
+type ProductActionsProps = {
+  product: ProductDetails;
+}
+
+const PRODUCT_COLORS: Record<string, string> = {
+  midnight: '#2e3641',
+  starlight: '#f0ece4',
+  'space-gray': '#535150',
+  spacegray: '#535150',
+  graphite: '#41424c',
+  'sierra-blue': '#a7c1d6',
+  sierrablue: '#a7c1d6',
+  'alpine-green': '#505c4e',
+  alpinegreen: '#505c4e',
+  'rose-gold': '#fad6d1',
+  rosegold: '#fad6d1',
+  gold: '#f9e4b7',
+  silver: '#ebebeb',
+  coral: '#ff6f61',
+  'sky-blue': '#def0f9',
+};
+
+export const ProductActions = ({ product }: ProductActionsProps) => {
+  const { items: cart, saveItems } = useCart();
+  const { items: favorites, saveItems: saveFavorites } = useFavorites();
+  const specsConfig = formatProdductSpecs(product);
+
+  const isAdded = cart.includes(product.id);
+  const isFavorite = favorites.includes(product.id);
+
+  const addToCart = () => {
+    if (cart.includes(product.id)) return;
+
+    saveItems([...cart, product.id]);
+  };
+
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      saveFavorites(favorites.filter((id) => id !== product.id));
+      return;
+    }
+
+    saveFavorites([...favorites, product.id]);
+  };
+
   return (
     <div className="product-page__actions product-actions">
       <div className="product-actions__content">
@@ -12,29 +62,24 @@ export const ProductActions: React.FC = () => {
             <span className="product-actions__selection-title">
               Available colors
             </span>
-            <span className="product-actions__id">ID: 802390</span>
+            <span className="product-actions__id">ID: {product.id}</span>
           </div>
           <div className="product-actions__color-options">
-            <a
-              href="#"
-              className="product-actions__color-option product-actions__color-option--pink"
-              title="Pink"
-            ></a>
-            <a
-              href="#"
-              className="product-actions__color-option product-actions__color-option--dark-green"
-              title="Dark Green"
-            ></a>
-            <a
-              href="#"
-              className="product-actions__color-option product-actions__color-option--dark-grey"
-              title="Dark Grey"
-            ></a>
-            <a
-              href="#"
-              className="product-actions__color-option product-actions__color-option--light-grey"
-              title="Light Grey"
-            ></a>
+            {product.colorsAvailable.map(color => {
+              return (
+                <Link key={color.id} to={`/product/${color.id}`}>
+                  <span
+                    className={classNames(
+                      'product-actions__color-option',
+                      { 'product-actions__color-option--active': product.id === color.id }
+                    )}
+                    title={color.name}
+                    style={{ backgroundColor: PRODUCT_COLORS[color.color.toLowerCase()] || color.color }}
+                  >
+                  </span>
+                </Link>
+              )
+            })}
           </div>
         </div>
 
@@ -44,73 +89,72 @@ export const ProductActions: React.FC = () => {
           </span>
 
           <div className="product-actions__capacity-options">
-            <a
-              href="#"
-              className="product-actions__capacity-option capacity-btn capacity-btn--active"
-            >
-              64 GB
-            </a>
-
-            <a
-              href="#"
-              className="product-actions__capacity-option capacity-btn"
-            >
-              256 GB
-            </a>
-
-            <a
-              href="#"
-              className="product-actions__capacity-option capacity-btn"
-            >
-              512 GB
-            </a>
+            {product.capacityAvailable.map(capacity => {
+              return (
+                <Link key={capacity.id} to={`/product/${capacity.id}`}>
+                  <span
+                    className={classNames(
+                      'product-actions__capacity-option',
+                      'capacity-btn',
+                      { 'capacity-btn--active': product.id === capacity.id }
+                    )}
+                    title={capacity.name}
+                  >
+                    {capacity.capacity}
+                  </span>
+                </Link>
+              )
+            })}
           </div>
         </div>
 
         <div className="product-actions__purchase purchase">
           <div className="purchase__price">
-            <span className="purchase__price-current">$799</span>
-            <span className="purchase__price-old">$1199</span>
+            {product.priceDiscount === product.priceRegular ?
+              (<span className="purchase__price-current">${product.priceRegular}</span>) :
+              (<>
+                <span className="purchase__price-current">${product.priceRegular}</span>
+                <span className="purchase__price-old">${product.priceDiscount}</span>
+              </>
+              )
+            }
           </div>
 
           <div className="purchase__controls">
             <Button
-              className="button"
-              style={{ width: '260px' }}
+              className={classNames('button product-actions__cart-button', {
+                'is-active': isAdded,
+              })}
+              onClick={addToCart}
             >
-              Add to cart
+              {isAdded ? 'Added to cart' : 'Add to cart'}
             </Button>
 
             <Button
-              className="button__icon button--lg"
-              onClick={() => {}}
+              className="button__icon button--lg product-actions__favorite-button"
+              onClick={toggleFavorite}
             >
-              <Icon name="heart" />
+              <Icon
+                name={isFavorite ? 'heartFilled' : 'heart'}
+                className={classNames({ 'text--accent-secondary': isFavorite })}
+              />
             </Button>
           </div>
         </div>
 
         <div className="product-actions__short-specs short-specs">
           <ul className="short-specs__list">
-            <li className="short-specs__item">
-              <span className="short-specs__name">Screen</span>
-              <span className="short-specs__value">6.5” OLED</span>
-            </li>
-            <li className="short-specs__item">
-              <span className="short-specs__name">Resolution</span>
-              <span className="short-specs__value">2688x1242</span>
-            </li>
-            <li className="short-specs__item">
-              <span className="short-specs__name">Processor</span>
-              <span className="short-specs__value">Apple A12 Bionic</span>
-            </li>
-            <li className="short-specs__item">
-              <span className="short-specs__name">RAM</span>
-              <span className="short-specs__value">3 GB</span>
-            </li>
+            {specsConfig.slice(0, 4).map(spec => {
+              return (<li key={spec.label} className="short-specs__item">
+                <span className="short-specs__name">{spec.label}</span>
+                <span className="short-specs__value">{spec.value}</span>
+              </li>
+              );
+            })}
           </ul>
         </div>
       </div>
     </div>
   );
 };
+

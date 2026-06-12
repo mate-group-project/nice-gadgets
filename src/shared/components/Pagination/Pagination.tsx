@@ -61,7 +61,10 @@ export const Pagination: React.FC<Props> = ({
       {pagesArray.map((page, index) => {
         if (page === '...') {
           return (
-            <span key={`dots-${index}`} className="pagination__dots">
+            <span
+              key={`dots-${index}`}
+              className="pagination__dots"
+            >
               ...
             </span>
           );
