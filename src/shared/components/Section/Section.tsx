@@ -20,6 +20,9 @@ export const Section: React.FC<SectionProps> = ({
   children,
 }) => {
   const childrenArray = React.Children.toArray(children);
+  const slidesCount = childrenArray.length;
+  
+  const isSliderActive = isSlide && slidesCount > 4; 
 
   const id = useId();
 
@@ -28,7 +31,7 @@ export const Section: React.FC<SectionProps> = ({
       <div className="section__header">
         <h2 className="section__title">{title}</h2>
 
-        {isSlide && (
+        {isSliderActive && (
           <div className="section__buttons">
             <button 
               className={`button__icon carousel__btn carousel__btn--prev prev-${id}`}
@@ -45,31 +48,35 @@ export const Section: React.FC<SectionProps> = ({
         )}
       </div>
 
-      {isSlide ?
-        <Swiper
-          spaceBetween={16}
-          modules={[Navigation]}
-          navigation={{
-            prevEl: `.prev-${id}`,
-            nextEl: `.next-${id}`,
-          }}
-          breakpoints={{
-            320: {
-              slidesPerView: 1.2,
-            },
-            640: {
-              slidesPerView: 2.2,
-            },
-            1024: {
-              slidesPerView: 4,
-            },
-          }}
-        >
-          {childrenArray.map((child, index) => (
-            <SwiperSlide key={index}>{child}</SwiperSlide>
-          ))}
-        </Swiper>
-      : children}
+      {isSliderActive ?
+          <Swiper
+            spaceBetween={16}
+            modules={[Navigation]}
+            navigation={{
+              prevEl: `.prev-${id}`,
+              nextEl: `.next-${id}`,
+            }}
+            breakpoints={{
+              320: {
+                slidesPerView: 1.2,
+              },
+              640: {
+                slidesPerView: 2.2,
+              },
+              1024: {
+                slidesPerView: 4,
+              },
+            }}
+          >
+            {childrenArray.map((child, index) => (
+              <SwiperSlide key={index}>{child}</SwiperSlide>
+            ))}
+          </Swiper>
+        : (
+          <div className="models">
+            {childrenArray}
+          </div>
+        )}
     </section>
   );
 };
