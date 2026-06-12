@@ -5,9 +5,10 @@ import './Actions.scss';
 
 interface Props {
   className?: string;
+  onNavigate?: () => void;
 }
 
-export const Actions = ({ className = '' }: Props) => {
+export const Actions = ({ className = '', onNavigate }: Props) => {
   return (
     <ul className={cn('actions', className)}>
       <li className="actions__item">
@@ -18,6 +19,7 @@ export const Actions = ({ className = '' }: Props) => {
               'actions__link--active': isActive,
             })
           }
+          onClick={onNavigate}
         >
           <Icon name="heart" />
         </NavLink>
@@ -30,6 +32,7 @@ export const Actions = ({ className = '' }: Props) => {
               'actions__link--active': isActive,
             })
           }
+          onClick={onNavigate}
         >
           <Icon name="bag" />
         </NavLink>
