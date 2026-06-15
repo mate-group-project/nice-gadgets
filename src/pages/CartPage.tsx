@@ -4,10 +4,13 @@ import { CartSummary } from '../features/cart/components/CartSummary/CartSummary
 import type { CartItemType } from '../features/cart/types';
 import '../features/cart/CartPage.scss';
 import { useCartProducts } from '@/features/cart/hooks/useCartProducts.ts';
+import { useNavigate } from 'react-router-dom';
 
 //Заглушка
 export const CartPage: React.FC = () => {
   const { cartProducts } = useCartProducts();
+  const navigate = useNavigate();
+
   console.log(cartProducts);
 
   const [cartItems, setCartItems] = useState<CartItemType[]>([
@@ -47,7 +50,7 @@ export const CartPage: React.FC = () => {
   };
 
   const handleCheckout = () => {
-    console.log('Checkout action processing...', cartItems);
+    navigate('/checkout');
   };
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);

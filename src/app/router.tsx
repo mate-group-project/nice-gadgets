@@ -8,6 +8,7 @@ import { ProductPage } from '@/pages/ProductPage.tsx';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { Contacts } from '@/pages/ContactsPage/Contacts';
 import { RightPage } from '@/pages/RightPage';
+import { CheckoutPage } from '@/pages/CheckoutPage';
 
 // routes
 export const router = createBrowserRouter([
@@ -38,6 +39,11 @@ export const router = createBrowserRouter([
       {
         path: 'cart',
         element: <CartPage />,
+      },
+
+      {
+        path: 'checkout',
+        element: <CheckoutPage />,
       },
 
       {
