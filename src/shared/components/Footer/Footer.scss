@@ -10,8 +10,12 @@ $height: 74px;
   height: $height;
   margin-top: $height;
   display: flex;
+  background-color: #fff;
+  border-top: 1px solid #e2e8f0;
+
   align-items: center;
-  justify-content: space-between;
+  text-align: center;
+  justify-content: center;
   padding: 0 120px;
   gap: 40px;
 
