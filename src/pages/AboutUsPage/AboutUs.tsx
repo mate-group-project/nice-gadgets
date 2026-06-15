@@ -1,5 +1,7 @@
+// import { Button } from '@base-ui/react';
 import { Button } from '@base-ui/react';
 import './AboutUs.scss';
+// import { PickupPointsSection } from '@/features/pickup-points-main/components/PickupPointsSection';
 
 export const AboutUs: React.FC = () => {
   return (
@@ -87,6 +89,7 @@ export const AboutUs: React.FC = () => {
           >
             Pickup and return points
           </Button>
+          {/* <PickupPointsSection /> */}
         </div>
       </div>
     </main>
