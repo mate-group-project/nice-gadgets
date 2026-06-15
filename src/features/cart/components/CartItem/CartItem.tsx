@@ -106,7 +106,6 @@ export const CartItem: React.FC<CartItemProps> = ({
           </svg>
         </button>
       </div>
-      z
       <div className="cart-item__price-wrapper">
         <span className="cart-item__price">${price * quantity}</span>
       </div>
