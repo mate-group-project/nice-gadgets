@@ -6,6 +6,9 @@ body {
   padding: 0;
 
   background-color: var(--hover);
+  color: var(--primary);
+
+  transition: background-color 0.2s ease, color 0.2s ease;
 
   font-family: var(--font-main), sans-serif;
 }
