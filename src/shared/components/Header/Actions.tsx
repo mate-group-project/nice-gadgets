@@ -2,6 +2,10 @@ import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import { Icon } from '@/shared/components/Icon';
 import './Actions.scss';
+import {
+  useCart,
+  useFavorites,
+} from '@/features/products/hooks/useLocalStorageList';
 
 interface Props {
   className?: string;
@@ -9,6 +13,9 @@ interface Props {
 }
 
 export const Actions = ({ className = '', onNavigate }: Props) => {
+  const { items: cart } = useCart();
+  const { items: favorites } = useFavorites();
+
   return (
     <ul className={cn('actions', className)}>
       <li className="actions__item">
@@ -22,6 +29,9 @@ export const Actions = ({ className = '', onNavigate }: Props) => {
           onClick={onNavigate}
         >
           <Icon name="heart" />
+          {favorites.length > 0 && (
+            <span className="actions__badge">{favorites.length}</span>
+          )}
         </NavLink>
       </li>
       <li className="actions__item">
@@ -35,6 +45,11 @@ export const Actions = ({ className = '', onNavigate }: Props) => {
           onClick={onNavigate}
         >
           <Icon name="bag" />
+          {cart.filter(Boolean).length > 0 && (
+            <span className="actions__badge">
+              {cart.filter(Boolean).length}
+            </span>
+          )}
         </NavLink>
       </li>
     </ul>
