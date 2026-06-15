@@ -21,19 +21,22 @@ export const ProductPage: React.FC = () => {
   }
 
   if (error || !product) {
-    return <div className="product-page__error">Error loading product details.</div>; 
+    return (
+      <div className="product-page__error">Error loading product details.</div>
+    );
   }
 
   return (
     <section className="product-page">
       <div className="product-page__container">
-        <h1 className="product-page__title">
-          {product.name}
-        </h1>
+        <h1 className="product-page__title">{product.name}</h1>
 
         <div className="product-page__content">
           <div className="product-page__main-info">
-            <Gallery product={product} key={product.id}/>
+            <Gallery
+              product={product}
+              key={product.id}
+            />
             <ProductActions product={product} />
           </div>
 
@@ -44,7 +47,7 @@ export const ProductPage: React.FC = () => {
         </div>
       </div>
 
-      <Section title='You may also like'/>
+      <Section title="You may also like" />
     </section>
   );
 };

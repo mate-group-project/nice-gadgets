@@ -5,8 +5,8 @@ import classNames from 'classnames';
 import { BASE_URL } from '@/shared/api/endpoints';
 
 type GalleryProps = {
-  product: ProductDetails,
-}
+  product: ProductDetails;
+};
 
 export const Gallery = ({ product }: GalleryProps) => {
   const [selectedImage, setSelectedImage] = useState(product.images[0]);
@@ -14,7 +14,7 @@ export const Gallery = ({ product }: GalleryProps) => {
   return (
     <div className="product-page__gallery gallery">
       <div className="gallery__thumbnails">
-        {product.images.map(image => {
+        {product.images.map((image) => {
           return (
             <button
               key={image}
@@ -28,7 +28,7 @@ export const Gallery = ({ product }: GalleryProps) => {
                 alt={image}
               />
             </button>
-          )
+          );
         })}
       </div>
 

@@ -28,8 +28,10 @@
     align-items: center;
     justify-content: center;
     padding: 4px;
-    border: 1px solid var(--secondary); 
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    border: 1px solid var(--secondary);
+    transition:
+      border-color 0.2s ease,
+      transform 0.2s ease;
     cursor: pointer;
 
     @include md-and-up {
