@@ -1,0 +1,32 @@
+.section {
+  @include container;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__title {
+    color: var(--primary);
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 16px;
+  }
+
+  .swiper {
+    align-items: stretch;
+  }
+
+  .swiper-slide {
+    height: auto;
+    display: flex;
+  }
+
+  .swiper-slide > * {
+    height: 100%;
+  }
+}

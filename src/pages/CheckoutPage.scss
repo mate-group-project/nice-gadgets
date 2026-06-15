@@ -1,0 +1,15 @@
+.checkout {
+  @include container;
+
+  &_content {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+
+    section,
+    aside {
+      border: 2px solid black;
+      min-height: 80vh;
+    }
+  }
+}
