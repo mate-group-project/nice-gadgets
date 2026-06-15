@@ -3,7 +3,7 @@ import { Icon } from '@/shared/components/Icon';
 import { Link } from 'react-router-dom';
 import './Breadcrumbs.scss';
 
-type Crumb = {
+export type Crumb = {
   label: string;
   url?: string;
 };

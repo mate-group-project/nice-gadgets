@@ -8,7 +8,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useProduct } from '@/features/products/hooks/useProduct';
 import { Section } from '@/shared/components/Section';
 import { Icon } from '@/shared/components/Icon';
-import { Breadcrumbs } from './Breadcrumbs';
+import { Breadcrumbs, type Crumb } from './Breadcrumbs';
 import { ProductCard } from '@/features/products/components/ProductCard';
 import { useProductsList } from '@/features/products/hooks/useProductsList';
 
@@ -31,15 +31,36 @@ export const ProductPage = () => {
   }
 
   if (error || !product) {
-    return <div className="product-page__error">Error loading product details.</div>;
+    return (
+      <div className="product-page__error">Error loading product details.</div>
+    );
   }
+
+  const TITLES = {
+    phones: 'Mobile phones',
+    tablets: 'Tablets',
+    accessories: 'Accessories',
+  } as const;
+
+  const crumbs: Crumb[] = [
+    {
+      label: TITLES[product.category],
+      url: '/catalog?category=' + product.category,
+    },
+    {
+      label: product.name,
+    },
+  ];
 
   return (
     <>
       <section className="product-page">
-        <Breadcrumbs page={product.name} />
+        <Breadcrumbs crumbs={crumbs} />
 
-        <Link to=".." className="product-page__back-link">
+        <Link
+          to=".."
+          className="product-page__back-link"
+        >
           <Icon name="chevronLeft" />
           <span>Back</span>
         </Link>
@@ -49,7 +70,10 @@ export const ProductPage = () => {
 
           <div className="product-page__content">
             <div className="product-page__main-info">
-              <Gallery product={product} key={product.id} />
+              <Gallery
+                product={product}
+                key={product.id}
+              />
               <ProductActions product={product} />
             </div>
 
