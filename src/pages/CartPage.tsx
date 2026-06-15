@@ -9,7 +9,9 @@ import { useNavigate } from 'react-router-dom';
 export const CartPage: React.FC = () => {
   const { cartProducts, isLoading } = useCartProducts();
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
-  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
+  // const [isOrderPlaced, setIsOrderPlaced] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (cartProducts.length === 0) return;
@@ -53,10 +55,12 @@ export const CartPage: React.FC = () => {
   };
 
   const handleCheckout = () => {
-    localStorage.setItem('cart', '[]');
-    localStorage.removeItem('cart_quantities');
-    setCartItems([]);
-    setIsOrderPlaced(true);
+    // localStorage.setItem('cart', '[]');
+    // localStorage.removeItem('cart_quantities');
+    // setCartItems([]);
+    // setIsOrderPlaced(true);
+
+    navigate('/checkout');
   };
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -65,17 +69,17 @@ export const CartPage: React.FC = () => {
     0,
   );
 
-  if (isOrderPlaced) {
-    return (
-      <div className="cart-page cart-page--success">
-        <h1 className="cart-page__title">Thank you!</h1>
-        <p className="cart-page__success-message">
-          Your order has been successfully processed and your cart has been cleared.
-        </p>
-        <a href="/" className="cart-page__back-link">Back to store</a>
-      </div>
-    );
-  }
+  // if (isOrderPlaced) {
+  //   return (
+  //     <div className="cart-page cart-page--success">
+  //       <h1 className="cart-page__title">Thank you!</h1>
+  //       <p className="cart-page__success-message">
+  //         Your order has been successfully processed and your cart has been cleared.
+  //       </p>
+  //       <a href="/" className="cart-page__back-link">Back to store</a>
+  //     </div>
+  //   );
+  // }
 
   if (isLoading && cartItems.length === 0) {
     return (
