@@ -38,7 +38,7 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
 
       <button
         type="button"
-        className="cart-summary__checkout-btn"
+        className="button cart-summary__checkout-btn"
         onClick={onCheckout}
       >
         Checkout
