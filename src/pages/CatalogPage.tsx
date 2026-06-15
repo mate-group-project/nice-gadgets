@@ -38,7 +38,9 @@ export const CatalogPage: React.FC = () => {
 
   return (
     <div className="catalog">
-      <Breadcrumbs page={TITLES[category as keyof typeof TITLES]} />
+      <Breadcrumbs
+        crumbs={[{ label: TITLES[category as keyof typeof TITLES] }]}
+      />
 
       <h1 className="catalog_title">
         {TITLES[category as keyof typeof TITLES]}

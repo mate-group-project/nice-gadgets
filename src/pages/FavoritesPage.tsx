@@ -9,7 +9,7 @@ export const FavoritesPage: React.FC = () => {
 
   return (
     <div className="favourites">
-      <Breadcrumbs page={'Favourites'} />
+      <Breadcrumbs crumbs={[{ label: 'Favourites' }]} />
 
       <h1 className="favourites__title">Favourites</h1>
       <p className="favourites__count">{cartProducts.length} items</p>
