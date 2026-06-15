@@ -23,7 +23,7 @@ $font-weight-extrabold: 800;
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
-  max-width: 70vw;
+  //max-width: 70vw;
   background-color: var(--white);
   font-family: var(--font-main);
   border-radius: 8px;
@@ -48,6 +48,10 @@ $font-weight-extrabold: 800;
     }
   }
 
+  &__link {
+    flex-grow: 1;
+  }
+
   &__title {
     margin: $space-8 0;
     padding-top: $space-16;
@@ -55,7 +59,6 @@ $font-weight-extrabold: 800;
     font-weight: $font-weight-semibold;
     font-size: $font-size-sm;
     line-height: 21px;
-    flex-grow: 1;
   }
 
   &__price {

@@ -9,6 +9,7 @@ $icon-size-lg: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 
   height: $height;
   min-width: $width;
@@ -56,6 +57,7 @@ $icon-size-lg: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 
     width: $icon-size;
     height: $icon-size;

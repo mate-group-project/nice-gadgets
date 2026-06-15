@@ -6,6 +6,8 @@ $space-32: 32px;
 $font-size-xs: 12px;
 $font-size-sm: 14px;
 $font-size-lg: 22px;
+$font-size-3xl: 32px;
+$font-size-5xl: 48px;
 
 $font-weight-regular: 400;
 $font-weight-medium: 500;
@@ -13,14 +15,13 @@ $font-weight-semibold: 600;
 $font-weight-bold: 700;
 $font-weight-extrabold: 800;
 
-// h1,
-// h2 {
-//   margin: 0;
-// }
+.contacts__container {
+  @include container;
+}
 
 .contacts__list {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 16px;
 }
@@ -30,14 +31,17 @@ $font-weight-extrabold: 800;
 
   font-family: var(--font-main);
 
-  &__title {
-    margin-bottom: 69px;
-    font-family: Mont;
+    &__title {
+    margin-top: 24px;
+    margin-bottom: 8px;
+    font-size: $font-size-3xl;
     font-weight: $font-weight-extrabold;
-    font-size: 48px;
-    // line-height: 56px;
-    letter-spacing: -1%;
     color: var(--primary);
+
+    @include sm-and-up {
+      margin-top: 40px;
+      font-size: $font-size-5xl;
+    }
   }
 
   @include lg-and-up {
@@ -82,11 +86,8 @@ $font-weight-extrabold: 800;
   &-title {
     position: relative;
     margin: $space-8 0;
-    // padding-top: $space-16;
     font-weight: $font-weight-semibold;
     font-size: $font-size-sm;
-    // line-height: 21px;
-    // flex-grow: 1;
 
     &::after {
       content: '';
@@ -113,6 +114,5 @@ $font-weight-extrabold: 800;
     font-weight: $font-weight-semibold;
     font-size: $font-size-xs;
     color: var(--secondary);
-    // color: var(--primary);
   }
 }

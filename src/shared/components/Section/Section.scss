@@ -6,6 +6,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 16px;
+    min-height: 28px;
   }
 
   &__title {
@@ -28,5 +29,13 @@
 
   .swiper-slide > * {
     height: 100%;
+  }
+
+  .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
+    justify-items: center;
+    gap: 16px;
+    width: 100%;
   }
 }
