@@ -112,9 +112,19 @@
     &__dropdown {
       display: flex;
       flex-direction: column;
+      gap: 15px;
 
       input {
         width: 100%;
+      }
+    }
+
+    &__dropdown-nogap {
+      margin-top: 15px;
+      width: 100%;
+
+      @include lg-and-up {
+        width: 80%;
       }
     }
 

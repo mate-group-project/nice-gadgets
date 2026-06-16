@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import './CheckoutForm.scss'
 import { Dropdown } from '@/shared/components/Dropdown';
 import { useStores } from '@/shared/hooks/useStoresList';
+import { useCheckout } from '@/shared/hooks/useCheckout';
+import { useCart } from '@/features/products/hooks/useLocalStorageList';
+import { useProductsList } from '@/features/products/hooks/useProductsList';
 
 type DeliveryType = 'pickup' | 'delivery';
 
@@ -118,35 +121,87 @@ export const CheckoutForm = () => {
       .finally(() => setLoadingWarehouses(false));
   }, [selectedCity?.Ref]);
 
-  // SUBMIT
-  const handleSubmit = (e: React.FormEvent) => {
+  // get cart items ids
+  const { items: cartIds, saveItems } = useCart();
+  const { products } = useProductsList();
+
+  const cartItems = products.filter((p) =>
+    cartIds.includes(p.id)
+  );
+
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.price,
+    0
+  );
+
+  // sending order to server
+  const { submitOrder } = useCheckout();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const isValid = validate();
+    if (!validate()) {
+      scrollToFirstError();
+      return;
+    }
 
-  if (!isValid) {
-    scrollToFirstError();
-    return;
-  }
+    const delivery =
+      deliveryType === 'pickup'
+        ? {
+            type: 'pickup' as const,
+            storeId,
+          }
+        : {
+            type: 'delivery' as const,
+            city: selectedCity!.Present!,
+            cityRef: selectedCity!.Ref!,
+            warehouse: selectedWarehouse!.Description!,
+            warehouseRef: selectedWarehouse!.Ref!,
+          };
 
     const order = {
       customer: form,
-      delivery: {
-        type: deliveryType,
-        ...(deliveryType === 'pickup'
-          ? { storeId }
-          : {
-              city: selectedCity?.Present,
-              cityRef: selectedCity?.Ref,
-              warehouse: selectedWarehouse?.Description,
-              warehouseRef: selectedWarehouse?.Ref,
-            }),
-      },
+      delivery,
+      items: cartItems.map((item) => ({
+        productId: item.id,
+        price: item.price,
+        quantity: 1,
+      })),
+      total,
     };
+
+    await submitOrder(order);
+    saveItems([]);
+    resetForm();
+
+    alert('Successful success')
 
     console.log('ORDER:', order);
   };
 
+  // reset form fields
+  const resetForm = () => {
+    setForm({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+    });
+
+    setDeliveryType('pickup');
+    setStoreId('');
+
+    setCitySearch('');
+    setCities([]);
+    setSelectedCity(null);
+
+    setWarehouseSearch('');
+    setWarehouses([]);
+    setSelectedWarehouse(null);
+
+    setErrors({});
+  };
+  
   // form validation
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -212,6 +267,7 @@ export const CheckoutForm = () => {
         <input 
           name="firstName" 
           placeholder="First name" 
+          value={form.firstName}
           onChange={handleChange}
           className="form__field"
         />
@@ -225,6 +281,7 @@ export const CheckoutForm = () => {
         <input 
           name="lastName" 
           placeholder="Last name" 
+          value={form.lastName}
           onChange={handleChange}
           className="form__field"
         />
@@ -235,6 +292,7 @@ export const CheckoutForm = () => {
         <input 
           name="email" 
           placeholder="Email" 
+          value={form.email}
           onChange={handleChange} 
           className="form__field"
         />
@@ -245,6 +303,7 @@ export const CheckoutForm = () => {
         <input 
           name="phone" 
           placeholder="Phone" 
+          value={form.phone}
           onChange={handleChange} 
           className="form__field"
         />
@@ -271,7 +330,7 @@ export const CheckoutForm = () => {
         </label>
 
         {deliveryType === 'pickup' && (
-          <div className='delivery__dropdown'>
+          <div className='delivery__dropdown-nogap'>
             <Dropdown
               label="Select store"
               value={storeId}
