@@ -1,9 +1,12 @@
 import React from 'react';
-import type { CartItemType } from '../../types';
 import './CartItem.scss';
+import type { Product } from '@/features/products/types/Product.ts';
+import { BASE_URL } from '@/shared/api/endpoints';
+
+type ProductCart = Product & { quantity: string | number };
 
 interface CartItemProps {
-  item: CartItemType;
+  item: ProductCart;
   onRemove: (id: string) => void;
   onUpdateQuantity: (id: string, newQuantity: number) => void;
 }
@@ -13,7 +16,7 @@ export const CartItem: React.FC<CartItemProps> = ({
   onRemove,
   onUpdateQuantity,
 }) => {
-  const { id, name, imageUrl, price, quantity } = item;
+  const { id, name, image, price, quantity } = item;
 
   return (
     <article
@@ -44,7 +47,7 @@ export const CartItem: React.FC<CartItemProps> = ({
       </button>
       <div className="cart-item__img-wrapper">
         <img
-          src={imageUrl}
+          src={BASE_URL + '/' + image}
           alt=""
           className="cart-item__img"
         />
@@ -56,8 +59,8 @@ export const CartItem: React.FC<CartItemProps> = ({
         <button
           type="button"
           className="cart-item__qty-btn"
-          disabled={quantity <= 1}
-          onClick={() => onUpdateQuantity(id, quantity - 1)}
+          disabled={Number(quantity) <= 1}
+          onClick={() => onUpdateQuantity(id, Number(quantity) - 1)}
           aria-label="Decrease quantity"
         >
           <svg
@@ -86,7 +89,7 @@ export const CartItem: React.FC<CartItemProps> = ({
         <button
           type="button"
           className="cart-item__qty-btn"
-          onClick={() => onUpdateQuantity(id, quantity + 1)}
+          onClick={() => onUpdateQuantity(id, Number(quantity) + 1)}
           aria-label="Increase quantity"
         >
           <svg
@@ -107,7 +110,7 @@ export const CartItem: React.FC<CartItemProps> = ({
         </button>
       </div>
       <div className="cart-item__price-wrapper">
-        <span className="cart-item__price">${price * quantity}</span>
+        <span className="cart-item__price">${price * Number(quantity)}</span>
       </div>
     </article>
   );

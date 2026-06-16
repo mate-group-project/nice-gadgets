@@ -1,43 +1,101 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { Product } from '@/features/products/types/Product.ts';
 import { getProductCart } from '@/features/cart/api/cart.ts';
+import { useCart } from '@/features/products/hooks/useLocalStorageList.ts';
+
+type CartItem = {
+  id: string | number;
+  count: string | number;
+};
+
+type ProductCart = Product & {
+  quantity: string | number;
+};
 
 export const useCartProducts = () => {
-  const [cartProducts, setCartProducts] = useState<Product[]>([]);
+  const { items: cart, saveItems } = useCart();
+
+  const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    const cartLocal = JSON.parse(localStorage.getItem('cart') || '[]');
+  const productIds = useMemo(
+    () => cart.map((item) => String(item.id)).join('|'),
+    [cart],
+  );
 
-    if (cartLocal.length === 0) {
+  useEffect(() => {
+    if (!productIds) {
       return;
     }
 
-    const loadProductCart = async () => {
+    const loadProducts = async () => {
       setIsLoading(true);
       setError('');
 
       try {
-        const result: { status: string; value?: Product }[] =
-          await Promise.allSettled(
-            cartLocal.map((id: string) => getProductCart(id)),
-          );
+        const result = await Promise.allSettled(
+          cart.map((item) => getProductCart(String(item.id))),
+        );
 
-        setCartProducts(result.map((item) => item.value));
-      } catch {
-        setError('Product was not found');
+        const loadedProducts = result
+          .map((item) => {
+            if (item.status !== 'fulfilled') {
+              return null;
+            }
+
+            return item.value;
+          })
+          .filter((item): item is Product => item !== null);
+
+        setProducts(loadedProducts);
+
+        if (loadedProducts.length !== cart.length) {
+          setError('Some products were not found');
+        }
       } finally {
         setIsLoading(false);
       }
     };
 
-    loadProductCart().then(() => {});
-  }, []);
+    void loadProducts();
+  }, [productIds]);
+
+  const cartProducts: ProductCart[] = useMemo(() => {
+    if (cart.length === 0) {
+      return [];
+    }
+
+    return products.map((product) => {
+      const cartItem = cart.find(
+        (item) => String(item.id) === String(product.id),
+      );
+
+      return {
+        ...product,
+        quantity: cartItem?.count ?? 0,
+      };
+    });
+  }, [products, cart]);
+
+  const deleteItem = (id: CartItem['id']) => {
+    saveItems(cart.filter((item) => String(item.id) !== String(id)));
+  };
+
+  const changeCount = (id: CartItem['id'], count: CartItem['count']) => {
+    saveItems(
+      cart.map((item) =>
+        String(item.id) === String(id) ? { ...item, count } : item,
+      ),
+    );
+  };
 
   return {
     cartProducts,
+    cart,
     isLoading,
     error,
+    deleteItem,
+    changeCount,
   };
 };

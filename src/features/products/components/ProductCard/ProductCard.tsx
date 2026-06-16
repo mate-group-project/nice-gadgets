@@ -19,15 +19,15 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
   const navigate = useNavigate();
 
-  const isAdded = cart.includes(product.id);
+  const isAdded = cart.map((item) => item.id).includes(product.id);
 
   const addToCart = () => {
-    if (cart.includes(product.id)) {
+    if (cart.map((item) => item.id).includes(product.id)) {
       navigate('cart');
       return;
     }
 
-    saveItems([...cart, product.id]);
+    saveItems([...cart, { id: product.id, count: 1 }]);
   };
 
   const isFavorite = favorites.includes(product.id);
