@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import { Icon } from '@/shared/components/Icon';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import './Actions.scss';
 import {
   useCart,
@@ -20,6 +21,10 @@ export const Actions = ({ className = '', onNavigate, theme, onToggleTheme }: Pr
 
   return (
     <ul className={cn('actions', className)}>
+      <li className="actions__item actions__item--lang">
+        <LanguageSwitcher onLanguageSelect={onNavigate} />
+      </li>
+      
       <li className="actions__item">
         <button
           type="button"
