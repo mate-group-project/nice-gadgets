@@ -1,5 +1,6 @@
 import { novaPoshtaApi } from '@/shared/api/novaPoshta';
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import './CheckoutForm.scss'
 import { Dropdown } from '@/shared/components/Dropdown';
@@ -7,6 +8,7 @@ import { useStores } from '@/shared/hooks/useStoresList';
 import { useCheckout } from '@/shared/hooks/useCheckout';
 import { useCart } from '@/features/products/hooks/useLocalStorageList';
 import { useProductsList } from '@/features/products/hooks/useProductsList';
+import { SuccessModal } from '../SuccessModal';
 
 type DeliveryType = 'pickup' | 'delivery';
 
@@ -40,7 +42,7 @@ export const CheckoutForm = () => {
     email: '',
     phone: '',
   });
-
+  const [isOpen, setIsOpen] = useState(false);
   const [deliveryType, setDeliveryType] = useState<DeliveryType>('pickup');
   const [storeId, setStoreId] = useState('');
 
@@ -174,9 +176,17 @@ export const CheckoutForm = () => {
     saveItems([]);
     resetForm();
 
-    alert('Successful success')
+    setIsOpen(true);
 
     console.log('ORDER:', order);
+  };
+
+  // close modal window
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    setIsOpen(false);
+    navigate('/catalog');
   };
 
   // reset form fields
@@ -256,242 +266,256 @@ export const CheckoutForm = () => {
   };
 
   return (
-    <form 
-      onSubmit={handleSubmit}
-      className='order_form'
-    >
-      {/*  CUSTOMER */}
-      <h2>Contact information</h2>
+    <>
+      <form 
+        onSubmit={handleSubmit}
+        className='order_form'
+      >
+        {/*  CUSTOMER */}
+        <h2>Contact information</h2>
 
-      <div className="field">
-        <input 
-          name="firstName" 
-          placeholder="First name" 
-          value={form.firstName}
-          onChange={handleChange}
-          className="form__field"
-        />
-        {errors.firstName && <p 
-          className="error"
-          ref={errors.firstName ? firstErrorRef : null}
-        >{errors.firstName}</p>}
-      </div>
-            
-      <div className="field">
-        <input 
-          name="lastName" 
-          placeholder="Last name" 
-          value={form.lastName}
-          onChange={handleChange}
-          className="form__field"
-        />
-        {errors.lastName && <p className="error">{errors.lastName}</p>}
-      </div>
-
-      <div className="field">
-        <input 
-          name="email" 
-          placeholder="Email" 
-          value={form.email}
-          onChange={handleChange} 
-          className="form__field"
-        />
-        {errors.email && <p className="error">{errors.email}</p>}
-      </div>
-      
-      <div className="field">
-        <input 
-          name="phone" 
-          placeholder="Phone" 
-          value={form.phone}
-          onChange={handleChange} 
-          className="form__field"
-        />
-        {errors.phone && <p className="error">{errors.phone}</p>}
-      </div>
-
-      {/*  DELIVERY */}
-      <h2>Delivery method</h2>
-
-      <div className='delivery__method'>
-        <label
-          className={`radio__item ${
-            deliveryType === 'pickup' ? 'radio__item--active' : ''
-          }`}
-        >
-          <input
-            type="radio"
-            className="radio__input"
-            checked={deliveryType === 'pickup'}
-            onChange={() => setDeliveryType('pickup')}
+        <div className="field">
+          <input 
+            name="firstName" 
+            placeholder="First name" 
+            value={form.firstName}
+            onChange={handleChange}
+            className="form__field"
           />
+          {errors.firstName && <p 
+            className="error"
+            ref={errors.firstName ? firstErrorRef : null}
+          >{errors.firstName}</p>}
+        </div>
+              
+        <div className="field">
+          <input 
+            name="lastName" 
+            placeholder="Last name" 
+            value={form.lastName}
+            onChange={handleChange}
+            className="form__field"
+          />
+          {errors.lastName && <p className="error">{errors.lastName}</p>}
+        </div>
 
-          <span className="radio__label">Pickup (store)</span>
-        </label>
+        <div className="field">
+          <input 
+            name="email" 
+            placeholder="Email" 
+            value={form.email}
+            onChange={handleChange} 
+            className="form__field"
+          />
+          {errors.email && <p className="error">{errors.email}</p>}
+        </div>
+        
+        <div className="field">
+          <input 
+            name="phone" 
+            placeholder="Phone" 
+            value={form.phone}
+            onChange={handleChange} 
+            className="form__field"
+          />
+          {errors.phone && <p className="error">{errors.phone}</p>}
+        </div>
 
-        {deliveryType === 'pickup' && (
-          <div className='delivery__dropdown-nogap'>
-            <Dropdown
-              label="Select store"
-              value={storeId}
-              options={storeOptions}
-              onChange={(value) => {
-                setStoreId(value);
+        {/*  DELIVERY */}
+        <h2>Delivery method</h2>
 
-                setErrors((prev) => ({
-                  ...prev,
-                  store: '',
-                }));
-              }}
+        <div className='delivery__method'>
+          <label
+            className={`radio__item ${
+              deliveryType === 'pickup' ? 'radio__item--active' : ''
+            }`}
+          >
+            <input
+              type="radio"
+              className="radio__input"
+              checked={deliveryType === 'pickup'}
+              onChange={() => setDeliveryType('pickup')}
             />
-            {errors.store && <p className="error">{errors.store}</p>}
-          </div>
-        )}
-      </div>
-      
-      <div className='delivery__method'>
-        <label
-          className={`radio__item ${
-            deliveryType === 'delivery' ? 'radio__item--active' : ''
-          }`}
-        >
-          <input
-            type="radio"
-            className="radio__input"
-            checked={deliveryType === 'delivery'}
-            onChange={() => setDeliveryType('delivery')}
-          />
-          
-          <span className="radio__label">Nova Poshta delivery</span>
-        </label>
 
-        {deliveryType === 'delivery' && (
-          <div className='delivery__dropdown'>
-            {/* CITY SEARCH */}
-            <p className="delivery__title">Search city</p>
+            <span className="radio__label">Pickup (store)</span>
+          </label>
 
-            <div>
-              <input
-                placeholder="Search city"
-                value={citySearch}
-                className="form__field"
-                onChange={(e) => {
-                  const value = e.target.value;
-                  setCitySearch(value);
+          {deliveryType === 'pickup' && (
+            <div className='delivery__dropdown-nogap'>
+              <Dropdown
+                label="Select store"
+                value={storeId}
+                options={storeOptions}
+                onChange={(value) => {
+                  setStoreId(value);
 
-                  if (!value) {
-                    setSelectedCity(null);
-                    setCities([]);
-                  }
+                  setErrors((prev) => ({
+                    ...prev,
+                    store: '',
+                  }));
                 }}
               />
-
-              {errors.city && <p className="error">{errors.city}</p>}
+              {errors.store && <p className="error">{errors.store}</p>}
             </div>
+          )}
+        </div>
+        
+        <div className='delivery__method'>
+          <label
+            className={`radio__item ${
+              deliveryType === 'delivery' ? 'radio__item--active' : ''
+            }`}
+          >
+            <input
+              type="radio"
+              className="radio__input"
+              checked={deliveryType === 'delivery'}
+              onChange={() => setDeliveryType('delivery')}
+            />
+            
+            <span className="radio__label">Nova Poshta delivery</span>
+          </label>
 
-            {/* CITY LIST */}
-            {cities.length > 0 && (
-              <div className="delivery__list">
-                {cities
-                  .filter((c) =>
-                    (c.Present || '').toLowerCase().includes(citySearch.toLowerCase())
-                  )
-                  .map((city) => {
-                    const label = city.Present || '';
+          {deliveryType === 'delivery' && (
+            <div className='delivery__dropdown'>
+              {/* CITY SEARCH */}
+              <p className="delivery__title">Search city</p>
 
-                    const isActive =
-                      selectedCity?.Ref === (city.DeliveryCity || city.Ref);
+              <div>
+                <input
+                  placeholder="Search city"
+                  value={citySearch}
+                  className="form__field"
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setCitySearch(value);
 
-                    return (
-                      <div
-                        key={city.Ref}
-                        className={`delivery__item ${
-                          isActive ? 'delivery__item--active' : ''
-                        }`}
-                        onClick={() => {
-                          setSelectedCity({
-                            Ref: city.DeliveryCity || city.Ref,
-                            Present: label,
-                          });
+                    if (!value) {
+                      setSelectedCity(null);
+                      setCities([]);
+                    }
+                  }}
+                />
 
-                          setCitySearch(label);
-                        }}
-                      >
-                        {label}
-                      </div>
-                    );
-                  })}
+                {errors.city && <p className="error">{errors.city}</p>}
               </div>
-            )}
 
-            {/* WAREHOUSE SEARCH */}
-            {selectedCity?.Ref && (
-              <>
-                <p className="delivery__title">Search warehouse</p>
+              {/* CITY LIST */}
+              {cities.length > 0 && (
+                <div className="delivery__list">
+                  {cities
+                    .filter((c) =>
+                      (c.Present || '').toLowerCase().includes(citySearch.toLowerCase())
+                    )
+                    .map((city) => {
+                      const label = city.Present || '';
 
-                <div>
-                  <input
-                    placeholder="Search warehouse"
-                    value={warehouseSearch}
-                    className="form__field"
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setWarehouseSearch(value);
+                      const isActive =
+                        selectedCity?.Ref === (city.DeliveryCity || city.Ref);
 
-                      if (!value) {
-                        setSelectedWarehouse(null);
-                      }
-                    }}
-                  />
+                      return (
+                        <div
+                          key={city.Ref}
+                          className={`delivery__item ${
+                            isActive ? 'delivery__item--active' : ''
+                          }`}
+                          onClick={() => {
+                            setSelectedCity({
+                              Ref: city.DeliveryCity || city.Ref,
+                              Present: label,
+                            });
 
-                  {errors.warehouse && (
-                    <p className="error">{errors.warehouse}</p>)}
+                            setCitySearch(label);
+
+                              setErrors(prev => ({
+                                ...prev,
+                                city: '',
+                              }));
+                          }}
+                        >
+                          {label}
+                        </div>
+                      );
+                    })}
                 </div>
+              )}
 
-                {loadingWarehouses && <p>Loading...</p>}
+              {/* WAREHOUSE SEARCH */}
+              {selectedCity?.Ref && (
+                <>
+                  <p className="delivery__title">Search warehouse</p>
 
-                {!loadingWarehouses && warehouses.length > 0 && (
-                  <div className="delivery__list">
-                    {warehouses
-                      .filter((w) =>
-                        w.Description.toLowerCase().includes(
-                          warehouseSearch.toLowerCase()
-                        )
-                      )
-                      .map((w) => {
-                        const isActive = selectedWarehouse?.Ref === w.Ref;
+                  <div>
+                    <input
+                      placeholder="Search warehouse"
+                      value={warehouseSearch}
+                      className="form__field"
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setWarehouseSearch(value);
 
-                        return (
-                          <div
-                            key={w.Ref}
-                            className={`delivery__item ${
-                              isActive ? 'delivery__item--active' : ''
-                            }`}
-                            onClick={() => {
-                              setSelectedWarehouse(w);
-                              setWarehouseSearch(w.Description);
-                            }}
-                          >
-                            {w.Description}
-                          </div>
-                        );
-                      })}
+                        if (!value) {
+                          setSelectedWarehouse(null);
+                        }
+                      }}
+                    />
+
+                    {errors.warehouse && (
+                      <p className="error">{errors.warehouse}</p>)}
                   </div>
-                )}
-              </>
-            )}
-          </div>
-        )}
-      </div>
 
-      {/* SUBMIT */}
-      <button 
-        type="submit" 
-        className="button"
-        style={{ width: '180px' }}
-      >
-        Place order
-      </button>
-    </form>
+                  {loadingWarehouses && <p>Loading...</p>}
+
+                  {!loadingWarehouses && warehouses.length > 0 && (
+                    <div className="delivery__list">
+                      {warehouses
+                        .filter((w) =>
+                          w.Description.toLowerCase().includes(
+                            warehouseSearch.toLowerCase()
+                          )
+                        )
+                        .map((w) => {
+                          const isActive = selectedWarehouse?.Ref === w.Ref;
+
+                          return (
+                            <div
+                              key={w.Ref}
+                              className={`delivery__item ${
+                                isActive ? 'delivery__item--active' : ''
+                              }`}
+                              onClick={() => {
+                                setSelectedWarehouse(w);
+                                setWarehouseSearch(w.Description);
+
+                                  setErrors(prev => ({
+                                    ...prev,
+                                    warehouse: '',
+                                  }));
+                              }}
+                            >
+                              {w.Description}
+                            </div>
+                          );
+                        })}
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* SUBMIT */}
+        <button 
+          type="submit" 
+          className="button"
+          style={{ width: '180px' }}
+        >
+          Place order
+        </button>
+      </form>
+
+      <SuccessModal isOpen={isOpen} onClose={handleClose} />
+    </>
   );
 };
