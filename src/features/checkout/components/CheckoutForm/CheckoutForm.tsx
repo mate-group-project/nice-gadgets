@@ -1,7 +1,12 @@
 import { novaPoshtaApi } from '@/shared/api/novaPoshta';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import './CheckoutForm.scss'
+import { Dropdown } from '@/shared/components/Dropdown';
+import { useStores } from '@/shared/hooks/useStoresList';
+import { useCheckout } from '@/shared/hooks/useCheckout';
+import { useCart } from '@/features/products/hooks/useLocalStorageList';
+import { useProductsList } from '@/features/products/hooks/useProductsList';
 
 type DeliveryType = 'pickup' | 'delivery';
 
@@ -37,7 +42,7 @@ export const CheckoutForm = () => {
   });
 
   const [deliveryType, setDeliveryType] = useState<DeliveryType>('pickup');
-  const [storeId, setStoreId] = useState('kyiv-1');
+  const [storeId, setStoreId] = useState('');
 
   // cities
   const [citySearch, setCitySearch] = useState('');
@@ -50,11 +55,30 @@ export const CheckoutForm = () => {
   const [selectedWarehouse, setSelectedWarehouse] = useState<Warehouse | null>(null);
   const [loadingWarehouses, setLoadingWarehouses] = useState(false);
 
+  // errors
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const firstErrorRef = useRef<HTMLDivElement | null>(null);
+
+  // get stores list from API
+  const { stores } = useStores();
+
+  const storeOptions = stores.map((store) => ({
+    label: store.name,
+    value: String(store.id),
+  }));
+
   // form
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
     setForm((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: '',
     }));
   };
 
@@ -97,174 +121,377 @@ export const CheckoutForm = () => {
       .finally(() => setLoadingWarehouses(false));
   }, [selectedCity?.Ref]);
 
-  // SUBMIT
-  const handleSubmit = (e: React.FormEvent) => {
+  // get cart items ids
+  const { items: cartIds, saveItems } = useCart();
+  const { products } = useProductsList();
+
+  const cartItems = products.filter((p) =>
+    cartIds.includes(p.id)
+  );
+
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.price,
+    0
+  );
+
+  // sending order to server
+  const { submitOrder } = useCheckout();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validate()) {
+      scrollToFirstError();
+      return;
+    }
+
+    const delivery =
+      deliveryType === 'pickup'
+        ? {
+            type: 'pickup' as const,
+            storeId,
+          }
+        : {
+            type: 'delivery' as const,
+            city: selectedCity!.Present!,
+            cityRef: selectedCity!.Ref!,
+            warehouse: selectedWarehouse!.Description!,
+            warehouseRef: selectedWarehouse!.Ref!,
+          };
 
     const order = {
       customer: form,
-      delivery: {
-        type: deliveryType,
-        ...(deliveryType === 'pickup'
-          ? { storeId }
-          : {
-              city: selectedCity?.Present || selectedCity?.Description,
-              cityRef: selectedCity?.Ref,
-              warehouse: selectedWarehouse?.Description,
-              warehouseRef: selectedWarehouse?.Ref,
-            }),
-      },
+      delivery,
+      items: cartItems.map((item) => ({
+        productId: item.id,
+        price: item.price,
+        quantity: 1,
+      })),
+      total,
     };
+
+    await submitOrder(order);
+    saveItems([]);
+    resetForm();
+
+    alert('Successful success')
 
     console.log('ORDER:', order);
   };
 
+  // reset form fields
+  const resetForm = () => {
+    setForm({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+    });
+
+    setDeliveryType('pickup');
+    setStoreId('');
+
+    setCitySearch('');
+    setCities([]);
+    setSelectedCity(null);
+
+    setWarehouseSearch('');
+    setWarehouses([]);
+    setSelectedWarehouse(null);
+
+    setErrors({});
+  };
+  
+  // form validation
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!form.firstName.trim()) {
+      newErrors.firstName = 'First name is required';
+    }
+
+    if (!form.lastName.trim()) {
+      newErrors.lastName = 'Last name is required';
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(form.email)) {
+      newErrors.email = 'Invalid email';
+    }
+
+    if (!form.phone.trim()) {
+      newErrors.phone = 'Phone is required';
+    } else if (form.phone.length < 10) {
+      newErrors.phone = 'Phone is too short';
+    }
+
+    if (deliveryType === 'delivery') {
+      if (!selectedCity?.Ref) {
+        newErrors.city = 'Select city';
+      }
+
+      if (!selectedWarehouse?.Ref) {
+        newErrors.warehouse = 'Select warehouse';
+      }
+    }
+
+    if (deliveryType === 'pickup' && !storeId) {
+      newErrors.store = 'Select store';
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // scroll form to error place
+  const scrollToFirstError = () => {
+    setTimeout(() => {
+      firstErrorRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }, 0);
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form 
+      onSubmit={handleSubmit}
+      className='order_form'
+    >
       {/*  CUSTOMER */}
       <h2>Contact information</h2>
-      <input name="firstName" placeholder="First name" onChange={handleChange} />
-      <input name="lastName" placeholder="Last name" onChange={handleChange} />
-      <input name="email" placeholder="Email" onChange={handleChange} />
-      <input name="phone" placeholder="Phone" onChange={handleChange} />
+
+      <div className="field">
+        <input 
+          name="firstName" 
+          placeholder="First name" 
+          value={form.firstName}
+          onChange={handleChange}
+          className="form__field"
+        />
+        {errors.firstName && <p 
+          className="error"
+          ref={errors.firstName ? firstErrorRef : null}
+        >{errors.firstName}</p>}
+      </div>
+            
+      <div className="field">
+        <input 
+          name="lastName" 
+          placeholder="Last name" 
+          value={form.lastName}
+          onChange={handleChange}
+          className="form__field"
+        />
+        {errors.lastName && <p className="error">{errors.lastName}</p>}
+      </div>
+
+      <div className="field">
+        <input 
+          name="email" 
+          placeholder="Email" 
+          value={form.email}
+          onChange={handleChange} 
+          className="form__field"
+        />
+        {errors.email && <p className="error">{errors.email}</p>}
+      </div>
+      
+      <div className="field">
+        <input 
+          name="phone" 
+          placeholder="Phone" 
+          value={form.phone}
+          onChange={handleChange} 
+          className="form__field"
+        />
+        {errors.phone && <p className="error">{errors.phone}</p>}
+      </div>
 
       {/*  DELIVERY */}
       <h2>Delivery method</h2>
 
-      <div className='pickup'>
-        <label>
+      <div className='delivery__method'>
+        <label
+          className={`radio__item ${
+            deliveryType === 'pickup' ? 'radio__item--active' : ''
+          }`}
+        >
           <input
             type="radio"
+            className="radio__input"
             checked={deliveryType === 'pickup'}
             onChange={() => setDeliveryType('pickup')}
           />
-          Pickup (store)
+
+          <span className="radio__label">Pickup (store)</span>
         </label>
 
         {deliveryType === 'pickup' && (
-          <div>
-            <h3>Select store</h3>
-            <select value={storeId} onChange={(e) => setStoreId(e.target.value)}>
-              <option value="kyiv-1">Kyiv Store #1</option>
-              <option value="lviv-1">Lviv Store #1</option>
-              <option value="odesa-1">Odesa Store #1</option>
-            </select>
+          <div className='delivery__dropdown-nogap'>
+            <Dropdown
+              label="Select store"
+              value={storeId}
+              options={storeOptions}
+              onChange={(value) => {
+                setStoreId(value);
+
+                setErrors((prev) => ({
+                  ...prev,
+                  store: '',
+                }));
+              }}
+            />
+            {errors.store && <p className="error">{errors.store}</p>}
           </div>
         )}
       </div>
       
-      <div className='delivery'>
-        <label>
+      <div className='delivery__method'>
+        <label
+          className={`radio__item ${
+            deliveryType === 'delivery' ? 'radio__item--active' : ''
+          }`}
+        >
           <input
             type="radio"
+            className="radio__input"
             checked={deliveryType === 'delivery'}
             onChange={() => setDeliveryType('delivery')}
           />
-          Nova Poshta delivery
+          
+          <span className="radio__label">Nova Poshta delivery</span>
         </label>
 
         {deliveryType === 'delivery' && (
-          <div>
-            <h3>Nova Poshta delivery</h3>
-
+          <div className='delivery__dropdown'>
             {/* CITY SEARCH */}
-            <input
-              placeholder="Search city"
-              value={citySearch}
-              className='search'
-              onChange={(e) => {
-                const value = e.target.value;
-                setCitySearch(value);
-                if (value === '') {
-                  setSelectedCity(null);
-                  setCities([]);
-                }
-              }}
-            />
+            <p className="delivery__title">Search city</p>
+
+            <div>
+              <input
+                placeholder="Search city"
+                value={citySearch}
+                className="form__field"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setCitySearch(value);
+
+                  if (!value) {
+                    setSelectedCity(null);
+                    setCities([]);
+                  }
+                }}
+              />
+
+              {errors.city && <p className="error">{errors.city}</p>}
+            </div>
 
             {/* CITY LIST */}
             {cities.length > 0 && (
-              <div style={{ border: '1px solid #ccc', maxHeight: '200px', overflowY: 'auto' }}
-              className='111'>
+              <div className="delivery__list">
                 {cities
                   .filter((c) =>
-                    (c.Present || c.Description || '')
-                      .toLowerCase()
-                      .includes(citySearch.toLowerCase())
+                    (c.Present || '').toLowerCase().includes(citySearch.toLowerCase())
                   )
-                  .map((city) => (
-                    <div
-                      key={city.Ref}
-                      onClick={() => {
-                        setSelectedCity({
-                          Ref: city.DeliveryCity || city.Ref,
-                          Present: city.Present || city.Description,
-                        });
-                        setCitySearch(city.Present || city.Description || '');
-                      }}
-                      style={{
-                        padding: '4px',
-                        cursor: 'pointer',
-                        backgroundColor: selectedCity?.Ref === (city.DeliveryCity || city.Ref) ? '#eee' : 'white',
-                      }}
-                    >
-                      {city.Present || city.Description}
-                    </div>
-                  ))}
+                  .map((city) => {
+                    const label = city.Present || '';
+
+                    const isActive =
+                      selectedCity?.Ref === (city.DeliveryCity || city.Ref);
+
+                    return (
+                      <div
+                        key={city.Ref}
+                        className={`delivery__item ${
+                          isActive ? 'delivery__item--active' : ''
+                        }`}
+                        onClick={() => {
+                          setSelectedCity({
+                            Ref: city.DeliveryCity || city.Ref,
+                            Present: label,
+                          });
+
+                          setCitySearch(label);
+                        }}
+                      >
+                        {label}
+                      </div>
+                    );
+                  })}
               </div>
             )}
 
             {/* WAREHOUSE SEARCH */}
             {selectedCity?.Ref && (
-              <div>
-                <h4>Search warehouse</h4>
-                <input
-                  placeholder="Search warehouse"
-                  value={warehouseSearch}
-                  className='search'
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setWarehouseSearch(value);
-                    if (value === '') {
-                      setSelectedWarehouse(null);
-                    }
-                  }}
-                />
+              <>
+                <p className="delivery__title">Search warehouse</p>
+
+                <div>
+                  <input
+                    placeholder="Search warehouse"
+                    value={warehouseSearch}
+                    className="form__field"
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setWarehouseSearch(value);
+
+                      if (!value) {
+                        setSelectedWarehouse(null);
+                      }
+                    }}
+                  />
+
+                  {errors.warehouse && (
+                    <p className="error">{errors.warehouse}</p>)}
+                </div>
 
                 {loadingWarehouses && <p>Loading...</p>}
 
                 {!loadingWarehouses && warehouses.length > 0 && (
-                  <div style={{ border: '1px solid #ccc', maxHeight: '200px', overflowY: 'auto' }}>
+                  <div className="delivery__list">
                     {warehouses
                       .filter((w) =>
-                        w.Description.toLowerCase().includes(warehouseSearch.toLowerCase())
+                        w.Description.toLowerCase().includes(
+                          warehouseSearch.toLowerCase()
+                        )
                       )
-                      .map((w) => (
-                        <div
-                          key={w.Ref}
-                          onClick={() => {
-                            setSelectedWarehouse(w);
-                            setWarehouseSearch(w.Description);
-                          }}
-                          style={{
-                            padding: '4px',
-                            cursor: 'pointer',
-                            backgroundColor: selectedWarehouse?.Ref === w.Ref ? '#eee' : 'white',
-                          }}
-                        >
-                          {w.Description}
-                        </div>
-                      ))}
+                      .map((w) => {
+                        const isActive = selectedWarehouse?.Ref === w.Ref;
+
+                        return (
+                          <div
+                            key={w.Ref}
+                            className={`delivery__item ${
+                              isActive ? 'delivery__item--active' : ''
+                            }`}
+                            onClick={() => {
+                              setSelectedWarehouse(w);
+                              setWarehouseSearch(w.Description);
+                            }}
+                          >
+                            {w.Description}
+                          </div>
+                        );
+                      })}
                   </div>
                 )}
-              </div>
+              </>
             )}
           </div>
         )}
       </div>
 
       {/* SUBMIT */}
-      <button type="submit">Place order</button>
+      <button 
+        type="submit" 
+        className="button"
+        style={{ width: '180px' }}
+      >
+        Place order
+      </button>
     </form>
   );
 };

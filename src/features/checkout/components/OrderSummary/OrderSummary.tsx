@@ -1,3 +1,5 @@
+import './OrderSummary.scss';
+
 export const OrderSummary = () => {
   return (
     <aside className="checkout_summary">
