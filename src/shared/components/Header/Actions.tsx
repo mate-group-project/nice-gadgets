@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import { Icon } from '@/shared/components/Icon';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import './Actions.scss';
 
 interface Props {
@@ -11,6 +12,10 @@ interface Props {
 export const Actions = ({ className = '', onNavigate }: Props) => {
   return (
     <ul className={cn('actions', className)}>
+      <li className="actions__item actions__item--lang">
+        <LanguageSwitcher onLanguageSelect={onNavigate} />
+      </li>
+      
       <li className="actions__item">
         <NavLink
           to="/favorites"
