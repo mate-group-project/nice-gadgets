@@ -69,7 +69,7 @@ export const CheckoutForm = () => {
     value: String(store.id),
   }));
 
-  // form
+  //  form
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
