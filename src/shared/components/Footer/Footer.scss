@@ -10,8 +10,12 @@ $height: 74px;
   height: $height;
   margin-top: $height;
   display: flex;
+  background-color: #fff;
+  border-top: 1px solid #e2e8f0;
+
   align-items: center;
-  justify-content: space-between;
+  text-align: center;
+  justify-content: center;
   padding: 0 120px;
   gap: 40px;
 
@@ -77,7 +81,7 @@ $height: 74px;
 
   .info {
     flex-direction: column;
-    gap:16px;
+    gap: 16px;
   }
 
   .container {
@@ -89,13 +93,12 @@ $height: 74px;
 
 .logo,
 .footer__container {
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 
-
-@media (min-width:1281px) {
+@media (min-width: 1281px) {
   .info {
-    gap:106px;
+    gap: 106px;
   }
 }
 
@@ -108,6 +111,6 @@ $height: 74px;
 @media (max-width: 768px) {
   .info {
     flex-direction: column;
-    gap:16px;
+    gap: 16px;
   }
 }
