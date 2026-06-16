@@ -1,0 +1,8 @@
+.checkout_summary {
+  width: 100%;
+  flex-shrink: 0;
+
+  @include lg-and-up {
+    width: 368px;
+  }
+}
