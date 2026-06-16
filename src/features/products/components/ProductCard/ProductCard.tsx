@@ -44,7 +44,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
   return (
     <article className="product__card">
-      <Link to={`product/${product.id}`}>
+      <Link to={`/product/${product.id}`}>
         <img
           src={`${BASE_URL}/${product.image}`}
           alt={product.name}

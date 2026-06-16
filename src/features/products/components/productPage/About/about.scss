@@ -1,7 +1,10 @@
 .about {
   &__item {
-    margin-bottom: 32px;
+    &:not(:last-child) {
+      margin-bottom: 32px;
+    }
   }
+
   &__title {
     position: relative;
     margin-bottom: 20px;
@@ -28,7 +31,7 @@
 
   &__subtitle {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 500;
     line-height: 100%;
     margin: 0 0 16px 0;
   }
@@ -42,6 +45,9 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 21px;
-    margin-bottom: 24px;
+
+    &:not(:last-child) {
+      margin-bottom: 24px;
+    }
   }
 }

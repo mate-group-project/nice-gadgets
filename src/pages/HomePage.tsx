@@ -6,12 +6,16 @@ import { CategoryCard } from '@/features/categories/components/CategoryCard';
 import { useProductsList } from '@/features/products/hooks/useProductsList.ts';
 import { Link } from 'react-router-dom';
 import { ProductCartSkeleton } from '@/features/products/components/ProductCard/ProductCartSkeleton.tsx';
+import { useCategories } from '@/features/categories/api/useCategories';
 
 export const HomePage: React.FC = () => {
   const { products } = useProductsList();
+  const { categories } = useCategories();
+
+  const maxYear = Math.max(...products.map((p) => p.year));
 
   const brandNewProducts = products.filter(
-    (product) => product.price === product.fullPrice,
+    (product) => product.year === maxYear,
   );
 
   const hotPriceProducts = [...products]
@@ -26,6 +30,14 @@ export const HomePage: React.FC = () => {
   const loader = Array(4)
     .fill(null)
     .map((_, i) => <ProductCartSkeleton key={i} />);
+
+  const IMAGES = [
+    'https://i.ibb.co/gFwSBpht/Phones.png',
+    'https://i.ibb.co/zHD5rcYd/Tablets.png',
+    'https://i.ibb.co/DyL6gQR/Accessories.png',
+  ];
+
+  const CATEGORIES = ['phones', 'tablets', 'accessories'];
 
   return (
     <>
@@ -50,24 +62,15 @@ export const HomePage: React.FC = () => {
 
       <Section title="Shop by category">
         <div className="categories">
-          <Link
-            to="/catalog?category=phones"
-            style={{ flex: 1 }}
-          >
-            <CategoryCard image="https://i.ibb.co/gFwSBpht/Phones.png" />
-          </Link>
-          <Link
-            to="http://localhost:5173/catalog?category=tablets"
-            style={{ flex: 1 }}
-          >
-            <CategoryCard image="https://i.ibb.co/zHD5rcYd/Tablets.png" />
-          </Link>
-          <Link
-            to="http://localhost:5173/catalog?category=accessories"
-            style={{ flex: 1 }}
-          >
-            <CategoryCard image="https://i.ibb.co/DyL6gQR/Accessories.png" />
-          </Link>
+          {categories.map((category, index) => (
+            <Link
+              key={category.id}
+              to={`/catalog?category=${CATEGORIES[index]}`}
+              style={{ flex: 1 }}
+            >
+              <CategoryCard image={IMAGES[index]} />
+            </Link>
+          ))}
         </div>
       </Section>
 

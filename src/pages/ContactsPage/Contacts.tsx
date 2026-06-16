@@ -77,7 +77,7 @@ export const Contacts: React.FC = () => {
   return (
     <main className="contacts">
       <div className="contacts__container">
-        <Breadcrumbs page="Contacts" />
+        <Breadcrumbs crumbs={[{ label: 'Contacts' }]} />
         <h1 className="contacts__title">Contacts</h1>
         <div className="contacts__list">
           {people.map((person) => (

@@ -6,7 +6,7 @@ export const AboutUs: React.FC = () => {
   return (
     <main className="about">
       <div className="about__container">
-        <Breadcrumbs page="About us" />
+        <Breadcrumbs crumbs={[{ label: 'About us' }]} />
         <h1 className="about__page-title">About us</h1>
         <div className="about__content">
           <h2 className="about__heading">Small dreams and grand plans</h2>
