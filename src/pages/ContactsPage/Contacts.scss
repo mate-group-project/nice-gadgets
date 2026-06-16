@@ -15,8 +15,17 @@ $font-weight-semibold: 600;
 $font-weight-bold: 700;
 $font-weight-extrabold: 800;
 
+:root {
+  scroll-behavior: smooth;
+}
+
 .contacts__container {
   @include container;
+
+  .breadcrumbs .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .contacts__list {
@@ -27,8 +36,6 @@ $font-weight-extrabold: 800;
 }
 
 .contacts {
-  margin: 80px 24px 64px;
-
   font-family: var(--font-main);
 
   &__title {
@@ -42,10 +49,6 @@ $font-weight-extrabold: 800;
       margin-top: 40px;
       font-size: $font-size-5xl;
     }
-  }
-
-  @include lg-and-up {
-    margin: 80px 31px 80px 33px;
   }
 }
 

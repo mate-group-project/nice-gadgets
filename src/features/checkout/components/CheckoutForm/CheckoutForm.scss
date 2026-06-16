@@ -67,7 +67,7 @@
       &--active {
         border-color: var(--primary);
       }
-          
+
       @include lg-and-up {
         width: 80%;
       }
@@ -87,7 +87,7 @@
       cursor: pointer;
 
       &::before {
-        content: "";
+        content: '';
         width: 8px;
         height: 8px;
         border-radius: 50%;

@@ -2,7 +2,7 @@ import { novaPoshtaApi } from '@/shared/api/novaPoshta';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import './CheckoutForm.scss'
+import './CheckoutForm.scss';
 import { Dropdown } from '@/shared/components/Dropdown';
 import { useStores } from '@/shared/hooks/useStoresList';
 import { useCheckout } from '@/shared/hooks/useCheckout';
@@ -29,11 +29,11 @@ interface SearchSettlementsResponse {
   data: {
     Addresses?: City[];
   }[];
-};
+}
 
 interface GetWarehousesResponse {
   data: Warehouse[];
-};
+}
 
 export const CheckoutForm = () => {
   const [form, setForm] = useState({
@@ -54,7 +54,9 @@ export const CheckoutForm = () => {
   // warehouses
   const [warehouseSearch, setWarehouseSearch] = useState('');
   const [warehouses, setWarehouses] = useState<Warehouse[]>([]);
-  const [selectedWarehouse, setSelectedWarehouse] = useState<Warehouse | null>(null);
+  const [selectedWarehouse, setSelectedWarehouse] = useState<Warehouse | null>(
+    null,
+  );
   const [loadingWarehouses, setLoadingWarehouses] = useState(false);
 
   // errors
@@ -127,14 +129,9 @@ export const CheckoutForm = () => {
   const { items: cartIds, saveItems } = useCart();
   const { products } = useProductsList();
 
-  const cartItems = products.filter((p) =>
-    cartIds.includes(p.id)
-  );
+  const cartItems = products.filter((p) => cartIds.includes(p.id));
 
-  const total = cartItems.reduce(
-    (sum, item) => sum + item.price,
-    0
-  );
+  const total = cartItems.reduce((sum, item) => sum + item.price, 0);
 
   // sending order to server
   const { submitOrder } = useCheckout();
@@ -148,18 +145,18 @@ export const CheckoutForm = () => {
     }
 
     const delivery =
-      deliveryType === 'pickup'
-        ? {
-            type: 'pickup' as const,
-            storeId,
-          }
-        : {
-            type: 'delivery' as const,
-            city: selectedCity!.Present!,
-            cityRef: selectedCity!.Ref!,
-            warehouse: selectedWarehouse!.Description!,
-            warehouseRef: selectedWarehouse!.Ref!,
-          };
+      deliveryType === 'pickup' ?
+        {
+          type: 'pickup' as const,
+          storeId,
+        }
+      : {
+          type: 'delivery' as const,
+          city: selectedCity!.Present!,
+          cityRef: selectedCity!.Ref!,
+          warehouse: selectedWarehouse!.Description!,
+          warehouseRef: selectedWarehouse!.Ref!,
+        };
 
     const order = {
       customer: form,
@@ -211,7 +208,7 @@ export const CheckoutForm = () => {
 
     setErrors({});
   };
-  
+
   // form validation
   const validate = () => {
     const newErrors: Record<string, string> = {};

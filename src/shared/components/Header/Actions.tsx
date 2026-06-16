@@ -15,7 +15,12 @@ interface Props {
   onToggleTheme: () => void;
 }
 
-export const Actions = ({ className = '', onNavigate, theme, onToggleTheme }: Props) => {
+export const Actions = ({
+  className = '',
+  onNavigate,
+  theme,
+  onToggleTheme,
+}: Props) => {
   const { items: cart } = useCart();
   const { items: favorites } = useFavorites();
 
@@ -24,11 +29,11 @@ export const Actions = ({ className = '', onNavigate, theme, onToggleTheme }: Pr
       <li className="actions__item actions__item--lang">
         <LanguageSwitcher onLanguageSelect={onNavigate} />
       </li>
-      
+
       <li className="actions__item">
         <button
           type="button"
-          className="actions__link" 
+          className="actions__link"
           onClick={onToggleTheme}
           aria-label="Toggle theme"
           style={{ background: 'none', border: 'none', cursor: 'pointer' }}

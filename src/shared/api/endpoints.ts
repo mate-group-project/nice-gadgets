@@ -8,6 +8,6 @@ export const ENDPOINTS = {
   cart: '/cart',
   favorites: '/favorites',
   orders: '/orders',
-  pickupPoints: "/pickup-points",
-  stores: "/stores/en",
+  pickupPoints: '/pickup-points',
+  stores: '/stores/en',
 } as const;

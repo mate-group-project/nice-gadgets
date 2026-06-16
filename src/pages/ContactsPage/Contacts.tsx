@@ -5,6 +5,7 @@ import tiger from './images/tiger.png';
 import panda from './images/panda.png';
 import tigresse from './images/tigresse.png';
 import monkey from './images/monkey.png';
+import { Breadcrumbs } from '../Breadcrumbs';
 
 export type Person = {
   id: number;
@@ -76,6 +77,7 @@ export const Contacts: React.FC = () => {
   return (
     <main className="contacts">
       <div className="contacts__container">
+        <Breadcrumbs crumbs={[{ label: 'Contacts' }]} />
         <h1 className="contacts__title">Contacts</h1>
         <div className="contacts__list">
           {people.map((person) => (

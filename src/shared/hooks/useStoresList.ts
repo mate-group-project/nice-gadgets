@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getStores, type Store } from '../api/stores';
 
-
 export const useStores = () => {
   const [stores, setStores] = useState<Store[]>([]);
   const [isLoading, setIsLoading] = useState(true);

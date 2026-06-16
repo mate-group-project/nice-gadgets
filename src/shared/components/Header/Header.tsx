@@ -7,7 +7,7 @@ import { Menu } from '@/shared/components/Header/Menu.tsx';
 type HeaderProps = {
   theme: string;
   onToggleTheme: () => void;
-}
+};
 
 export const Header = ({ theme, onToggleTheme }: HeaderProps) => {
   return (
@@ -16,7 +16,7 @@ export const Header = ({ theme, onToggleTheme }: HeaderProps) => {
         to="/"
         className="header__logo logo__link"
       >
-        {theme === 'light' ? (
+        {theme === 'light' ?
           <img
             src="/dark-logo.png"
             alt="logo"
@@ -24,15 +24,14 @@ export const Header = ({ theme, onToggleTheme }: HeaderProps) => {
             height="145"
             className="logo__image"
           />
-        ) : (
-          <img
+        : <img
             src="/light-logo.png"
             alt="logo"
             width="404"
             height="145"
             className="logo__image"
           />
-        )}
+        }
       </NavLink>
 
       <div className="header__nav">
@@ -40,7 +39,10 @@ export const Header = ({ theme, onToggleTheme }: HeaderProps) => {
       </div>
 
       <div className="header__actions">
-        <Actions theme={theme} onToggleTheme={onToggleTheme} />
+        <Actions
+          theme={theme}
+          onToggleTheme={onToggleTheme}
+        />
       </div>
 
       <div className="header__menu">
