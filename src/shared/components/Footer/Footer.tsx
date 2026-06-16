@@ -30,6 +30,13 @@ export const Footer: React.FC = () => {
         </a>
 
         <a
+          href="/about"
+          className="contact"
+        >
+          about
+        </a>
+
+        <a
           href="/contacts"
           className="contact"
         >
