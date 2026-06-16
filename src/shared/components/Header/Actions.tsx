@@ -10,14 +10,27 @@ import {
 interface Props {
   className?: string;
   onNavigate?: () => void;
+  theme: string;
+  onToggleTheme: () => void;
 }
 
-export const Actions = ({ className = '', onNavigate }: Props) => {
+export const Actions = ({ className = '', onNavigate, theme, onToggleTheme }: Props) => {
   const { items: cart } = useCart();
   const { items: favorites } = useFavorites();
 
   return (
     <ul className={cn('actions', className)}>
+      <li className="actions__item">
+        <button
+          type="button"
+          className="actions__link" 
+          onClick={onToggleTheme}
+          aria-label="Toggle theme"
+          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+        >
+          <Icon name={theme === 'light' ? 'moon' : 'sun'} />
+        </button>
+      </li>
       <li className="actions__item">
         <NavLink
           to="/favorites"

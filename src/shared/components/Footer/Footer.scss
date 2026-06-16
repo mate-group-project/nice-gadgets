@@ -10,8 +10,8 @@ $height: 74px;
   height: $height;
   margin-top: $height;
   display: flex;
-  background-color: #fff;
-  border-top: 1px solid #e2e8f0;
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--elements);
 
   align-items: center;
   text-align: center;

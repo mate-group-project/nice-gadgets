@@ -73,7 +73,7 @@
     border-radius: 50%;
     cursor: pointer;
     border: 1px solid var(--secondary);
-    box-shadow: 0 0 0 2px var(--white) inset;
+    box-shadow: 0 0 0 2px var(--bg-surface) inset;
     transition:
       transform 0.2s ease,
       border-color 0.2s ease;
@@ -106,7 +106,7 @@
   align-items: center;
   justify-content: center;
   padding: 10px 16px;
-  background-color: var(--white);
+  background-color: var(--bg-surface);
   border: 1px solid var(--elements);
   border-radius: 4px;
   color: var(--primary);
@@ -123,7 +123,7 @@
   &--active {
     background-color: var(--primary);
     border-color: var(--primary);
-    color: var(--white);
+    color: var(--bg-surface);
     font-weight: 600;
   }
 }
