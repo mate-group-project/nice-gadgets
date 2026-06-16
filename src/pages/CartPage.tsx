@@ -16,11 +16,18 @@ export const CartPage: React.FC = () => {
   useEffect(() => {
     if (cartProducts.length === 0) return;
 
-    const activeIds: string[] = JSON.parse(localStorage.getItem('cart') || '[]');
-    const savedQuantities = JSON.parse(localStorage.getItem('cart_quantities') || '{}');
+    const activeIds: string[] = JSON.parse(
+      localStorage.getItem('cart') || '[]',
+    );
+    const savedQuantities = JSON.parse(
+      localStorage.getItem('cart_quantities') || '{}',
+    );
 
     const validProducts = cartProducts
-      .filter((product): product is NonNullable<typeof product> => !!product && activeIds.includes(product.id))
+      .filter(
+        (product): product is NonNullable<typeof product> =>
+          !!product && activeIds.includes(product.id),
+      )
       .map((product) => ({
         id: product.id,
         name: product.name,
@@ -33,21 +40,29 @@ export const CartPage: React.FC = () => {
   }, [cartProducts]);
 
   const handleUpdateQuantity = (id: string, newQuantity: number) => {
-    const savedQuantities = JSON.parse(localStorage.getItem('cart_quantities') || '{}');
+    const savedQuantities = JSON.parse(
+      localStorage.getItem('cart_quantities') || '{}',
+    );
     const updatedQuantities = { ...savedQuantities, [id]: newQuantity };
-    
+
     localStorage.setItem('cart_quantities', JSON.stringify(updatedQuantities));
     setCartItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, quantity: newQuantity } : item))
+      prev.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item,
+      ),
     );
   };
 
   const handleRemove = (id: string) => {
-    const activeIds: string[] = JSON.parse(localStorage.getItem('cart') || '[]');
+    const activeIds: string[] = JSON.parse(
+      localStorage.getItem('cart') || '[]',
+    );
     const updatedIds = activeIds.filter((cartId) => cartId !== id);
     localStorage.setItem('cart', JSON.stringify(updatedIds));
 
-    const savedQuantities = JSON.parse(localStorage.getItem('cart_quantities') || '{}');
+    const savedQuantities = JSON.parse(
+      localStorage.getItem('cart_quantities') || '{}',
+    );
     delete savedQuantities[id];
     localStorage.setItem('cart_quantities', JSON.stringify(savedQuantities));
 
@@ -91,7 +106,12 @@ export const CartPage: React.FC = () => {
 
   return (
     <div className="cart-page">
-      <a href="/" className="cart-page__back-link">Back</a>
+      <a
+        href="/"
+        className="cart-page__back-link"
+      >
+        Back
+      </a>
       <h1 className="cart-page__title">Cart</h1>
 
       <div className="cart-page__content">

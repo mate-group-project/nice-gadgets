@@ -34,15 +34,15 @@ export type ProductDetails = {
   priceRegular: number;
   priceDiscount: number;
   color: string;
-  images: string[]; 
-  description: ProductDescription[]; 
+  images: string[];
+  description: ProductDescription[];
   screen: string;
   resolution: string;
   processor: string;
   ram: string;
   camera: string;
   zoom: string;
-  cell: string[]; 
+  cell: string[];
   colorsAvailable: ProductVariantOption[];
   capacityAvailable: ProductVariantOption[];
 };
