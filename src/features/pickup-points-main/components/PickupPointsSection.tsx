@@ -18,8 +18,8 @@ export const PickupPointsSection = () => {
     setError(null);
 
     try {
-      const language: 'en' | 'uk' = 'en';
-      const response = await getPickupPoints(language);
+      // const language: 'en' | 'uk' = 'en';
+      const response = await getPickupPoints();
 
       setPickupPoints(response);
       setHasLoaded(true);
