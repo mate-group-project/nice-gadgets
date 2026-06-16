@@ -23,7 +23,6 @@ function App() {
 
   return (
     <div className="app">
-
       <div className="app__header">
         <Header theme={theme} onToggleTheme={toggleTheme}/>
       </div>
@@ -37,7 +36,6 @@ function App() {
       <div className="app__footer">
         <Footer theme={theme}/>
       </div>
-
     </div>
   );
 }
