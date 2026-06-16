@@ -3,11 +3,16 @@ import { Icon } from '@/shared/components/Icon';
 import { Link } from 'react-router-dom';
 import './Breadcrumbs.scss';
 
-type Props = {
-  page: string;
+export type Crumb = {
+  label: string;
+  url?: string;
 };
 
-export const Breadcrumbs: React.FC<Props> = ({ page }) => {
+type Props = {
+  crumbs: Crumb[];
+};
+
+export const Breadcrumbs: React.FC<Props> = ({ crumbs = [] }) => {
   return (
     <div className="breadcrumbs">
       <div className="container">
@@ -17,8 +22,19 @@ export const Breadcrumbs: React.FC<Props> = ({ page }) => {
             name="home"
           />
         </Link>
-        <span className="icon">›</span>
-        <span className="page">{page}</span>
+        {crumbs.map((crumb) => (
+          <React.Fragment key={crumb.label}>
+            <span className="icon">›</span>
+            {crumb.url ?
+              <Link
+                to={crumb.url}
+                className="page"
+              >
+                {crumb.label}
+              </Link>
+            : <span className="page">{crumb.label}</span>}
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
