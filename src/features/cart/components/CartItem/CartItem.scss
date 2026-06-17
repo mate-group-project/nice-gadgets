@@ -76,6 +76,12 @@
     line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+
+    &_price {
+      padding-left: 8px;
+      color: var(--icons);
+      text-decoration: line-through;
+    }
   }
 
   &__quantity {

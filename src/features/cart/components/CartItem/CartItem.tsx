@@ -14,7 +14,7 @@ export const CartItem: React.FC<CartItemProps> = ({
   onRemove,
   onUpdateQuantity,
 }) => {
-  const { id, name, image, price, quantity } = item;
+  const { id, name, image, price, fullPrice, quantity } = item;
 
   return (
     <article
@@ -52,6 +52,10 @@ export const CartItem: React.FC<CartItemProps> = ({
       </div>
       <div className="cart-item__info">
         <h3 className="cart-item__name">{name}</h3>
+        <p>
+          <strong>${price}</strong>
+          <span className="cart-item__name_price">{`${price !== fullPrice ? '$' + fullPrice : ''}`}</span>
+        </p>
       </div>
       <div className="cart-item__quantity">
         <button

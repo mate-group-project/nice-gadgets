@@ -30,9 +30,15 @@ export const useCartProducts = () => {
     );
   };
 
+  const clearCart = () => {
+    saveItems([]);
+    setProducts([]);
+  };
+
   return {
     products,
     deleteItem,
     changeCount,
+    clearCart,
   };
 };
