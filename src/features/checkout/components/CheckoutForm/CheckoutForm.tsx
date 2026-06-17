@@ -6,9 +6,8 @@ import './CheckoutForm.scss';
 import { Dropdown } from '@/shared/components/Dropdown';
 import { useStores } from '@/shared/hooks/useStoresList';
 import { useCheckout } from '@/shared/hooks/useCheckout';
-import { useCart } from '@/features/products/hooks/useLocalStorageList';
-import { useProductsList } from '@/features/products/hooks/useProductsList';
 import { SuccessModal } from '../SuccessModal';
+import { useCartProducts } from '@/features/cart/hooks/useCartProducts';
 
 type DeliveryType = 'pickup' | 'delivery';
 
@@ -125,15 +124,13 @@ export const CheckoutForm = () => {
       .finally(() => setLoadingWarehouses(false));
   }, [selectedCity?.Ref]);
 
-  // get cart items ids
-  const { items: cartIds, saveItems } = useCart();
-  const { products } = useProductsList();
+  // get cart items
+  const { products: cartItems, clearCart } = useCartProducts();
 
-  const cartItems = products.filter((p) =>
-    cartIds.map((item) => item.id).includes(p.id),
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
   );
-
-  const total = cartItems.reduce((sum, item) => sum + item.price, 0);
 
   // sending order to server
   const { submitOrder } = useCheckout();
@@ -173,7 +170,7 @@ export const CheckoutForm = () => {
     };
 
     await submitOrder(order);
-    saveItems([]);
+    clearCart();
     resetForm();
 
     setIsOpen(true);
