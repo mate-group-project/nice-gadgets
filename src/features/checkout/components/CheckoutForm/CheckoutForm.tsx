@@ -28,10 +28,26 @@ export const CheckoutForm = () => {
     <form onSubmit={handleSubmit}>
       <h2>Contact information</h2>
 
-      <input name="firstName" placeholder="First name" onChange={handleChange} />
-      <input name="lastName" placeholder="Last name" onChange={handleChange} />
-      <input name="email" placeholder="Email" onChange={handleChange} />
-      <input name="phone" placeholder="Phone" onChange={handleChange} />
+      <input
+        name="firstName"
+        placeholder="First name"
+        onChange={handleChange}
+      />
+      <input
+        name="lastName"
+        placeholder="Last name"
+        onChange={handleChange}
+      />
+      <input
+        name="email"
+        placeholder="Email"
+        onChange={handleChange}
+      />
+      <input
+        name="phone"
+        placeholder="Phone"
+        onChange={handleChange}
+      />
 
       <h2>Delivery method</h2>
 
@@ -53,9 +69,7 @@ export const CheckoutForm = () => {
         Delivery (Nova Poshta)
       </label>
 
-      <button type="submit">
-        Place order
-      </button>
+      <button type="submit">Place order</button>
     </form>
-  )
-}
+  );
+};

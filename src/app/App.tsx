@@ -8,7 +8,6 @@ import { ScrollToTop } from '@/shared/components/ScrollToTop';
 function App() {
   return (
     <div className="app">
-
       <div className="app__header">
         <Header />
       </div>
@@ -22,7 +21,6 @@ function App() {
       <div className="app__footer">
         <Footer />
       </div>
-
     </div>
   );
 }

@@ -9,18 +9,24 @@ import { useNavigate } from 'react-router-dom';
 export const CartPage: React.FC = () => {
   const { cartProducts, isLoading } = useCartProducts();
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
-  // const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (cartProducts.length === 0) return;
 
-    const activeIds: string[] = JSON.parse(localStorage.getItem('cart') || '[]');
-    const savedQuantities = JSON.parse(localStorage.getItem('cart_quantities') || '{}');
+    const activeIds: string[] = JSON.parse(
+      localStorage.getItem('cart') || '[]',
+    );
+    const savedQuantities = JSON.parse(
+      localStorage.getItem('cart_quantities') || '{}',
+    );
 
     const validProducts = cartProducts
-      .filter((product): product is NonNullable<typeof product> => !!product && activeIds.includes(product.id))
+      .filter(
+        (product): product is NonNullable<typeof product> =>
+          !!product && activeIds.includes(product.id),
+      )
       .map((product) => ({
         id: product.id,
         name: product.name,
@@ -29,25 +35,34 @@ export const CartPage: React.FC = () => {
         quantity: savedQuantities[product.id] || 1,
       }));
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCartItems(validProducts);
   }, [cartProducts]);
 
   const handleUpdateQuantity = (id: string, newQuantity: number) => {
-    const savedQuantities = JSON.parse(localStorage.getItem('cart_quantities') || '{}');
+    const savedQuantities = JSON.parse(
+      localStorage.getItem('cart_quantities') || '{}',
+    );
     const updatedQuantities = { ...savedQuantities, [id]: newQuantity };
-    
+
     localStorage.setItem('cart_quantities', JSON.stringify(updatedQuantities));
     setCartItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, quantity: newQuantity } : item))
+      prev.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item,
+      ),
     );
   };
 
   const handleRemove = (id: string) => {
-    const activeIds: string[] = JSON.parse(localStorage.getItem('cart') || '[]');
+    const activeIds: string[] = JSON.parse(
+      localStorage.getItem('cart') || '[]',
+    );
     const updatedIds = activeIds.filter((cartId) => cartId !== id);
     localStorage.setItem('cart', JSON.stringify(updatedIds));
 
-    const savedQuantities = JSON.parse(localStorage.getItem('cart_quantities') || '{}');
+    const savedQuantities = JSON.parse(
+      localStorage.getItem('cart_quantities') || '{}',
+    );
     delete savedQuantities[id];
     localStorage.setItem('cart_quantities', JSON.stringify(savedQuantities));
 
@@ -91,7 +106,12 @@ export const CartPage: React.FC = () => {
 
   return (
     <div className="cart-page">
-      <a href="/" className="cart-page__back-link">Back</a>
+      <a
+        href="/"
+        className="cart-page__back-link"
+      >
+        Back
+      </a>
       <h1 className="cart-page__title">Cart</h1>
 
       <div className="cart-page__content">

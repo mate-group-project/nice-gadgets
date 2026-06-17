@@ -4,5 +4,5 @@ export const OrderSummary = () => {
       <h2>Order summary</h2>
       {/* aside */}
     </aside>
-  )
-}
+  );
+};

@@ -43,7 +43,7 @@ export const Navigation = ({ className = '', onNavigate }: Props) => {
           className={cn('nav__link', {
             'nav__link--active': category === 'tablets',
           })}
-         onClick={onNavigate}
+          onClick={onNavigate}
         >
           Tablets
         </NavLink>

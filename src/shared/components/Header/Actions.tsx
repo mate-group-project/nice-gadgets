@@ -22,7 +22,7 @@ export const Actions = ({ className = '', onNavigate }: Props) => {
       <li className="actions__item actions__item--lang">
         <LanguageSwitcher onLanguageSelect={onNavigate} />
       </li>
-      
+
       <li className="actions__item">
         <NavLink
           to="/favorites"
