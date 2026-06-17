@@ -24,11 +24,11 @@ export const Actions = ({ className = '', onNavigate, theme, onToggleTheme }: Pr
       <li className="actions__item actions__item--lang">
         <LanguageSwitcher onLanguageSelect={onNavigate} />
       </li>
-      
+
       <li className="actions__item">
         <button
           type="button"
-          className="actions__link" 
+          className="actions__link"
           onClick={onToggleTheme}
           aria-label="Toggle theme"
           style={{ background: 'none', border: 'none', cursor: 'pointer' }}
@@ -68,6 +68,18 @@ export const Actions = ({ className = '', onNavigate, theme, onToggleTheme }: Pr
               {cart.filter(Boolean).length}
             </span>
           )}
+        </NavLink>
+      </li>
+      <li className="actions__item">
+        <NavLink
+          to="/auth"
+          className={({ isActive }) =>
+            cn('actions__link', {
+              'actions__link--active': isActive,
+            })
+          }
+        >
+          <Icon name="user" />
         </NavLink>
       </li>
     </ul>
