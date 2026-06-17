@@ -8,12 +8,11 @@
   border-radius: 8px;
   padding: 32px;
   border: 1px solid var(--elements);
-  position: sticky;
-  top: 64px;
-  bottom: 0;
 
   @include lg-and-up {
     width: 368px;
+    position: sticky;
+    top: 64px;
   }
 
   &__title {
