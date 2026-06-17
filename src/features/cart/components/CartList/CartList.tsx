@@ -1,9 +1,7 @@
 import React from 'react';
 import { CartItem } from '../CartItem/CartItem';
 import './CartList.scss';
-import type { Product } from '@/features/products/types/Product.ts';
-
-type ProductCart = Product & { quantity: string | number };
+import type { ProductCart } from '@/features/cart/types.ts';
 
 interface CartListProps {
   items: ProductCart[];

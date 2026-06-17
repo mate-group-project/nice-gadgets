@@ -27,7 +27,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
       return;
     }
 
-    saveItems([...cart, { id: product.id, count: 1 }]);
+    saveItems([...cart, { ...product, quantity: 1 }]);
   };
 
   const isFavorite = favorites.includes(product.id);

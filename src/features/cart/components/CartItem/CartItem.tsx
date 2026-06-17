@@ -1,9 +1,7 @@
 import React from 'react';
 import './CartItem.scss';
-import type { Product } from '@/features/products/types/Product.ts';
 import { BASE_URL } from '@/shared/api/endpoints';
-
-type ProductCart = Product & { quantity: string | number };
+import type { ProductCart } from '@/features/cart/types.ts';
 
 interface CartItemProps {
   item: ProductCart;
@@ -59,8 +57,8 @@ export const CartItem: React.FC<CartItemProps> = ({
         <button
           type="button"
           className="cart-item__qty-btn"
-          disabled={Number(quantity) <= 1}
-          onClick={() => onUpdateQuantity(id, Number(quantity) - 1)}
+          disabled={quantity <= 1}
+          onClick={() => onUpdateQuantity(id, quantity - 1)}
           aria-label="Decrease quantity"
         >
           <svg
@@ -89,7 +87,7 @@ export const CartItem: React.FC<CartItemProps> = ({
         <button
           type="button"
           className="cart-item__qty-btn"
-          onClick={() => onUpdateQuantity(id, Number(quantity) + 1)}
+          onClick={() => onUpdateQuantity(id, quantity + 1)}
           aria-label="Increase quantity"
         >
           <svg
@@ -110,7 +108,7 @@ export const CartItem: React.FC<CartItemProps> = ({
         </button>
       </div>
       <div className="cart-item__price-wrapper">
-        <span className="cart-item__price">${price * Number(quantity)}</span>
+        <span className="cart-item__price">${price * quantity}</span>
       </div>
     </article>
   );

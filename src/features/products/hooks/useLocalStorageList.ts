@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react';
+import type { ProductCart } from '@/features/cart/types.ts';
 
 type StorageListResult<T> = {
   items: T[];
@@ -36,13 +37,8 @@ const createStorageListHook = <T>(key: string) => {
   };
 };
 
-type CartItem = {
-  id: string | number;
-  count: string | number;
-};
-
 type FavoriteItem = string | number;
 
-export const useCart = createStorageListHook<CartItem>('cartStore');
+export const useCart = createStorageListHook<ProductCart>('cartStore');
 
 export const useFavorites = createStorageListHook<FavoriteItem>('favorites');
