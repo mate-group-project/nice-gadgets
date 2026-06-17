@@ -1,5 +1,6 @@
 .section {
   @include container;
+  padding: 12px 0;
 
   &__header {
     display: flex;
@@ -7,6 +8,11 @@
     align-items: center;
     gap: 16px;
     min-height: 28px;
+    padding: 0 20px;
+
+    @include lg-and-up {
+      padding: 0;
+    }
   }
 
   &__title {
@@ -20,6 +26,12 @@
 
   .swiper {
     align-items: stretch;
+    padding: 14px;
+    margin: -6px 0;
+
+    @include lg-and-up {
+      margin: -6px -14px;
+    }
   }
 
   .swiper-slide {
