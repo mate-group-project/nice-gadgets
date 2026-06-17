@@ -159,6 +159,7 @@ export const CheckoutForm = () => {
         };
 
     const order = {
+      email: form.email,
       customer: form,
       delivery,
       items: cartItems.map((item) => ({
