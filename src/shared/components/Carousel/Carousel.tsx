@@ -2,17 +2,13 @@ import React from 'react';
 import './Carousel.scss';
 
 import { Icon } from '../Icon';
-import heroBannerLg from './../../../assets/img/hero-banner-lg.png';
-import heroBannerMd from './../../../assets/img/hero-banner-md.png';
-import heroBannerSm from './../../../assets/img/hero-banner-sm.png';
+import heroBanner from './../../../assets/img/Screenshot_3.png';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-
-// The slider looks really bad when it changes 'cause of the buttons. We can change the effect in the future (Maybe to fade).
 
 export const Carousel: React.FC = () => {
   return (
@@ -40,9 +36,7 @@ export const Carousel: React.FC = () => {
           }}
           scrollbar={{ draggable: true }}
         >
-          <SwiperSlide>
-            {/* We will change it for routes later */}
-
+          {/* <SwiperSlide>
             <picture>
               <source
                 media="(min-width: 1200px)"
@@ -58,43 +52,32 @@ export const Carousel: React.FC = () => {
                 alt="Hero banner"
               />
             </picture>
-          </SwiperSlide>
+          </SwiperSlide> */}
 
           <SwiperSlide>
-            <picture>
-              <source
-                media="(min-width: 1200px)"
-                srcSet={heroBannerLg}
-              />
-              <source
-                media="(min-width: 640px)"
-                srcSet={heroBannerMd}
-              />
+            <div className="carousel__slide">
 
-              <img
-                src={heroBannerSm}
-                alt="Hero banner"
-              />
-            </picture>
+              <div className="carousel__content">
+                <h2 className="carousel__title">
+                  <span className="gradient">Now available in our store</span>
+                  <span className="emoji">👌</span>
+                </h2>
+                <p className="carousel__text">
+                  Be the first!
+                </p>
+                <button 
+                  className="button carousel__button"
+                >
+                  Order now
+                </button>
+              </div>
+
+              <div className="carousel__image">
+                <img src={heroBanner} alt="hero Banner" />
+              </div>
+            </div>
           </SwiperSlide>
 
-          <SwiperSlide>
-            <picture>
-              <source
-                media="(min-width: 1200px)"
-                srcSet={heroBannerLg}
-              />
-              <source
-                media="(min-width: 640px)"
-                srcSet={heroBannerMd}
-              />
-
-              <img
-                src={heroBannerSm}
-                alt="Hero banner"
-              />
-            </picture>
-          </SwiperSlide>
         </Swiper>
       </div>
 

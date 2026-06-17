@@ -6,6 +6,7 @@ $bp-lg: 1200px;
 
 :root {
   --primary: #0f0f11;
+  --primary-carousel-bg: #2f2f33;
   --secondary: #89939a;
   --accent: #4219d0;
   --accent-secondary: #f4ba47;
@@ -14,9 +15,9 @@ $bp-lg: 1200px;
   --hover: #fafbfc;
   --bg-surface: #ffffff;
   --btn-text: #fff;
+  --red-alert: #ff0000;
   --font-main: 'Mont', sans-serif;
   --font-secondary: 'Manrope', sans-serif;
-  --red-alert: red;
 
   color-scheme: light;
 }
