@@ -56,7 +56,7 @@ export const PickupPointsSection = () => {
         className="button about__button"
         onClick={handleToggleMap}
       >
-        Pickup and return points
+        Pickup points
       </Button>
 
       {isOpen && (

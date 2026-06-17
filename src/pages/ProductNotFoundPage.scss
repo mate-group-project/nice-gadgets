@@ -1,0 +1,17 @@
+.product-not-found {
+  text-align: center;
+  padding: 80px 20px;
+
+  &__title {
+    font-size: 96px;
+    margin: 0;
+  }
+
+  &__text {
+    font-size: 24px;
+  }
+
+  &__link {
+    color: #5c17d4;
+  }
+}
