@@ -23,6 +23,7 @@ export const Actions = ({
 }: Props) => {
   const { items: cart } = useCart();
   const { items: favorites } = useFavorites();
+  const isAuth = !!localStorage.getItem('currentUser');
 
   return (
     <ul className={cn('actions', className)}>
@@ -73,6 +74,18 @@ export const Actions = ({
               {cart.filter(Boolean).length}
             </span>
           )}
+        </NavLink>
+      </li>
+      <li className="actions__item">
+        <NavLink
+          to={isAuth ? '/' : '/auth?mode=login'}
+          className={({ isActive }) =>
+            cn('actions__link', {
+              'actions__link--active': isActive,
+            })
+          }
+        >
+          <Icon name="user" />
         </NavLink>
       </li>
     </ul>
