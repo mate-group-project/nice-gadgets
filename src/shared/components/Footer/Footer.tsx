@@ -1,10 +1,13 @@
-import React from 'react';
 import './Footer.scss';
 import { Button } from '@base-ui/react';
 import { Icon } from '../Icon';
 import { NavLink } from 'react-router-dom';
 
-export const Footer: React.FC = () => {
+type FooterProps = {
+  theme: string;
+};
+
+export const Footer = ({ theme }: FooterProps) => {
   return (
     <div className="footer">
       <div className="logo">
@@ -12,11 +15,18 @@ export const Footer: React.FC = () => {
           to="/"
           onClick={() => window.scrollTo(0, 0)}
         >
-          <img
-            src="/logo.png"
-            className="log"
-            alt="logo"
-          />
+          {theme === 'light' ?
+            <img
+              src="/dark-logo.png"
+              className="log"
+              alt="logo"
+            />
+          : <img
+              src="/light-logo.png"
+              className="log"
+              alt="logo"
+            />
+          }
         </NavLink>
       </div>
 
@@ -27,6 +37,13 @@ export const Footer: React.FC = () => {
           target="blank"
         >
           github
+        </a>
+
+        <a
+          href="/about"
+          className="contact"
+        >
+          about
         </a>
 
         <a

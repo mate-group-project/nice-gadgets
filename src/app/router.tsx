@@ -9,6 +9,7 @@ import { NotFoundPage } from '@/pages/NotFoundPage';
 import { Contacts } from '@/pages/ContactsPage/Contacts';
 import { RightPage } from '@/pages/RightPage';
 import { CheckoutPage } from '@/pages/CheckoutPage';
+import { AboutUs } from '@/pages/AboutUsPage/AboutUs';
 
 // routes
 export const router = createBrowserRouter([
@@ -59,6 +60,11 @@ export const router = createBrowserRouter([
       {
         path: 'rights',
         element: <RightPage />,
+      },
+
+      {
+        path: 'about',
+        element: <AboutUs />,
       },
     ],
   },

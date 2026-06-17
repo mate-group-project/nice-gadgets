@@ -53,6 +53,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
       </Link>
 
       <Link
+        className="product__card__link"
         to={`/product/${product.id}`}
         target="_blank"
         rel="noreferrer"

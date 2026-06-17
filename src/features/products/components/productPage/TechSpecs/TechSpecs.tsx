@@ -4,10 +4,9 @@ import type { ProductDetails } from '@/features/products/types/Product';
 
 type TechSpecsProps = {
   product: ProductDetails;
-}
+};
 
 export const TechSpecs = ({ product }: TechSpecsProps) => {
-
   const specsConfig = formatProdductSpecs(product);
 
   return (
@@ -15,7 +14,10 @@ export const TechSpecs = ({ product }: TechSpecsProps) => {
       <h2 className="tech-specs__title">Tech specs</h2>
       <ul className="tech-specs__list">
         {specsConfig.map((spec) => (
-          <li key={spec.label} className="tech-specs__item">
+          <li
+            key={spec.label}
+            className="tech-specs__item"
+          >
             <span className="tech-specs__name">{spec.label}</span>
             <span className="tech-specs__value">{spec.value}</span>
           </li>

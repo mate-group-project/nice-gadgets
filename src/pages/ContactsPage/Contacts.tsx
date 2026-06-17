@@ -5,6 +5,7 @@ import tiger from './images/tiger.png';
 import panda from './images/panda.png';
 import tigresse from './images/tigresse.png';
 import monkey from './images/monkey.png';
+import { Breadcrumbs } from '../Breadcrumbs';
 
 export type Person = {
   id: number;
@@ -76,65 +77,66 @@ export const Contacts: React.FC = () => {
   return (
     <main className="contacts">
       <div className="contacts__container">
+        <Breadcrumbs crumbs={[{ label: 'Contacts' }]} />
         <h1 className="contacts__title">Contacts</h1>
-      <div className="contacts__list">
-        {people.map((person) => (
-          <article
-            key={person.id}
-            className="contact__card"
-          >
-            <img
-              className="contact__card-image"
-              src={person.avatar}
-              alt={`${person.fullName}'s avatar`}
-            />
+        <div className="contacts__list">
+          {people.map((person) => (
+            <article
+              key={person.id}
+              className="contact__card"
+            >
+              <img
+                className="contact__card-image"
+                src={person.avatar}
+                alt={`${person.fullName}'s avatar`}
+              />
 
-            <h2 className="contact__card-title">{person.fullName}</h2>
+              <h2 className="contact__card-title">{person.fullName}</h2>
 
-            <ul className="contact__card-info-list">
-              <li className="contact__card-info">
-                <a
-                  className="contact__card-info-value"
-                  href={person.github}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  GitHub profile
-                </a>
-              </li>
+              <ul className="contact__card-info-list">
+                <li className="contact__card-info">
+                  <a
+                    className="contact__card-info-value"
+                    href={person.github}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    GitHub profile
+                  </a>
+                </li>
 
-              <li className="contact__card-info">
-                <a
-                  className="contact__card-info-value"
-                  href={person.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  LinkedIn profile
-                </a>
-              </li>
+                <li className="contact__card-info">
+                  <a
+                    className="contact__card-info-value"
+                    href={person.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    LinkedIn profile
+                  </a>
+                </li>
 
-              <li className="contact__card-info">
-                <a
-                  className="contact__card-info-value"
-                  href={`tel:${person.phone}`}
-                >
-                  {person.phone}
-                </a>
-              </li>
+                <li className="contact__card-info">
+                  <a
+                    className="contact__card-info-value"
+                    href={`tel:${person.phone}`}
+                  >
+                    {person.phone}
+                  </a>
+                </li>
 
-              <li className="contact__card-info">
-                <a
-                  className="contact__card-info-value"
-                  href={`mailto:${person.email}`}
-                >
-                  {person.email}
-                </a>
-              </li>
-            </ul>
-          </article>
-        ))}
-      </div>
+                <li className="contact__card-info">
+                  <a
+                    className="contact__card-info-value"
+                    href={`mailto:${person.email}`}
+                  >
+                    {person.email}
+                  </a>
+                </li>
+              </ul>
+            </article>
+          ))}
+        </div>
       </div>
     </main>
   );

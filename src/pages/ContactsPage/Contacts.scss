@@ -15,8 +15,17 @@ $font-weight-semibold: 600;
 $font-weight-bold: 700;
 $font-weight-extrabold: 800;
 
+:root {
+  scroll-behavior: smooth;
+}
+
 .contacts__container {
   @include container;
+
+  .breadcrumbs .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .contacts__list {
@@ -27,11 +36,9 @@ $font-weight-extrabold: 800;
 }
 
 .contacts {
-  margin: 80px 24px 64px;
-
   font-family: var(--font-main);
 
-    &__title {
+  &__title {
     margin-top: 24px;
     margin-bottom: 8px;
     font-size: $font-size-3xl;
@@ -43,10 +50,6 @@ $font-weight-extrabold: 800;
       font-size: $font-size-5xl;
     }
   }
-
-  @include lg-and-up {
-    margin: 80px 31px 80px 33px;
-  }
 }
 
 .contact__card {
@@ -57,7 +60,7 @@ $font-weight-extrabold: 800;
   padding: $space-32;
   width: 100%;
   max-width: 288px;
-  background-color: var(--white);
+  background-color: var(--bg-surface);
   font-family: var(--font-main);
   border-radius: 8px;
   border: 1px solid var(--elements);

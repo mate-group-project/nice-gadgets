@@ -22,7 +22,7 @@
 
     border: 1px solid var(--icons);
     border-radius: 8px;
-    background-color: var(--white);
+    background-color: var(--bg-surface);
     color: var(--primary);
     cursor: pointer;
 
@@ -41,10 +41,12 @@
 
     border: 1px solid var(--elements);
     border-radius: 8px;
-    background-color: var(--white);
+    background-color: var(--bg-surface);
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
 
     white-space: nowrap;
+    max-height: 240px;
+    overflow-y: auto;
   }
 
   &__item {

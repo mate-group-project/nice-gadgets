@@ -6,21 +6,33 @@ $bp-lg: 1200px;
 
 :root {
   --primary: #0f0f11;
+  --primary-carousel-bg: #2f2f33;
   --secondary: #89939a;
   --accent: #4219d0;
   --accent-secondary: #f4ba47;
   --icons: #b4bdc3;
   --elements: #e2e6e9;
   --hover: #fafbfc;
-  --white: #ffffff;
-  --green: #27ae60;
-  --red: #eb5757;
-  --pink: #fcdbc1;
-  --dark-green: #5f7170;
-  --dark-grey: #4c4c4c;
-  --light-grey: #f0f0f0;
+  --bg-surface: #ffffff;
+  --btn-text: #fff;
+  --red-alert: #ff0000;
   --font-main: 'Mont', sans-serif;
   --font-secondary: 'Manrope', sans-serif;
+
+  color-scheme: light;
+}
+
+html[data-theme='dark'] {
+  --primary: #fff;
+  --secondary: #75767f;
+  --accent: #4219d0;
+  --accent-secondary: #f4ba47;
+  --icons: #4a4d58;
+  --elements: #3b3e4a;
+  --hover: #0f1121;
+  --bg-surface: #0f1121;
+
+  color-scheme: dark;
 }
 
 .text--accent-secondary {

@@ -27,12 +27,7 @@ export const CartPage: React.FC = () => {
 
   return (
     <div className="cart-page">
-      <a
-        href="/"
-        className="cart-page__back-link"
-      >
-        Back
-      </a>
+      <a href="/" className="cart-page__back-link">Back</a>
       <h1 className="cart-page__title">Cart</h1>
 
       <div className="cart-page__content">

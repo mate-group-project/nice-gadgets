@@ -1,15 +1,19 @@
 .checkout {
   @include container;
 
-  &_content {
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 24px;
+  h2 {
+    margin-top: 0;
+  }
 
-    section,
-    aside {
-      border: 2px solid black;
-      min-height: 80vh;
+  &_content {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2rem;
+
+    @include lg-and-up {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1.5rem;
     }
   }
 }

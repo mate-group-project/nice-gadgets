@@ -17,7 +17,7 @@ $icon-size-lg: 40px;
   border-radius: 50px;
   border: 1px solid var(--accent);
 
-  color: var(--white);
+  color: var(--btn-text);
   background-color: var(--accent);
 
   font-weight: 700;
@@ -36,20 +36,20 @@ $icon-size-lg: 40px;
   &:not(:disabled):active {
     color: var(--accent);
 
-    background-color: var(--white);
+    background-color: var(--bg-surface);
 
     border-color: var(--elements);
   }
 
   &:disabled {
-    background-color: var(--white);
+    background-color: var(--bg-surface);
     color: var(--icons);
     border-color: var(--elements);
   }
 
   &.is-active {
     color: var(--accent);
-    background-color: var(--white);
+    background-color: var(--bg-surface);
     border-color: var(--elements);
   }
 
@@ -66,7 +66,7 @@ $icon-size-lg: 40px;
     border: 1px solid var(--elements);
 
     color: var(--primary);
-    background-color: var(--white);
+    background-color: var(--bg-surface);
 
     overflow: hidden;
     padding: 2px;
@@ -90,7 +90,7 @@ $icon-size-lg: 40px;
     }
 
     &:not(:disabled):active {
-      color: var(--white);
+      color: var(--bg-surface);
 
       background-color: var(--primary);
     }
@@ -100,7 +100,7 @@ $icon-size-lg: 40px;
     }
 
     &.is-active {
-      color: var(--white);
+      color: var(--bg-surface);
       background-color: var(--primary);
       border: 1px solid var(--primary);
     }

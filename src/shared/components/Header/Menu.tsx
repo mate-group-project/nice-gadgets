@@ -1,6 +1,6 @@
 import { Dialog } from '@base-ui/react/dialog';
 import cn from 'classnames';
-import { useState, useEffect  } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Icon } from '@/shared/components/Icon';
 
@@ -30,7 +30,10 @@ export const Menu = ({ className = '' }: Props) => {
   }, []);
 
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
+    <Dialog.Root
+      open={open}
+      onOpenChange={setOpen}
+    >
       <Dialog.Trigger className={cn('menu', className)}>
         <Icon name="menu" />
       </Dialog.Trigger>
@@ -54,7 +57,11 @@ export const Menu = ({ className = '' }: Props) => {
           <div className="menu__body">
             <Navigation onNavigate={() => setOpen(false)} />
             <div className="menu__footer">
-              <Actions onNavigate={() => setOpen(false)} />
+              <Actions
+                onNavigate={() => setOpen(false)}
+                onToggleTheme={() => {}}
+                theme={''}
+              />
             </div>
           </div>
         </Dialog.Popup>
