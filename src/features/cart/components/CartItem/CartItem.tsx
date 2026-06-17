@@ -1,9 +1,10 @@
 import React from 'react';
-import type { CartItemType } from '../../types';
 import './CartItem.scss';
+import { BASE_URL } from '@/shared/api/endpoints';
+import type { ProductCart } from '@/features/cart/types.ts';
 
 interface CartItemProps {
-  item: CartItemType;
+  item: ProductCart;
   onRemove: (id: string) => void;
   onUpdateQuantity: (id: string, newQuantity: number) => void;
 }
@@ -13,7 +14,7 @@ export const CartItem: React.FC<CartItemProps> = ({
   onRemove,
   onUpdateQuantity,
 }) => {
-  const { id, name, imageUrl, price, quantity } = item;
+  const { id, name, image, price, quantity } = item;
 
   return (
     <article
@@ -44,7 +45,7 @@ export const CartItem: React.FC<CartItemProps> = ({
       </button>
       <div className="cart-item__img-wrapper">
         <img
-          src={imageUrl}
+          src={BASE_URL + '/' + image}
           alt=""
           className="cart-item__img"
         />
