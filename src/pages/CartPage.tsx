@@ -10,8 +10,6 @@ export const CartPage: React.FC = () => {
 
   const navigate = useNavigate();
 
-  console.log(cartProducts);
-
   const handleCheckout = () => {
     navigate('/checkout');
   };
