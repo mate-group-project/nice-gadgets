@@ -6,8 +6,8 @@
   grid-template-rows: auto auto;
   gap: 1rem;
   padding: 1rem;
-  background-color: #ffffff;
-  border: 1px solid #e2e6e9;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--elements);
   border-radius: 8px;
   align-items: center;
 
@@ -22,7 +22,7 @@
     grid-row: 1;
     background: none;
     border: none;
-    color: #b4bdc4;
+    color: var(--secondary);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -31,7 +31,7 @@
     transition: color 0.2s ease;
 
     &:hover {
-      color: #313237;
+      color: var(--primary);
     }
 
     svg {
@@ -69,7 +69,7 @@
     font-weight: 500;
     font-size: 0.875rem;
     line-height: 1.5;
-    color: #313237;
+    color: var(-secondary);
     margin: 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -103,23 +103,23 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    border: 1px solid #e2e6e9;
-    background-color: #ffffff;
+    border: 1px solid var(--elements);
+    background-color: var(--bg-surface);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #313237;
+    color: var(--primary);
     cursor: pointer;
     transition: all 0.2s ease;
 
     &:hover:not(:disabled) {
-      border-color: #313237;
-      background-color: #f4f5f6;
+      border-color: var(--secondary);
+      background-color: var(--hover);
     }
 
     &:disabled {
-      color: #e2e6e9;
-      border-color: #e2e6e9;
+      color: var(--elements);
+      border-color: var(--elements);
       cursor: not-allowed;
     }
 
@@ -133,7 +133,7 @@
     font-family: 'Mont', sans-serif;
     font-weight: 600;
     font-size: 0.875rem;
-    color: #313237;
+    color: var(--primary);
     min-width: 24px;
     text-align: center;
   }
@@ -156,7 +156,7 @@
     font-family: 'Mont', sans-serif;
     font-weight: 700;
     font-size: 1.25rem;
-    color: #313237;
+    color: var(--primary);
     letter-spacing: -0.01em;
   }
 }
