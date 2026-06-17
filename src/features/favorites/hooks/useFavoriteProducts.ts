@@ -21,12 +21,16 @@ export const useFavoriteProducts = () => {
       setError('');
 
       try {
-        const result: { status: string; value?: Product }[] =
-          await Promise.allSettled(
-            favoritesLocal.map((id: string) => getFavouriteProduct(id)),
-          );
+       const result: PromiseSettledResult<Product>[] =
+  await Promise.allSettled(
+    favoritesLocal.map((id: string) => getFavouriteProduct(id)),
+  );
 
-        setFavoritesProducts(result.map((item) => item.value));
+  const fulfilled = result
+  .filter((item) => item.status === 'fulfilled')
+  .map((item) => (item as PromiseFulfilledResult<Product>).value);
+
+        setFavoritesProducts(fulfilled);
       } catch {
         setError('Product was not found');
       } finally {
@@ -34,7 +38,7 @@ export const useFavoriteProducts = () => {
       }
     };
 
-    loadProductCart().then(() => {});
+   loadProductCart().then(() => {});
   }, []);
 
   return {

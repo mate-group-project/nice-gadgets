@@ -1,13 +1,12 @@
 import { useSyncExternalStore } from 'react';
+import type { ProductCart } from '@/features/cart/types.ts';
 
-type Id = string | number;
-
-type StorageListResult = {
-  items: Id[];
-  saveItems: (items: Id[]) => void;
+type StorageListResult<T> = {
+  items: T[];
+  saveItems: (items: T[]) => void;
 };
 
-const createStorageListHook = (key: string) => {
+const createStorageListHook = <T>(key: string) => {
   const subscribe = (callback: () => void) => {
     window.addEventListener(`${key}-updated`, callback);
 
@@ -20,12 +19,12 @@ const createStorageListHook = (key: string) => {
     return localStorage.getItem(key) || '[]';
   };
 
-  return function useStorageList(): StorageListResult {
+  return function useStorageList(): StorageListResult<T> {
     const data = useSyncExternalStore(subscribe, getSnapshot);
 
-    const items: Id[] = JSON.parse(data);
+    const items: T[] = JSON.parse(data);
 
-    const saveItems = (updated: Id[]) => {
+    const saveItems = (updated: T[]) => {
       localStorage.setItem(key, JSON.stringify(updated));
 
       window.dispatchEvent(new Event(`${key}-updated`));
@@ -38,6 +37,8 @@ const createStorageListHook = (key: string) => {
   };
 };
 
-export const useCart = createStorageListHook('cart');
+type FavoriteItem = string | number;
 
-export const useFavorites = createStorageListHook('favorites');
+export const useCart = createStorageListHook<ProductCart>('cartStore');
+
+export const useFavorites = createStorageListHook<FavoriteItem>('favorites');

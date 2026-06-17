@@ -1,43 +1,44 @@
-import { useEffect, useState } from 'react';
-import type { Product } from '@/features/products/types/Product.ts';
-import { getProductCart } from '@/features/cart/api/cart.ts';
+import { useCart } from '@/features/products/hooks/useLocalStorageList.ts';
+import type { ProductCart } from '@/features/cart/types.ts';
+import { useState } from 'react';
 
 export const useCartProducts = () => {
-  const [cartProducts, setCartProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const { items: cart, saveItems } = useCart();
 
-  useEffect(() => {
-    const cartLocal = JSON.parse(localStorage.getItem('cart') || '[]');
+  const [products, setProducts] = useState<ProductCart[]>(cart);
 
-    if (cartLocal.length === 0) {
-      return;
-    }
+  const deleteItem = (id: ProductCart['id']) => {
+    saveItems(cart.filter((item) => String(item.id) !== String(id)));
 
-    const loadProductCart = async () => {
-      setIsLoading(true);
-      setError('');
+    setProducts((current) =>
+      current.filter((item) => String(item.id) !== String(id)),
+    );
+  };
 
-      try {
-        const result: { status: string; value?: Product }[] =
-          await Promise.allSettled(
-            cartLocal.map((id: string) => getProductCart(id)),
-          );
+  const changeCount = (
+    id: ProductCart['id'],
+    quantity: ProductCart['quantity'],
+  ) => {
+    saveItems(
+      cart.map((item) =>
+        String(item.id) === String(id) ? { ...item, quantity } : item,
+      ),
+    );
 
-        setCartProducts(result.map((item) => item.value));
-      } catch {
-        setError('Product was not found');
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    setProducts((current) =>
+      current.map((item) => (item.id === id ? { ...item, quantity } : item)),
+    );
+  };
 
-    loadProductCart().then(() => {});
-  }, []);
+  const clearCart = () => {
+    saveItems([]);
+    setProducts([]);
+  };
 
   return {
-    cartProducts,
-    isLoading,
-    error,
+    products,
+    deleteItem,
+    changeCount,
+    clearCart,
   };
 };

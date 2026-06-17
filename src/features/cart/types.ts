@@ -1,7 +1,9 @@
-export interface CartItemType {
+export type ProductCart = {
   id: string;
+  category: 'phones' | 'tablets' | 'accessories';
   name: string;
-  imageUrl: string;
+  fullPrice: number;
   price: number;
+  image: string;
   quantity: number;
-}
+};
