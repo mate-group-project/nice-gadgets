@@ -41,6 +41,7 @@ export const Actions = ({
           <Icon name={theme === 'light' ? 'moon' : 'sun'} />
         </button>
       </li>
+
       <li className="actions__item">
         <NavLink
           to="/favorites"

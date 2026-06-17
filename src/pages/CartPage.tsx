@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 export const CartPage: React.FC = () => {
   const { cartProducts, isLoading } = useCartProducts();
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
-  // const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
   const navigate = useNavigate();
 
@@ -36,6 +35,7 @@ export const CartPage: React.FC = () => {
         quantity: savedQuantities[product.id] || 1,
       }));
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCartItems(validProducts);
   }, [cartProducts]);
 

@@ -264,7 +264,7 @@ export const CheckoutForm = () => {
 
   return (
     <>
-      <form 
+      <form
         onSubmit={handleSubmit}
         className='order_form'
       >
@@ -272,23 +272,23 @@ export const CheckoutForm = () => {
         <h2>Contact information</h2>
 
         <div className="field">
-          <input 
-            name="firstName" 
-            placeholder="First name" 
+          <input
+            name="firstName"
+            placeholder="First name"
             value={form.firstName}
             onChange={handleChange}
             className="form__field"
           />
-          {errors.firstName && <p 
+          {errors.firstName && <p
             className="error"
             ref={errors.firstName ? firstErrorRef : null}
           >{errors.firstName}</p>}
         </div>
-              
+
         <div className="field">
-          <input 
-            name="lastName" 
-            placeholder="Last name" 
+          <input
+            name="lastName"
+            placeholder="Last name"
             value={form.lastName}
             onChange={handleChange}
             className="form__field"
@@ -297,22 +297,22 @@ export const CheckoutForm = () => {
         </div>
 
         <div className="field">
-          <input 
-            name="email" 
-            placeholder="Email" 
+          <input
+            name="email"
+            placeholder="Email"
             value={form.email}
-            onChange={handleChange} 
+            onChange={handleChange}
             className="form__field"
           />
           {errors.email && <p className="error">{errors.email}</p>}
         </div>
-        
+
         <div className="field">
-          <input 
-            name="phone" 
-            placeholder="Phone" 
+          <input
+            name="phone"
+            placeholder="Phone"
             value={form.phone}
-            onChange={handleChange} 
+            onChange={handleChange}
             className="form__field"
           />
           {errors.phone && <p className="error">{errors.phone}</p>}
@@ -356,7 +356,7 @@ export const CheckoutForm = () => {
             </div>
           )}
         </div>
-        
+
         <div className='delivery__method'>
           <label
             className={`radio__item ${
@@ -369,7 +369,7 @@ export const CheckoutForm = () => {
               checked={deliveryType === 'delivery'}
               onChange={() => setDeliveryType('delivery')}
             />
-            
+
             <span className="radio__label">Nova Poshta delivery</span>
           </label>
 
@@ -503,8 +503,8 @@ export const CheckoutForm = () => {
         </div>
 
         {/* SUBMIT */}
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="button"
           style={{ width: '180px' }}
         >
