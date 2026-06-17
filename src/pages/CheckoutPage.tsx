@@ -10,7 +10,6 @@ export const CheckoutPage = () => {
 
       <div className="checkout_content">
         <CheckoutForm />
-
         <OrderSummary />
       </div>
     </div>

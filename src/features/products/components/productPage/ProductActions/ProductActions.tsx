@@ -36,13 +36,24 @@ export const ProductActions = ({ product }: ProductActionsProps) => {
   const { items: favorites, saveItems: saveFavorites } = useFavorites();
   const specsConfig = formatProdductSpecs(product);
 
-  const isAdded = cart.includes(product.id);
+  const isAdded = cart.map((item) => item.id).includes(product.id);
   const isFavorite = favorites.includes(product.id);
 
   const addToCart = () => {
-    if (cart.includes(product.id)) return;
+    if (isAdded) return;
 
-    saveItems([...cart, product.id]);
+    saveItems([
+      ...cart,
+      {
+        id: product.id,
+        category: product.category,
+        name: product.name,
+        fullPrice: product.priceRegular,
+        price: product.priceDiscount,
+        image: product.images[0],
+        quantity: 1,
+      },
+    ]);
   };
 
   const toggleFavorite = () => {

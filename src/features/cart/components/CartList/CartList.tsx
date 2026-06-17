@@ -1,10 +1,10 @@
 import React from 'react';
-import type { CartItemType } from '../../types';
 import { CartItem } from '../CartItem/CartItem';
 import './CartList.scss';
+import type { ProductCart } from '@/features/cart/types.ts';
 
 interface CartListProps {
-  items: CartItemType[];
+  items: ProductCart[];
   onRemove: (id: string) => void;
   onUpdateQuantity: (id: string, newQuantity: number) => void;
 }
