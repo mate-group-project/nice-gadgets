@@ -1,55 +1,73 @@
-// import { Button } from "@base-ui/react";
-// import './PickupPointsSection.scss';
-// import { useState } from "react";
-// // import type { PickupPoint } from "../types/PickupPoint";
-// import { getPickupPoints } from '../api//getPickupPoints.ts';
-// import { PickupPointsMap } from "./PickupPointsMap.tsx";
+import { Button } from '@base-ui/react';
+import './PickupPointsSection.scss';
+import { useEffect, useRef, useState } from 'react';
+import type { PickupPoint } from '../types/PickupPoint';
+import { getPickupPoints } from '../api/getPickupPoints.ts';
+import { PickupPointsMap } from './PickupPointsMap.tsx';
 
-// export const PickupPointsSection = () => {
-//   const [isOpen, setIsOpen] = useState(false);
-//   const [pickupPoints, setPickupPoints] = useState([]);
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState<string | null>(null);
+export const PickupPointsSection = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [pickupPoints, setPickupPoints] = useState<PickupPoint[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const mapRef = useRef<HTMLDivElement | null>(null);
 
-//   const loadPickupPoints = async () => {
-//     setLoading(true);
-//     setError(null);
+  const loadPickupPoints = async () => {
+    setLoading(true);
+    setError(null);
 
-//     try {
-//       const response = await getPickupPoints();
-//       setPickupPoints(response.data);
-//     } catch {
-//       setError('Failed to load pickup points');
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
+    try {
+      // const language: 'en' | 'uk' = 'en';
+      const response = await getPickupPoints();
 
-//   const handleOpenMap = () => {
-//     setIsOpen(true);
-//     loadPickupPoints();
-//   };
+      setPickupPoints(response);
+      setHasLoaded(true);
+    } catch {
+      setError('Failed to load pickup points');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-//   return (
-//     <>
-//       <Button
-//       className="button about__button"
-//       onClick={handleOpenMap}
-//     >
-//       Pickup and return points
-//       </Button>
+  const handleToggleMap = () => {
+    const shouldOpen = !isOpen;
 
-//       {isOpen && (
-//       <div>
-//         {loading && <p>Loading...</p>}
+    setIsOpen(shouldOpen);
 
-//         {error && <p>{error}</p>}
+    if (shouldOpen && !hasLoaded) {
+      loadPickupPoints();
+    }
+  };
 
-//         {!loading && !error && (
-//           <PickupPointsMap points={pickupPoints} />
-//         )}
-//       </div>
-//     )}
-//     </>
-//   );
-// };
+  useEffect(() => {
+    if (!isOpen) return;
+    if (pickupPoints.length === 0) return;
+
+    mapRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }, [isOpen, pickupPoints]);
+
+  return (
+    <>
+      <Button
+        className="button about__button"
+        onClick={handleToggleMap}
+      >
+        Pickup and return points
+      </Button>
+
+      {isOpen && (
+        <div ref={mapRef}>
+          {loading && <p>Loading...</p>}
+
+          {error && <p>{error}</p>}
+
+          {!loading && !error && <PickupPointsMap points={pickupPoints} />}
+        </div>
+      )}
+    </>
+  );
+};

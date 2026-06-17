@@ -20,11 +20,13 @@ function App() {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
-
   return (
     <div className="app">
       <div className="app__header">
-        <Header theme={theme} onToggleTheme={toggleTheme}/>
+        <Header
+          theme={theme}
+          onToggleTheme={toggleTheme}
+        />
       </div>
 
       <ScrollToTop />
@@ -34,7 +36,7 @@ function App() {
       </div>
 
       <div className="app__footer">
-        <Footer theme={theme}/>
+        <Footer theme={theme} />
       </div>
     </div>
   );

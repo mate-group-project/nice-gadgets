@@ -1,12 +1,12 @@
-// import { Button } from '@base-ui/react';
-import { Button } from '@base-ui/react';
+import { Breadcrumbs } from '../Breadcrumbs';
 import './AboutUs.scss';
-// import { PickupPointsSection } from '@/features/pickup-points-main/components/PickupPointsSection';
+import { PickupPointsSection } from '@/features/pickup-points-main/components/PickupPointsSection';
 
 export const AboutUs: React.FC = () => {
   return (
     <main className="about">
       <div className="about__container">
+        <Breadcrumbs crumbs={[{ label: 'About us' }]} />
         <h1 className="about__page-title">About us</h1>
         <div className="about__content">
           <h2 className="about__heading">Small dreams and grand plans</h2>
@@ -83,13 +83,7 @@ export const AboutUs: React.FC = () => {
             something they need.`}
           </p>
           <h2 className="about__heading">We are waiting for you here</h2>
-          <Button
-            className="button about__button"
-            onClick={() => {}}
-          >
-            Pickup and return points
-          </Button>
-          {/* <PickupPointsSection /> */}
+          <PickupPointsSection />
         </div>
       </div>
     </main>

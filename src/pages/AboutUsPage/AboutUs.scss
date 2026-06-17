@@ -1,65 +1,30 @@
-$space-1: 1px;
-$space-8: 8px;
-$space-16: 16px;
-$space-32: 32px;
-
-$font-size-xs: 12px;
-$font-size-sm: 14px;
-$font-size-lg: 22px;
-$font-size-3xl: 32px;
-$font-size-5xl: 48px;
-
-$font-weight-regular: 400;
-$font-weight-medium: 500;
-$font-weight-semibold: 600;
-$font-weight-bold: 700;
-$font-weight-extrabold: 800;
-
-$space-1: 1px;
-$space-8: 8px;
-$space-16: 16px;
-$space-32: 32px;
-
-$font-size-xs: 12px;
-$font-size-sm: 14px;
-$font-size-lg: 22px;
-$font-size-3xl: 32px;
-$font-size-5xl: 48px;
-
-$font-weight-regular: 400;
-$font-weight-medium: 500;
-$font-weight-semibold: 600;
-$font-weight-bold: 700;
-$font-weight-extrabold: 800;
+:root {
+  scroll-behavior: smooth;
+}
 
 .about__container {
   @include container;
+
+  .breadcrumbs .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .about {
-  margin: 80px 24px 64px;
-
   font-family: var(--font-main);
 
   &__page-title {
-    margin-top: 24px;
     margin-bottom: 8px;
-    font-size: $font-size-3xl;
-    font-weight: $font-weight-extrabold;
+    font-size: 32px;
+    font-weight: 800;
     color: var(--primary);
 
     @include sm-and-up {
       margin-top: 40px;
-      font-size: $font-size-5xl;
+      font-size: 48px;
     }
   }
-
-  @include lg-and-up {
-    margin: 80px 31px 80px 33px;
-  }
-
-  // &__content {
-  // }
 
   &__heading {
     color: var(--primary);
@@ -99,8 +64,4 @@ $font-weight-extrabold: 800;
       color: var(--secondary);
     }
   }
-
-  // &__button {
-  //   width: 256px;
-  // }
 }

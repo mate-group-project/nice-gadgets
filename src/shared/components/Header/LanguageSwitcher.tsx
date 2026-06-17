@@ -8,7 +8,9 @@ interface LanguageSwitcherProps {
   onLanguageSelect?: () => void;
 }
 
-export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ onLanguageSelect }) => {
+export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
+  onLanguageSelect,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState<Language>(() => {
     return (localStorage.getItem('app_lang') as Language) || 'en';
@@ -18,7 +20,10 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ onLanguageSe
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -36,21 +41,32 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ onLanguageSe
   };
 
   const languages = {
-    en: { label: 'English', flagUrl: 'https://hatscripts.github.io/circle-flags/flags/gb.svg' },
-    ua: { label: 'Українська', flagUrl: 'https://hatscripts.github.io/circle-flags/flags/ua.svg' },
+    en: {
+      label: 'English',
+      flagUrl: 'https://hatscripts.github.io/circle-flags/flags/gb.svg',
+    },
+    ua: {
+      label: 'Українська',
+      flagUrl: 'https://hatscripts.github.io/circle-flags/flags/ua.svg',
+    },
   };
 
   return (
-    <div className="lang-switcher" ref={dropdownRef}>
-      <button 
+    <div
+      className="lang-switcher"
+      ref={dropdownRef}
+    >
+      <button
         type="button"
-        className={cn('lang-switcher__trigger', { 'lang-switcher__trigger--open': isOpen })}
+        className={cn('lang-switcher__trigger', {
+          'lang-switcher__trigger--open': isOpen,
+        })}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <img 
-          src={languages[currentLang].flagUrl} 
-          alt={currentLang} 
-          className="lang-switcher__current-flag" 
+        <img
+          src={languages[currentLang].flagUrl}
+          alt={currentLang}
+          className="lang-switcher__current-flag"
         />
         <span className="lang-switcher__arrow">▼</span>
       </button>
@@ -66,12 +82,14 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ onLanguageSe
               })}
               onClick={() => handleLangChange(lang)}
             >
-              <img 
-                src={languages[lang].flagUrl} 
-                alt={lang} 
-                className="lang-switcher__dropdown-flag" 
+              <img
+                src={languages[lang].flagUrl}
+                alt={lang}
+                className="lang-switcher__dropdown-flag"
               />
-              <span className="lang-switcher__option-label">{languages[lang].label}</span>
+              <span className="lang-switcher__option-label">
+                {languages[lang].label}
+              </span>
             </button>
           ))}
         </div>

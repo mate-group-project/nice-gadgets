@@ -16,19 +16,20 @@ $bp-lg: 1200px;
   --btn-text: #fff;
   --font-main: 'Mont', sans-serif;
   --font-secondary: 'Manrope', sans-serif;
+  --red-alert: red;
 
   color-scheme: light;
 }
 
-html[data-theme="dark"] {
-   --primary: #fff;
-  --secondary: #75767F;
+html[data-theme='dark'] {
+  --primary: #fff;
+  --secondary: #75767f;
   --accent: #4219d0;
   --accent-secondary: #f4ba47;
-  --icons: #4A4D58;
-  --elements: #3B3E4A;
-  --hover: #0F1121;
-  --bg-surface: #0F1121;
+  --icons: #4a4d58;
+  --elements: #3b3e4a;
+  --hover: #0f1121;
+  --bg-surface: #0f1121;
 
   color-scheme: dark;
 }

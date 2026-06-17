@@ -57,7 +57,11 @@ export const Menu = ({ className = '' }: Props) => {
           <div className="menu__body">
             <Navigation onNavigate={() => setOpen(false)} />
             <div className="menu__footer">
-              <Actions onNavigate={() => setOpen(false)} />
+              <Actions
+                onNavigate={() => setOpen(false)}
+                onToggleTheme={() => {}}
+                theme={''}
+              />
             </div>
           </div>
         </Dialog.Popup>

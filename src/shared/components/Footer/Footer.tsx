@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 type FooterProps = {
   theme: string;
-}
+};
 
 export const Footer = ({ theme }: FooterProps) => {
   return (
@@ -15,19 +15,18 @@ export const Footer = ({ theme }: FooterProps) => {
           to="/"
           onClick={() => window.scrollTo(0, 0)}
         >
-          {theme === 'light' ? (
+          {theme === 'light' ?
             <img
               src="/dark-logo.png"
               className="log"
               alt="logo"
             />
-          ) : (
-            <img
+          : <img
               src="/light-logo.png"
               className="log"
               alt="logo"
             />
-          )}
+          }
         </NavLink>
       </div>
 
@@ -38,6 +37,13 @@ export const Footer = ({ theme }: FooterProps) => {
           target="blank"
         >
           github
+        </a>
+
+        <a
+          href="/about"
+          className="contact"
+        >
+          about
         </a>
 
         <a

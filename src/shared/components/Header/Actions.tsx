@@ -15,7 +15,12 @@ interface Props {
   onToggleTheme: () => void;
 }
 
-export const Actions = ({ className = '', onNavigate, theme, onToggleTheme }: Props) => {
+export const Actions = ({
+  className = '',
+  onNavigate,
+  theme,
+  onToggleTheme,
+}: Props) => {
   const { items: cart } = useCart();
   const { items: favorites } = useFavorites();
 
