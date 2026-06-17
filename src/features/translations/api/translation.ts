@@ -1,6 +1,6 @@
 export type Language = 'en' | 'uk';
 
-export type TranslationData = Record<string, unknown>;
+export type TranslationData = Record<string, string>;
 
 type TranslationResponse = {
   id: Language;
@@ -20,9 +20,7 @@ export const getTranslations = async (
 
   const data: TranslationResponse[] = await response.json();
 
-  const selectedTranslations = data.find(
-    item => item.id === language,
-  );
+  const selectedTranslations = data.find((item) => item.id === language);
 
   return selectedTranslations?.data ?? {};
 };

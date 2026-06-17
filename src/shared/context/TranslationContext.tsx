@@ -1,11 +1,11 @@
-import {
+import React, {
   createContext,
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from 'react';
-import { getTranslations, type Language } from '@/features/translations/api/translation'
+import { getTranslations } from '@/features/translations/api/translation';
 
 type TranslationContextType = {
   language: string;
@@ -18,6 +18,7 @@ type Props = {
   children: React.ReactNode;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const TranslationContext = createContext<
   TranslationContextType | undefined
 >(undefined);
@@ -39,6 +40,8 @@ export const TranslationProvider = ({ children }: Props) => {
 
         const data = await getTranslations(language);
 
+        console.log(data);
+
         setTranslations(data);
       } catch (error) {
         console.error('Failed to load translations:', error);
@@ -47,12 +50,20 @@ export const TranslationProvider = ({ children }: Props) => {
       }
     };
 
-    loadTranslations();
+    loadTranslations().then(() => {});
   }, [language]);
 
   const t = useCallback(
     (key: string) => {
-      return translations[key] ?? key;
+      const value = key.split('.').reduce<unknown>((acc, part) => {
+        if (acc && typeof acc === 'object' && part in acc) {
+          return (acc as Record<string, unknown>)[part];
+        }
+
+        return undefined;
+      }, translations);
+
+      return typeof value === 'string' ? value : key;
     },
     [translations],
   );
