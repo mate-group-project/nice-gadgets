@@ -8,11 +8,16 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('app-item') || 'light';
+    const savedTheme = localStorage.getItem('app-theme');
+
+    return (savedTheme === 'dark' || savedTheme === 'light') ? savedTheme : 'light';
   });
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    const root = document.documentElement; 
+
+    root.setAttribute('data-theme', theme);
+
     localStorage.setItem('app-theme', theme);
   }, [theme]);
 
