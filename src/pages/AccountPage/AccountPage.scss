@@ -1,0 +1,118 @@
+.account-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 20px;
+  font-family: system-ui, sans-serif;
+  color: #111;
+  background: #fafafa;
+}
+
+
+
+.account-page__title {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+}
+
+
+.account-page__products {
+  margin-bottom: 50px;
+}
+
+.account-page__products-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.account-page__product {
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #eee;
+  overflow: hidden;
+
+  transition: 0.2s ease;
+}
+
+.account-page__product:hover {
+  transform: translateY(-3px);
+  border-color: #ddd;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.account-page__product img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.account-page__product span {
+  display: block;
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.account-page__product span:last-child {
+  font-weight: 600;
+}
+
+.account-page__password {
+  max-width: 360px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+}
+
+
+.account-page__password form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.account-page__password input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 14px;
+}
+
+.account-page__password input:focus {
+  border-color: #111;
+}
+
+
+.account-page__password button {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  background: #111;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.account-page__password button:hover {
+  background: #333;
+}
+
+.account-page__password button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+.account-page__error {
+  margin-top: 10px;
+  color: #d12d35;
+  font-size: 13px;
+}

@@ -1,7 +1,8 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import { Icon } from '@/shared/components/Icon';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { useAuthUser } from '@/shared/hooks/useAuthUser';
 import './Actions.scss';
 import {
   useCart,
@@ -23,7 +24,9 @@ export const Actions = ({
 }: Props) => {
   const { items: cart } = useCart();
   const { items: favorites } = useFavorites();
-  const isAuth = !!localStorage.getItem('currentUser');
+
+  const navigate = useNavigate();
+  const user = useAuthUser();
 
   return (
     <ul className={cn('actions', className)}>
@@ -76,18 +79,45 @@ export const Actions = ({
           )}
         </NavLink>
       </li>
-      <li className="actions__item">
-        <NavLink
-          to={isAuth ? '/' : '/auth?mode=login'}
-          className={({ isActive }) =>
-            cn('actions__link', {
-              'actions__link--active': isActive,
-            })
-          }
-        >
-          <Icon name="user" />
-        </NavLink>
-      </li>
+      {user ?
+        <li className="actions__item actions__profile">
+          <button
+            type="button"
+            className="actions__link actions__profile-trigger"
+          >
+            <Icon name="user" />
+          </button>
+          <div className="actions__dropdown">
+            <div className="actions__dropdown-user">
+              {user.customer?.firstName} {user.customer?.lastName}
+            </div>
+            <NavLink
+              to="/account"
+              className="actions__dropdown-link"
+            >
+              My Profile
+            </NavLink>
+            <button
+              type="button"
+              className="actions__dropdown-btn"
+              onClick={() => {
+                localStorage.removeItem('currentUser');
+                window.location.href = '/';
+              }}
+            >
+              Log out
+            </button>
+          </div>
+        </li>
+      : <li className="actions__item">
+          <NavLink
+            to="/auth?mode=login"
+            className="actions__link"
+          >
+            <Icon name="user" />
+          </NavLink>
+        </li>
+      }
     </ul>
   );
 };
