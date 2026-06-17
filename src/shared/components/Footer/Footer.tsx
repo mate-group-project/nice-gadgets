@@ -1,7 +1,7 @@
 import './Footer.scss';
 import { Button } from '@base-ui/react';
 import { Icon } from '../Icon';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 type FooterProps = {
   theme: string;
@@ -31,34 +31,34 @@ export const Footer = ({ theme }: FooterProps) => {
       </div>
 
       <div className="info">
-        <a
-          href="https://github.com/mate-group-project/nice-gadgets/tree/main"
+        <Link
+          to="https://github.com/mate-group-project/nice-gadgets/tree/main"
           className="contact"
           target="blank"
         >
           github
-        </a>
+        </Link>
 
-        <a
-          href="/about"
+        <Link
+          to="/about"
           className="contact"
         >
           about
-        </a>
+        </Link>
 
-        <a
-          href="/contacts"
+        <Link
+          to="/contacts"
           className="contact"
         >
           contacts
-        </a>
+        </Link>
 
-        <a
-          href="/rights"
+        <Link
+          to="/rights"
           className="contact"
         >
           rights
-        </a>
+        </Link>
       </div>
       <div className="footer__container">
         <a

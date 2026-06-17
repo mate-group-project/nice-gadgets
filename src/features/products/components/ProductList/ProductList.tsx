@@ -16,7 +16,7 @@ export const ProductList = ({ products, isLoading, errorMessage }: Props) => {
 
   const skeleton = Array(12).fill(null);
 
-  if (products.length === 0 || isLoading)
+  if (isLoading) {
     return (
       <div className="models">
         {skeleton.map((_, i) => (
@@ -24,6 +24,16 @@ export const ProductList = ({ products, isLoading, errorMessage }: Props) => {
         ))}
       </div>
     );
+  }
+
+  if (products.length === 0) {
+    return (
+      <div className="models__empty">
+        <p className="models__empty-title">No items found</p>
+        <p className="models__empty-text">You haven't added anything yet</p>
+      </div>
+    );
+  }
 
   return (
     <div className="models">

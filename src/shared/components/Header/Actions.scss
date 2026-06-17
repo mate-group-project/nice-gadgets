@@ -53,7 +53,15 @@ $space-x-lg: 26px;
     position: absolute;
     top: 17px;
     left: 32px;
+  
+
+    @media (max-width:1199px) {
+    top: 7px;
+    left: 23px;
+    }
   }
+
+ 
 
   &__link {
     position: relative;
