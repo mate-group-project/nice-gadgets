@@ -4,13 +4,6 @@ import { Icon } from '../Icon';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from '@/features/translations/hooks/useTranslation.ts';
 
-const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
-};
-
 type FooterProps = {
   theme: string;
 };
@@ -23,7 +16,7 @@ export const Footer = ({ theme }: FooterProps) => {
       <div className="logo">
         <NavLink
           to="/"
-          onClick={scrollToTop}
+           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           {theme === 'light' ?
             <img
@@ -72,7 +65,7 @@ export const Footer = ({ theme }: FooterProps) => {
       </div>
       <div className="footer__container">
         <a
-          onClick={scrollToTop}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           style={{ cursor: 'pointer' }}
           className="back"
         >
@@ -80,7 +73,7 @@ export const Footer = ({ theme }: FooterProps) => {
         </a>
         <Button
           className="button__icon button--lg"
-          onClick={scrollToTop}
+           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           {' '}
           <Icon name="chevronUp" />{' '}
