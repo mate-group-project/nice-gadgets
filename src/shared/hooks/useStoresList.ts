@@ -19,7 +19,7 @@ export const useStores = () => {
         const block = res.find((item) => item.id === language);
 
         if (block) {
-          setStores(block.data);
+          setStores(block?.data);
         } else {
           setStores([]);
         }
