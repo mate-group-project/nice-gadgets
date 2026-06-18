@@ -1,5 +1,6 @@
 import React from 'react';
 import './CartSummary.scss';
+import { useTranslation } from '@/features/translations/hooks/useTranslation.ts';
 
 interface CartSummaryProps {
   totalPrice: number;
@@ -12,6 +13,8 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
   totalItems,
   onCheckout,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <section
       className="cart-summary"
@@ -21,13 +24,13 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
         id="summary-heading"
         className="is-sr-only"
       >
-        Order Summary
+        {t('cart.orderSummary')}
       </h2>
 
       <div className="cart-summary__price-container">
         <span className="cart-summary__total-price">${totalPrice}</span>
         <span className="cart-summary__count">
-          Total for {totalItems} {totalItems === 1 ? 'item' : 'items'}
+          {t('cart.totalFor')} {totalItems} {totalItems === 1 ? (t('cart.item') || 'item') : (t('cart.items') || 'items')}
         </span>
       </div>
 
@@ -41,7 +44,7 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
         className="button cart-summary__checkout-btn"
         onClick={onCheckout}
       >
-        Checkout
+        {t('cart.checkout')}
       </button>
     </section>
   );

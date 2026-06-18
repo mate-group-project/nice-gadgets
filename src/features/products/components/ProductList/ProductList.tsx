@@ -2,6 +2,7 @@ import type { Product } from '@/features/products/types/Product.ts';
 import { ProductCard } from '@/features/products/components/ProductCard';
 import { ProductCartSkeleton } from '@/features/products/components/ProductCard/ProductCartSkeleton.tsx';
 import './ProductList.scss';
+import { useTranslation } from '@/features/translations/hooks/useTranslation';
 
 interface Props {
   products: Product[];
@@ -10,6 +11,8 @@ interface Props {
 }
 
 export const ProductList = ({ products, isLoading, errorMessage }: Props) => {
+  const { t } = useTranslation();
+
   if (errorMessage) {
     return errorMessage;
   }
@@ -29,8 +32,8 @@ export const ProductList = ({ products, isLoading, errorMessage }: Props) => {
   if (products.length === 0) {
     return (
       <div className="models__empty">
-        <p className="models__empty-title">No items found</p>
-        <p className="models__empty-text">You haven't added anything yet</p>
+        <p className="models__empty-title">{t('products.notFound') || 'No items found'}</p>
+        <p className="models__empty-text">{t('products.emptyList') || "You haven't added anything yet"}</p>
       </div>
     );
   }

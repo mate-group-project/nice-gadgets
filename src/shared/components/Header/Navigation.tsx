@@ -1,6 +1,7 @@
 import { NavLink, useSearchParams } from 'react-router-dom';
 import cn from 'classnames';
 import './Navigation.scss';
+import { useTranslation } from '@/features/translations/hooks/useTranslation.ts';
 
 interface Props {
   className?: string;
@@ -10,6 +11,7 @@ interface Props {
 export const Navigation = ({ className = '', onNavigate }: Props) => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category');
+  const { t } = useTranslation();
 
   return (
     <ul className={cn('nav', className)}>
@@ -23,7 +25,7 @@ export const Navigation = ({ className = '', onNavigate }: Props) => {
           }
           onClick={onNavigate}
         >
-          Home
+          {t('header.home')}
         </NavLink>
       </li>
       <li className="nav__item">
@@ -34,7 +36,7 @@ export const Navigation = ({ className = '', onNavigate }: Props) => {
           })}
           onClick={onNavigate}
         >
-          Phones
+          {t('header.phones')}
         </NavLink>
       </li>
       <li className="nav__item">
@@ -45,7 +47,7 @@ export const Navigation = ({ className = '', onNavigate }: Props) => {
           })}
           onClick={onNavigate}
         >
-          Tablets
+          {t('header.tablets')}
         </NavLink>
       </li>
       <li className="nav__item">
@@ -56,7 +58,7 @@ export const Navigation = ({ className = '', onNavigate }: Props) => {
           })}
           onClick={onNavigate}
         >
-          Accessories
+          {t('header.accessories')}
         </NavLink>
       </li>
     </ul>

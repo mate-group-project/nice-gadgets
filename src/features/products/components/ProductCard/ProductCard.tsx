@@ -7,6 +7,7 @@ import { BASE_URL } from '@/shared/api/endpoints';
 import classNames from 'classnames';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart, useFavorites } from '../../hooks/useLocalStorageList';
+import { useTranslation } from '@/features/translations/hooks/useTranslation';
 
 type Props = {
   product: Product;
@@ -14,10 +15,9 @@ type Props = {
 
 export const ProductCard: React.FC<Props> = ({ product }) => {
   const { items: cart, saveItems } = useCart();
-
   const { items: favorites, saveItems: saveFavorites } = useFavorites();
-
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const isAdded = cart.map((item) => item.id).includes(product.id);
 
@@ -35,7 +35,6 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   const toggleFavorite = () => {
     if (isFavorite) {
       saveFavorites(favorites.filter((id) => id !== product.id));
-
       return;
     }
 
@@ -70,17 +69,17 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
       <section className="product__card__specs">
         <p className="product__card__spec">
-          <span className="product__card__spec-label">Screen</span>
+          <span className="product__card__spec-label">{t('product.screen')}</span>
           <span className="product__card__spec-value">{product.screen}</span>
         </p>
 
         <p className="product__card__spec">
-          <span className="product__card__spec-label">Capacity</span>
+          <span className="product__card__spec-label">{t('product.capacityLabel') || 'Capacity'}</span>
           <span className="product__card__spec-value">{product.capacity}</span>
         </p>
 
         <p className="product__card__spec">
-          <span className="product__card__spec-label">RAM</span>
+          <span className="product__card__spec-label">{t('product.ram')}</span>
           <span className="product__card__spec-value">{product.ram}</span>
         </p>
       </section>
@@ -92,7 +91,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
           })}
           onClick={addToCart}
         >
-          {isAdded ? 'Go to cart' : 'Add to cart'}
+          {isAdded ? t('product.goToCart') : t('product.addToCart')}
         </Button>
         <Button
           className="button__icon button--lg product__card__icon-button"
