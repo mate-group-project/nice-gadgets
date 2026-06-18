@@ -9,15 +9,18 @@ type Props = {
 
 export const CategoryCard: React.FC<Props> = ({ image, title, count }) => {
   return (
-    <article className="category__card">
-      <div className="image-wrapper">
-        <img
-          src={image}
-          className="phone"
-        />
-      </div>
-      <h3>{title}</h3>
-      <p>{count} models</p>
-    </article>
+    <>
+      {' '}
+      <article className="category__card">
+        <div className="image-wrapper">
+          <img
+            src={image}
+            className="phone"
+          />
+        </div>
+        <h3>{title}</h3>
+        <p>{count} models</p>
+      </article>
+    </>
   );
 };

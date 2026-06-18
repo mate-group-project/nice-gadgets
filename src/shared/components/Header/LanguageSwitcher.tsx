@@ -12,7 +12,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   onLanguageSelect,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   const { language, setLanguage } = useTranslation();
   const currentLang = language as Language;
 
@@ -32,7 +32,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   }, []);
 
   const handleLangChange = (lang: Language) => {
-    setLanguage(lang); 
+    setLanguage(lang);
     setIsOpen(false);
     if (onLanguageSelect) {
       onLanguageSelect();

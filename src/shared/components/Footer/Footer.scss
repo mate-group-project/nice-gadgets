@@ -5,12 +5,17 @@ $height: 74px;
   --color-contacts: #89939a;
 }
 
+
+html, body {
+  overflow-x: hidden;
+}
 .footer {
   @include container;
   height: $height;
   margin-top: $height;
   display: flex;
   background-color: var(--bg-surface);
+  margin-bottom: -23px;
   border-top: 1px solid var(--elements);
 
   align-items: center;
