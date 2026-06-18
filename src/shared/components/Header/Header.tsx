@@ -46,7 +46,7 @@ export const Header = ({ theme, onToggleTheme }: HeaderProps) => {
       </div>
 
       <div className="header__menu">
-        <Menu />
+        <Menu theme={theme} onToggleTheme={onToggleTheme}/>
       </div>
     </header>
   );

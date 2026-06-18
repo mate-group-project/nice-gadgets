@@ -4,47 +4,58 @@ import { useEffect, useRef, useState } from 'react';
 import type { PickupPoint } from '../types/PickupPoint';
 import { getPickupPoints } from '../api/getPickupPoints.ts';
 import { PickupPointsMap } from './PickupPointsMap.tsx';
+import { useTranslation } from '@/features/translations/hooks/useTranslation';
 
 export const PickupPointsSection = () => {
+  const { language } = useTranslation();
+
+  const pickupPointsLanguage: 'en' | 'uk' = language === 'uk' ? 'uk' : 'en';
+
   const [isOpen, setIsOpen] = useState(false);
   const [pickupPoints, setPickupPoints] = useState<PickupPoint[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [hasLoaded, setHasLoaded] = useState(false);
+
   const mapRef = useRef<HTMLDivElement | null>(null);
 
-  const getCurrentLanguage = (): 'en' | 'ua' => {
-  return localStorage.getItem('app_lang') === 'ua'
-    ? 'ua'
-    : 'en';
-};
-
-  const loadPickupPoints = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const language = getCurrentLanguage();
-      const response = await getPickupPoints(language);
-
-      setPickupPoints(response);
-      setHasLoaded(true);
-    } catch {
-      setError('Failed to load pickup points');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleToggleMap = () => {
-    const shouldOpen = !isOpen;
-
-    setIsOpen(shouldOpen);
-
-    if (shouldOpen && !hasLoaded) {
-      loadPickupPoints();
-    }
+    setIsOpen((currentIsOpen) => !currentIsOpen);
   };
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    let ignore = false;
+
+    const loadPickupPoints = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await getPickupPoints(pickupPointsLanguage);
+
+        if (!ignore) {
+          setPickupPoints(response);
+        }
+      } catch {
+        if (!ignore) {
+          setError('Failed to load pickup points');
+        }
+      } finally {
+        if (!ignore) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadPickupPoints();
+
+    return () => {
+      ignore = true;
+    };
+  }, [isOpen, pickupPointsLanguage]);
 
   useEffect(() => {
     if (!isOpen) return;
