@@ -18,7 +18,12 @@
     inset: 0;
     z-index: 1001;
 
-    background: #fff;
+    background: var(--bg-surface);
+
+    .menu__body,
+    .menu__header {
+      background: transparent; 
+    }
   }
 
   &__header {
