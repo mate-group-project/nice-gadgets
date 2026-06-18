@@ -2,7 +2,7 @@ import { client } from '@/shared/api/client';
 import { ENDPOINTS } from '@/shared/api/endpoints';
 import type { PickupPoint } from '../types/PickupPoint';
 
-type Language = 'en' | 'ua';
+type Language = 'en' | 'uk';
 
 type StoresResponse = {
   id: string;
