@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import { getOrdersByEmail, updateUserPassword, type StoredUser } from '@/features/auth/api/account';
+import {
+  getOrdersByEmail,
+  updateUserPassword,
+  type StoredUser,
+} from '@/features/auth/api/account';
 import { getProductsList } from '@/features/products/api/products';
 import type { Product } from '@/features/products/types/Product';
 
@@ -27,7 +31,8 @@ export const useAccount = () => {
         );
 
         return getProductsList({ perPage: '1000' }).then((allProducts) => {
-          const data = Array.isArray(allProducts) ? allProducts : allProducts.data;
+          const data =
+            Array.isArray(allProducts) ? allProducts : allProducts.data;
           setProducts(data.filter((product) => productIds.has(product.id)));
         });
       })
@@ -46,7 +51,10 @@ export const useAccount = () => {
 
     updateUserPassword(user.id, newPassword, user)
       .then(() => {
-        const updated = { ...user, customer: { ...user.customer, password: newPassword } };
+        const updated = {
+          ...user,
+          customer: { ...user.customer, password: newPassword },
+        };
         setUser(updated);
         localStorage.setItem('currentUser', JSON.stringify(updated));
       })

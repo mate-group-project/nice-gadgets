@@ -34,8 +34,8 @@ export const client = {
   put: <TResponse>(url: string, data: unknown) =>
     request<TResponse>(url, 'PUT', data),
 
-patch: <TResponse>(url: string, data: unknown) =>
-  request<TResponse>(url, 'PATCH', data),
+  patch: <TResponse>(url: string, data: unknown) =>
+    request<TResponse>(url, 'PATCH', data),
 
   delete: (url: string) => request<void>(url, 'DELETE'),
 };

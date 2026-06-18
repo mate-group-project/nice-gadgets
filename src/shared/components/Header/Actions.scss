@@ -29,7 +29,7 @@ $space-x-lg: 26px;
       border-right: 1px solid var(--elements);
     }
 
-    @include sm-and-up {
+    @include md-and-up {
       flex: none;
       width: $header-size;
     }
@@ -119,10 +119,9 @@ $space-x-lg: 26px;
   &:hover .actions__dropdown {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    background-color: var(--bg-surface);
   }
 }
-
 
 .actions__dropdown {
   position: absolute;
@@ -152,12 +151,12 @@ $space-x-lg: 26px;
     text-transform: uppercase;
   }
 
- &-link {
+  &-link {
     text-decoration: none;
     color: var(--color-grey);
     font-size: 14px;
     padding: 6px 0;
-    
+
     &:hover {
       color: var(--color-red);
     }
