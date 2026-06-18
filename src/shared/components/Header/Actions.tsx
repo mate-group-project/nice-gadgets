@@ -1,4 +1,4 @@
-import { Link, NavLink, Navigate, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import { Icon } from '@/shared/components/Icon';
 import { LanguageSwitcher } from './LanguageSwitcher';
@@ -25,7 +25,6 @@ export const Actions = ({
   const { items: cart } = useCart();
   const { items: favorites } = useFavorites();
 
-  const navigate = useNavigate();
   const user = useAuthUser();
 
   return (
