@@ -5,8 +5,6 @@ import './OrderSummary.scss';
 export const OrderSummary = () => {
   const { products: cartItems } = useCartProducts();
 
-  console.log(cartItems);
-
   const total = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0,
