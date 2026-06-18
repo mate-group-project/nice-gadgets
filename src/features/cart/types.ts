@@ -6,4 +6,6 @@ export type ProductCart = {
   price: number;
   image: string;
   quantity: number;
+  color?: string;
+  capacity?: string;
 };

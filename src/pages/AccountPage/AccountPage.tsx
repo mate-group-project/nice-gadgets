@@ -61,28 +61,19 @@ export const AccountPage = () => {
         </div>
       </div>
 
-      <div className="account-page__content">
-        <section className="account-page__products">
-          <h2>My Products</h2>
-          {isLoading && <p>Loading...</p>}
-          {!isLoading && products.length === 0 && <p>No products yet</p>}
-          <ul className="account-page__products-list">
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                className="account-page__product"
-              >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                />
-                <span>{product.name}</span>
-                <span>${product.price}</span>
-              </ProductCard>
-            ))}
-          </ul>
-        </section>
+      <section className="account-page__products">
+        <h2>My Products</h2>
+        {isLoading && <p>Loading...</p>}
+        {!isLoading && products.length === 0 && <p>No products yet</p>}
+        <ul className="account-page__products-list">
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+            ></ProductCard>
+          ))}
+        </ul>
+      </section>
 
         <section className="account-page__password">
           <h2>Change password</h2>

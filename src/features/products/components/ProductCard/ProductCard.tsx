@@ -23,7 +23,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
   const addToCart = () => {
     if (cart.map((item) => item.id).includes(product.id)) {
-      navigate('cart');
+      navigate('/cart');
       return;
     }
 

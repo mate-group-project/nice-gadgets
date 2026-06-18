@@ -7,10 +7,12 @@ import { useProductsList } from '@/features/products/hooks/useProductsList.ts';
 import { Link } from 'react-router-dom';
 import { ProductCartSkeleton } from '@/features/products/components/ProductCard/ProductCartSkeleton.tsx';
 import { useCategories } from '@/features/categories/api/useCategories';
+import { useTranslation } from '@/features/translations/hooks/useTranslation.ts';
 
 export const HomePage: React.FC = () => {
   const { products } = useProductsList();
   const { categories } = useCategories();
+  const { t } = useTranslation();
 
   const maxYear = Math.max(...products.map((p) => p.year));
 
@@ -42,13 +44,13 @@ export const HomePage: React.FC = () => {
   return (
     <>
       <div className="hero">
-        <h1 className="hero_title">Welcome to Nice Gadgets store!</h1>
+        <h1 className="hero_title">{t('homePage.title')}</h1>
         <Carousel />
       </div>
 
       {brandNewProducts.length > 0 ?
         <Section
-          title="Brand new models"
+          title={t('homePage.newModels')}
           isSlide
         >
           {brandNewProducts.map((product) => (
@@ -60,7 +62,7 @@ export const HomePage: React.FC = () => {
         </Section>
       : <Section>{loader}</Section>}
 
-      <Section title="Shop by category">
+      <Section title={t('homePage.categories')}>
         <div className="categories">
           {categories.map((category, index) => (
             <Link
@@ -76,7 +78,7 @@ export const HomePage: React.FC = () => {
 
       {hotPriceProducts.length > 0 ?
         <Section
-          title="Hot prices"
+          title={t('homePage.hotPrices')}
           isSlide
         >
           {hotPriceProducts.map((product) => (
