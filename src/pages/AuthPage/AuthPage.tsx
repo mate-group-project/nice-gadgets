@@ -96,7 +96,7 @@ export const AuthPage = () => {
             localStorage.setItem('currentUser', JSON.stringify(foundUser));
             window.dispatchEvent(new Event('authChange'));
 
-            navigate('/');
+            navigate('/account');
             setFormInputs({
               email: '',
               password: '',
@@ -172,7 +172,7 @@ export const AuthPage = () => {
 
         localStorage.setItem('currentUser', JSON.stringify(createdUser));
         window.dispatchEvent(new Event('authChange'));
-        navigate('/');
+        navigate('/account');
         setFormInputs({
           email: '',
           password: '',

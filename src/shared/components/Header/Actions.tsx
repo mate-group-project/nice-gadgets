@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import { Icon } from '@/shared/components/Icon';
 import { LanguageSwitcher } from './LanguageSwitcher';
@@ -24,6 +24,9 @@ export const Actions = ({
 }: Props) => {
   const { items: cart } = useCart();
   const { items: favorites } = useFavorites();
+
+  const location = useLocation();
+  const isAccountPage = location.pathname === '/account';
 
   const user = useAuthUser();
 
@@ -78,14 +81,24 @@ export const Actions = ({
           )}
         </NavLink>
       </li>
-      {user ?
+      {user ? (
         <li className="actions__item actions__profile">
-          <button
-            type="button"
-            className="actions__link actions__profile-trigger"
+          <NavLink
+            to="/account"
+            className={cn("actions__link actions__profile-trigger", {
+              "actions__link--active": isAccountPage
+            })}
+            onClick={onNavigate}
           >
-            <Icon name="user" />
-          </button>
+            {user.customer?.firstName ? (
+              <div className="actions__avatar">
+                {user.customer.firstName[0]}{user.customer.lastName?.[0]}
+              </div>
+            ) : (
+              <Icon name="user" />
+            )}
+          </NavLink>
+
           <div className="actions__dropdown">
             <div className="actions__dropdown-user">
               {user.customer?.firstName} {user.customer?.lastName}
@@ -93,6 +106,7 @@ export const Actions = ({
             <NavLink
               to="/account"
               className="actions__dropdown-link"
+              onClick={onNavigate}
             >
               My Profile
             </NavLink>
@@ -108,15 +122,17 @@ export const Actions = ({
             </button>
           </div>
         </li>
-      : <li className="actions__item">
+      ) : (
+        <li className="actions__item">
           <NavLink
             to="/auth?mode=login"
             className="actions__link"
+            onClick={onNavigate}
           >
             <Icon name="user" />
           </NavLink>
         </li>
-      }
+      )}
     </ul>
   );
 };
