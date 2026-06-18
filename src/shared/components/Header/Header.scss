@@ -29,7 +29,7 @@ $space-x-lg: 26px;
     display: block;
     height: 100%;
 
-    @include sm-and-up {
+    @include md-and-up {
       display: none;
     }
   }
@@ -37,7 +37,7 @@ $space-x-lg: 26px;
   &__nav {
     display: none;
 
-    @include sm-and-up {
+    @include md-and-up {
       display: block;
       height: 100%;
       margin-right: auto;
@@ -47,7 +47,7 @@ $space-x-lg: 26px;
   &__actions {
     display: none;
 
-    @include sm-and-up {
+    @include md-and-up {
       display: block;
       height: 100%;
     }
