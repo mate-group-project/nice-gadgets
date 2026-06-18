@@ -29,8 +29,7 @@ export const ProductPage = () => {
     });
 
   if (isLoading) {
-    // return <div className="product-page__loading">Loading...</div>;
-    return <ProductPageSkeleton />;
+    return <ProductPageSkeleton />
   }
 
   if (error || !product) {

@@ -1,117 +1,117 @@
 import './styles/productPage.scss';
-import '../features/products/components/productPage/Gallery/gallery.scss';
-import '../features/products/components/productPage/ProductActions/productAction.scss';
-import '../features/products/components/productPage/About/about.scss';
-import '../features/products/components/productPage/TechSpecs/techSpecs.scss';
 import './ProductPageSkeleton.scss';
 
 export const ProductPageSkeleton = () => (
   <section className="product-page product-page--skeleton">
-    <div className="product-page__breadcrumbs-skeleton" />
+    <div className="product-page-skeleton__breadcrumbs">
+      <span className="product-page-skeleton__breadcrumb-home" />
+      <span className="product-page-skeleton__breadcrumb-arrow" />
+      <span className="product-page-skeleton__breadcrumb-page" />
+      <span className="product-page-skeleton__breadcrumb-arrow" />
+      <span className="product-page-skeleton__breadcrumb-product" />
+    </div>
 
     <div className="product-page__back-link">
-      <span className="product-page__back-icon-skeleton" />
-      <span className="product-page__back-text-skeleton" />
+      <span className="product-page-skeleton__back-icon" />
+      <span className="product-page-skeleton__back-text" />
     </div>
 
     <div className="product-page__container">
-      <div className="product-page__title" />
+      <div className="product-page-skeleton__title" />
 
       <div className="product-page__content">
         <div className="product-page__main-info">
-          <div className="product-page__gallery gallery">
-            <div className="gallery__thumbnails">
-              <div className="gallery__thumb gallery__thumb--skeleton" />
-              <div className="gallery__thumb gallery__thumb--skeleton" />
-              <div className="gallery__thumb gallery__thumb--skeleton" />
-              <div className="gallery__thumb gallery__thumb--skeleton" />
+          <div className="product-page-skeleton__gallery">
+            <div className="product-page-skeleton__thumbs">
+              <span className="product-page-skeleton__thumb" />
+              <span className="product-page-skeleton__thumb" />
+              <span className="product-page-skeleton__thumb" />
+              <span className="product-page-skeleton__thumb" />
             </div>
 
-            <div className="gallery__main">
-              <div className="gallery__main-image-skeleton" />
-            </div>
+            <div className="product-page-skeleton__image" />
           </div>
 
-          <div className="product-page__actions product-actions">
-            <div className="product-actions__content">
-              <div className="product-actions__selection">
-                <div className="product-actions__selection-header">
-                  <span className="product-actions__selection-title-skeleton" />
-                  <span className="product-actions__id-skeleton" />
-                </div>
-
-                <div className="product-actions__color-options">
-                  <span className="product-actions__color-option" />
-                  <span className="product-actions__color-option" />
-                  <span className="product-actions__color-option" />
-                  <span className="product-actions__color-option" />
-                </div>
+          <div className="product-page-skeleton__actions">
+            <div className="product-page-skeleton__selection">
+              <div className="product-page-skeleton__selection-header">
+                <span className="product-page-skeleton__label" />
+                <span className="product-page-skeleton__id" />
               </div>
 
-              <div className="product-actions__selection">
-                <span className="product-actions__selection-title-skeleton" />
+              <div className="product-page-skeleton__colors">
+                <span className="product-page-skeleton__color" />
+                <span className="product-page-skeleton__color" />
+                <span className="product-page-skeleton__color" />
+                <span className="product-page-skeleton__color" />
+              </div>
+            </div>
 
-                <div className="product-actions__capacity-options">
-                  <span className="capacity-btn" />
-                  <span className="capacity-btn" />
-                  <span className="capacity-btn" />
-                </div>
+            <div className="product-page-skeleton__selection">
+              <span className="product-page-skeleton__label" />
+
+              <div className="product-page-skeleton__capacities">
+                <span className="product-page-skeleton__capacity" />
+                <span className="product-page-skeleton__capacity" />
+                <span className="product-page-skeleton__capacity" />
+              </div>
+            </div>
+
+            <div className="product-page-skeleton__purchase">
+              <div className="product-page-skeleton__prices">
+                <span className="product-page-skeleton__price-current" />
+                <span className="product-page-skeleton__price-old" />
               </div>
 
-              <div className="product-actions__purchase purchase">
-                <div className="purchase__price">
-                  <span className="purchase__price-current" />
-                  <span className="purchase__price-old" />
-                </div>
-
-                <div className="purchase__controls">
-                  <span className="product-actions__cart-button button" />
-                  <span className="product-actions__favorite-button button__icon button--lg" />
-                </div>
+              <div className="product-page-skeleton__buttons">
+                <span className="product-page-skeleton__cart-button" />
+                <span className="product-page-skeleton__fav-button" />
               </div>
+            </div>
 
-              <div className="product-actions__short-specs short-specs">
-                <ul className="short-specs__list">
-                  <li className="short-specs__item" />
-                  <li className="short-specs__item" />
-                  <li className="short-specs__item" />
-                  <li className="short-specs__item" />
-                </ul>
-              </div>
+            <div className="product-page-skeleton__short-specs">
+              <span className="product-page-skeleton__spec" />
+              <span className="product-page-skeleton__spec" />
+              <span className="product-page-skeleton__spec" />
+              <span className="product-page-skeleton__spec" />
             </div>
           </div>
         </div>
 
         <div className="product-page__details">
-          <div className="product-page__about about">
-            <div className="about__title" />
+          <div className="product-page-skeleton__about">
+            <div className="product-page-skeleton__section-heading">
+  <div className="product-page-skeleton__section-title" />
+</div>
 
-            <div className="about__item">
-              <div className="about__subtitle" />
-              <div className="about__text" />
-              <div className="about__text" />
-              <div className="about__text about__text--short" />
+            <div className="product-page-skeleton__about-block">
+              <div className="product-page-skeleton__subtitle" />
+              <div className="product-page-skeleton__text" />
+              <div className="product-page-skeleton__text" />
+              <div className="product-page-skeleton__text product-page-skeleton__text--short" />
             </div>
 
-            <div className="about__item">
-              <div className="about__subtitle" />
-              <div className="about__text" />
-              <div className="about__text about__text--medium" />
+            <div className="product-page-skeleton__about-block">
+              <div className="product-page-skeleton__subtitle" />
+              <div className="product-page-skeleton__text" />
+              <div className="product-page-skeleton__text product-page-skeleton__text--medium" />
             </div>
           </div>
 
-          <div className="product-page__tech-specs tech-specs">
-            <div className="tech-specs__title" />
+          <div className="product-page-skeleton__tech">
+            <div className="product-page-skeleton__section-heading product-page-skeleton__section-heading--tech">
+  <div className="product-page-skeleton__section-title" />
+</div>
 
-            <ul className="tech-specs__list">
-              <li className="tech-specs__item" />
-              <li className="tech-specs__item" />
-              <li className="tech-specs__item" />
-              <li className="tech-specs__item" />
-              <li className="tech-specs__item" />
-              <li className="tech-specs__item" />
-              <li className="tech-specs__item" />
-            </ul>
+            <div className="product-page-skeleton__tech-list">
+              <span className="product-page-skeleton__tech-row" />
+              <span className="product-page-skeleton__tech-row" />
+              <span className="product-page-skeleton__tech-row" />
+              <span className="product-page-skeleton__tech-row" />
+              <span className="product-page-skeleton__tech-row" />
+              <span className="product-page-skeleton__tech-row" />
+              <span className="product-page-skeleton__tech-row" />
+            </div>
           </div>
         </div>
       </div>

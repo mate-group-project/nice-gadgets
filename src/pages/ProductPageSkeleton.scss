@@ -1,60 +1,101 @@
 .product-page--skeleton {
   pointer-events: none;
 
-  .product-page__breadcrumbs-skeleton,
-  .product-page__back-icon-skeleton,
-  .product-page__back-text-skeleton,
-  .product-page__title,
-  .gallery__thumb--skeleton,
-  .gallery__main-image-skeleton,
-  .product-actions__selection-title-skeleton,
-  .product-actions__id-skeleton,
-  .product-actions__color-option,
-  .capacity-btn,
-  .purchase__price-current,
-  .purchase__price-old,
-  .product-actions__cart-button,
-  .product-actions__favorite-button,
-  .short-specs__item,
-  .about__title,
-  .about__subtitle,
-  .about__text,
-  .tech-specs__title,
-  .tech-specs__item {
+  .product-page__content {
+    gap: 64px;
+
+    @include md-and-up {
+      gap: 88px;
+    }
+
+    @include lg-and-up {
+      row-gap: 96px;
+      column-gap: 64px;
+    }
+  }
+}
+
+.product-page-skeleton {
+  &__breadcrumbs,
+  &__back-icon,
+  &__back-text,
+  &__title,
+  &__thumb,
+  &__image,
+  &__label,
+  &__id,
+  &__color,
+  &__capacity,
+  &__price-current,
+  &__price-old,
+  &__cart-button,
+  &__fav-button,
+  &__spec,
+  &__section-title,
+  &__subtitle,
+  &__text,
+  &__tech-row,
+  &__breadcrumb-home,
+  &__breadcrumb-arrow,
+  &__breadcrumb-page,
+  &__breadcrumb-product {
     background: linear-gradient(60deg, #eaeded 25%, #f3f4f6 50%, #eaeded 75%);
     background-size: 200% 100%;
     animation: product-page-skeleton-loading 2s infinite;
     border-radius: 8px;
   }
 
-  .product-page__breadcrumbs-skeleton {
-    width: 220px;
+  &__breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
     height: 16px;
-    margin-top: 24px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    background: none;
   }
 
-  .product-page__back-icon-skeleton {
+  &__breadcrumb-home,
+  &__breadcrumb-arrow {
     width: 16px;
     height: 16px;
   }
 
-  .product-page__back-text-skeleton {
-    width: 42px;
+  &__breadcrumb-page {
+    width: 96px;
+    height: 16px;
+  }
+
+  &__breadcrumb-product {
+    width: 160px;
+    height: 16px;
+  }
+
+  &__back-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  &__back-text {
+    width: 40px;
     height: 12px;
   }
 
-  .product-page__title {
-    width: min(100%, 620px);
+  &__title {
+    width: min(100%, 640px);
     height: 31px;
+    margin-bottom: 32px;
 
     @include md-and-up {
       height: 42px;
+      margin-bottom: 40px;
     }
   }
 
-  .gallery {
+  &__gallery {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     gap: 16px;
     width: 100%;
 
@@ -63,112 +104,190 @@
     }
   }
 
-  .gallery__thumbnails {
+   &__thumbs {
     display: flex;
-    flex-direction: row;
-    gap: 8px;
     justify-content: center;
+    gap: 8px;
+    order: 2;
 
     @include md-and-up {
       flex-direction: column;
       justify-content: flex-start;
+      order: 0;
     }
   }
 
-  .gallery__thumb {
-    width: 52px;
-    height: 52px;
-    padding: 4px;
-    border: 1px solid var(--secondary);
-    border-radius: 4px;
-    box-sizing: border-box;
+  &__thumb {
+  width: 52px;
+  height: 52px;
+  border-radius: 4px;
+  flex-shrink: 0;
 
-    @include md-and-up {
-      width: 80px;
-      height: 80px;
-    }
+  @include md-and-up {
+    width: 80px;
+    height: 80px;
   }
+}
 
-  .gallery__main {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 320px;
-    padding: 20px;
-    border-radius: 8px;
-    box-sizing: border-box;
-
-    @include md-and-up {
-      height: 440px;
-    }
-  }
-
-  .gallery__main-image-skeleton {
+   &__image {
+    display: block;
+    // margin: 0 auto;
     width: 100%;
-    max-width: 420px;
-    height: 100%;
-    max-height: 400px;
+    height: 320px;
+    order: 1;
+
+    @include md-and-up {
+      flex: 1;
+      height: 440px;
+      order: 0;
+    }
   }
 
-  .product-actions__selection-title-skeleton {
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    @include lg-and-up {
+      max-width: 320px;
+    }
+  }
+
+  &__selection {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--elements);
+  }
+
+  &__selection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__label {
     width: 120px;
     height: 14px;
   }
 
-  .product-actions__id-skeleton {
-    width: 82px;
+  &__id {
+    width: 90px;
     height: 12px;
   }
 
-  .capacity-btn {
-    width: 72px;
-    height: 38px;
-    padding: 0;
-    border: 0;
+  &__colors,
+  &__capacities,
+  &__prices,
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .purchase__price-current {
+  &__colors {
+    gap: 10px;
+  }
+
+  &__color {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  &__capacity {
+    width: 72px;
+    height: 40px;
+    border-radius: 4px;
+  }
+
+  &__purchase {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  &__price-current {
     width: 110px;
     height: 41px;
   }
 
-  .purchase__price-old {
+  &__price-old {
     width: 70px;
     height: 28px;
   }
 
-  .product-actions__favorite-button {
-    flex-shrink: 0;
-  }
-
-  .short-specs__item,
-  .tech-specs__item {
-    height: 21px;
-  }
-
-  .about__title,
-  .tech-specs__title {
+  &__cart-button {
+    width: 230px;
     height: 48px;
-    padding-bottom: 0;
-
-    &::after {
-      display: none;
-    }
+    border-radius: 50px;
 
     @include md-and-up {
-      height: 57px;
+      width: 180px;
+    }
+
+    @include lg-and-up {
+      width: 260px;
     }
   }
 
-  .about__subtitle {
-    width: 60%;
-    height: 20px;
+  &__fav-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
   }
 
-  .about__text {
+  &__short-specs,
+  &__tech-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__spec,
+  &__tech-row {
     width: 100%;
     height: 21px;
+  }
+
+  &__section-heading {
+  position: relative;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--elements);
+
+  &--tech {
+    margin-bottom: 25px;
+  }
+}
+
+&__section-title {
+  width: 120px;
+  height: 32px;
+
+  @include md-and-up {
+    width: 160px;
+    height: 41px;
+  }
+}
+
+  &__about-block:not(:last-child) {
+    margin-bottom: 32px;
+  }
+
+  &__subtitle {
+    width: 60%;
+    height: 20px;
+    margin-bottom: 16px;
+  }
+
+  &__text {
+    width: 100%;
+    height: 21px;
+    margin-bottom: 24px;
 
     &--medium {
       width: 82%;
