@@ -53,7 +53,7 @@ export const TranslationProvider = ({ children }: Props) => {
     loadTranslations().then(() => {});
   }, [language]);
 
-const t = useCallback(
+  const t = useCallback(
     (key: string) => {
       const value = key.split('.').reduce<unknown>((acc, part) => {
         if (acc && typeof acc === 'object' && part in acc) {
