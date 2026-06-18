@@ -4,6 +4,7 @@ import { CartSummary } from '../features/cart/components/CartSummary/CartSummary
 import '../features/cart/CartPage.scss';
 import { useCartProducts } from '@/features/cart/hooks/useCartProducts.ts';
 import { useNavigate } from 'react-router-dom';
+import { Breadcrumbs } from './Breadcrumbs';
 
 export const CartPage: React.FC = () => {
   const { products: cartProducts, deleteItem, changeCount } = useCartProducts();
@@ -25,12 +26,8 @@ export const CartPage: React.FC = () => {
 
   return (
     <div className="cart-page">
-      <a
-        href="/"
-        className="cart-page__back-link"
-      >
-        Back
-      </a>
+      <Breadcrumbs crumbs={[{ label: 'Cart' }]} />
+
       <h1 className="cart-page__title">Cart</h1>
 
       <div className="cart-page__content">

@@ -10,7 +10,7 @@ $font-weight-regular: 400;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
 
-$color-accent: #3111d6; 
+$color-accent: #3111d6;
 $color-accent-hover: #230bb0;
 
 .account-page {
@@ -18,8 +18,8 @@ $color-accent-hover: #230bb0;
   margin: 0 auto;
   padding: 48px 24px;
   font-family: system-ui, sans-serif;
-  color: var(--primary, #111);             
-  background-color: transparent; 
+  color: var(--primary, #111);
+  background-color: transparent;
 
   &__title {
     font-size: 32px;
@@ -43,7 +43,7 @@ $color-accent-hover: #230bb0;
   &__products {
     flex-grow: 1;
     width: 100%;
-    
+
     h2 {
       margin-bottom: 24px;
       color: var(--primary, #111);
@@ -90,12 +90,15 @@ $color-accent-hover: #230bb0;
     width: 100%;
     max-width: 360px;
     flex-shrink: 0;
-    background-color: var(--bg-surface, #fff); 
+    background-color: var(--bg-surface, #fff);
     border-radius: 8px;
-    padding: $space-32; 
-    border: 1px solid var(--elements, #eee);     
-    transition: transform 0.3s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    margin-top: 72px; 
+    padding: $space-32;
+    border: 1px solid var(--elements, #eee);
+    transition:
+      transform 0.3s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+    margin-top: 72px;
 
     @media (max-width: 990px) {
       margin-top: 0;
@@ -104,12 +107,12 @@ $color-accent-hover: #230bb0;
     &:hover {
       transform: translateY(-3px);
       border-color: var(--primary, #ddd);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
     h2 {
       margin: 0 0 $space-16 0;
-      font-size: 16px; 
+      font-size: 16px;
       font-weight: $font-weight-bold;
       color: var(--primary, #111);
     }
@@ -117,15 +120,15 @@ $color-accent-hover: #230bb0;
     form {
       display: flex;
       flex-direction: column;
-      gap: $space-12; 
+      gap: $space-12;
     }
 
     input {
       width: 100%;
       padding: 12px 16px;
-      border-radius: 24px; 
+      border-radius: 24px;
       border: 1px solid var(--elements, #ddd);
-      background-color: var(--bg-page, #fff); 
+      background-color: var(--bg-surface, #fff); 
       color: var(--primary, #111);
       outline: none;
       font-size: $font-size-sm;
@@ -133,9 +136,9 @@ $color-accent-hover: #230bb0;
       transition: border-color 0.2s ease;
 
       &:focus {
-        border-color: $color-accent; 
+        border-color: $color-accent;
       }
-      
+
       &::placeholder {
         color: var(--secondary, #999);
       }
@@ -144,14 +147,16 @@ $color-accent-hover: #230bb0;
     button {
       width: 100%;
       padding: 14px;
-      border-radius: 24px; 
+      border-radius: 24px;
       border: none;
-      background-color: $color-accent; 
-      color: #fff; 
+      background-color: $color-accent;
+      color: #fff;
       font-weight: $font-weight-bold;
       font-size: $font-size-sm;
       cursor: pointer;
-      transition: background-color 0.2s ease, opacity 0.2s ease;
+      transition:
+        background-color 0.2s ease,
+        opacity 0.2s ease;
       margin-top: $space-8;
 
       &:hover {
@@ -175,7 +180,7 @@ $color-accent-hover: #230bb0;
 
     &--error {
       background-color: var(--bg-error, #fde8e8);
-      color: #d12d35; 
+      color: #d12d35;
       border: 1px solid var(--border-error, #f8b4b4);
     }
 
@@ -193,17 +198,16 @@ $color-accent-hover: #230bb0;
   }
 
   &__header {
-    margin-bottom: 32px; 
+    margin-bottom: 32px;
   }
 
   &__title {
     font-size: 32px;
     font-weight: 800;
     letter-spacing: -0.6px;
-    margin-bottom: 4px; 
+    margin-bottom: 4px;
     color: var(--primary, #111);
   }
-
 
   &__email {
     font-size: 16px;
@@ -213,7 +217,12 @@ $color-accent-hover: #230bb0;
 }
 
 @keyframes accountFadeIn {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
