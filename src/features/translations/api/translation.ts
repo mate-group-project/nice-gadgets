@@ -3,7 +3,7 @@ export type Language = 'en' | 'uk';
 export type TranslationData = Record<string, string>;
 
 type TranslationResponse = {
-  id: Language;
+  id: string;
   data: TranslationData;
 };
 
@@ -20,7 +20,9 @@ export const getTranslations = async (
 
   const data: TranslationResponse[] = await response.json();
 
-  const selectedTranslations = data.find((item) => item.id === language);
+  const backendLangId = language === 'uk' ? 'ua' : language;
+
+  const selectedTranslations = data.find((item) => item.id === backendLangId);
 
   return selectedTranslations?.data ?? {};
 };

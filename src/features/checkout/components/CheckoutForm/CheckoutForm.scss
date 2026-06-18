@@ -70,10 +70,6 @@
       &:hover {
         border-color: var(--secondary);
       }
-
-      @include lg-and-up {
-        width: 80%;
-      }
     }
 
     &__input {

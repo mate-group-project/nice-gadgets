@@ -9,6 +9,7 @@ import { Breadcrumbs } from './Breadcrumbs';
 import { Dropdown } from '@/shared/components/Dropdown/Dropdown';
 import { Pagination } from '@/shared/components/Pagination';
 import { ProductList } from '@/features/products/components/ProductList/ProductList.tsx';
+import { useTranslation } from '@/features/translations/hooks/useTranslation';
 
 const TITLES = {
   phones: 'Mobile phones',
@@ -18,6 +19,7 @@ const TITLES = {
 
 export const CatalogPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { t } = useTranslation();
 
   const category = searchParams.get('category') || 'phones';
   const perPage = searchParams.get('_per_page') || '12';
@@ -36,27 +38,31 @@ export const CatalogPage: React.FC = () => {
     });
   }, [currentPage]);
 
+  const displayTitle = t(`categoryPage.categoriesTitle.${category}`) || TITLES[category as keyof typeof TITLES] || category;
+
   return (
     <div className="catalog">
       <Breadcrumbs
-        crumbs={[{ label: TITLES[category as keyof typeof TITLES] }]}
+        crumbs={[{ label: displayTitle }]}
       />
 
       <h1 className="catalog_title">
-        {TITLES[category as keyof typeof TITLES]}
+        {displayTitle}
       </h1>
 
-      <p className="catalog_count">{total} models</p>
+      <p className="catalog_count">
+        {total} {t('categoryPage.models') || 'models'}
+      </p>
 
       <div className="catalog_filters">
         <Dropdown
-          label="Sort by"
+          label={t('categoryPage.sortBy') || 'Sort by'}
           value={sort}
           options={[
-            { label: 'Newest', value: '-year' },
-            { label: 'Alphabetically', value: 'name' },
-            { label: 'Cheapest', value: 'price' },
-            { label: 'Biggest discount', value: 'fullPrice' },
+            { label: t('categoryPage.newest') || 'Newest', value: '-year' },
+            { label: t('categoryPage.alphabetically') || 'Alphabetically', value: 'name' },
+            { label: t('categoryPage.cheapest') || 'Cheapest', value: 'price' },
+            { label: t('categoryPage.discount') || 'Biggest discount', value: 'fullPrice' },
           ]}
           onChange={(value) => {
             const params = new URLSearchParams(searchParams);
@@ -65,7 +71,7 @@ export const CatalogPage: React.FC = () => {
           }}
         />
         <Dropdown
-          label="Items on page"
+          label={t('categoryPage.itemsOnPage') || 'Items on page'}
           value={perPage}
           options={[
             { label: '12', value: '12' },

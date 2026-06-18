@@ -1,14 +1,19 @@
 import type { ProductDescription } from '@/features/products/types/Product';
 import './about.scss';
+import { useTranslation } from '@/features/translations/hooks/useTranslation';
 
 type AboutProps = {
   productDescription: ProductDescription[];
 };
 
 export const About = ({ productDescription }: AboutProps) => {
+  const { t } = useTranslation();
+
   return (
     <div className="product-page__about about">
-      <h2 className="about__title">About</h2>
+      <h2 className="about__title">
+        {t('product.about') || 'About'}
+      </h2>
 
       <div className="about__content">
         {productDescription.map((desc, index) => (

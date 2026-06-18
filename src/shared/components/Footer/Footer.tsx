@@ -1,13 +1,16 @@
 import './Footer.scss';
 import { Button } from '@base-ui/react';
 import { Icon } from '../Icon';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useTranslation } from '@/features/translations/hooks/useTranslation.ts';
 
 type FooterProps = {
   theme: string;
 };
 
 export const Footer = ({ theme }: FooterProps) => {
+  const { t } = useTranslation();
+
   return (
     <div className="footer">
       <div className="logo">
@@ -31,34 +34,34 @@ export const Footer = ({ theme }: FooterProps) => {
       </div>
 
       <div className="info">
-        <Link
-          to="https://github.com/mate-group-project/nice-gadgets/tree/main"
+        <a
+          href="https://github.com/mate-group-project/nice-gadgets/tree/main"
           className="contact"
           target="blank"
         >
-          github
-        </Link>
+          {t('footer.github')}
+        </a>
 
-        <Link
-          to="/about"
+        <a
+          href="/about"
           className="contact"
         >
-          about
-        </Link>
+          {t('footer.about')}
+        </a>
 
-        <Link
-          to="/contacts"
+        <a
+          href="/contacts"
           className="contact"
         >
-          contacts
-        </Link>
+          {t('footer.contacts')}
+        </a>
 
-        <Link
-          to="/rights"
+        <a
+          href="/rights"
           className="contact"
         >
-          rights
-        </Link>
+          {t('footer.rights')}
+        </a>
       </div>
       <div className="footer__container">
         <a
@@ -66,7 +69,7 @@ export const Footer = ({ theme }: FooterProps) => {
           style={{ cursor: 'pointer' }}
           className="back"
         >
-          Back to top
+          {t('footer.backToTop')}
         </a>
         <Button
           className="button__icon button--lg"
