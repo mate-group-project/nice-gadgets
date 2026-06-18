@@ -5,6 +5,7 @@ import tiger from './images/tiger.png';
 import panda from './images/panda.png';
 import tigresse from './images/tigresse.png';
 import monkey from './images/monkey.png';
+import shifu from './images/shifu.png';
 import { Breadcrumbs } from '../Breadcrumbs';
 import { useTranslation } from '@/features/translations/hooks/useTranslation';
 
@@ -20,6 +21,15 @@ export type Person = {
 const people = [
   {
     id: 1,
+    avatar: shifu,
+    fullName: 'Anatolii Kosolapov',
+    github: 'https://github.com/KosolapovAnatolii',
+    linkedin: 'https://www.linkedin.com/in/anatolii-kosolapov-2075bb278/',
+    phone: '+380 00 000 00 00',
+    email: 'trogwar4ik4@gmail.com',
+  },
+  {
+    id: 2,
     avatar: mantis,
     fullName: 'Andriy Stetsula',
     github: 'https://github.com/andriy-stetsula',
@@ -28,7 +38,7 @@ const people = [
     email: 'andriystetsula2344@gmail.com',
   },
   {
-    id: 2,
+    id: 3,
     avatar: tiger,
     fullName: 'Bohdan Mikhaylenko',
     github: 'https://github.com/impo10nt',
@@ -37,7 +47,7 @@ const people = [
     email: 'bogdanmihajlenko7@gmail.com',
   },
   {
-    id: 3,
+    id: 4,
     avatar: panda,
     fullName: 'Roman Lysunets',
     github: 'https://github.com/rlysunets',
@@ -46,7 +56,7 @@ const people = [
     email: 'rlysunets@gmail.com',
   },
   {
-    id: 4,
+    id: 5,
     avatar: tigresse,
     fullName: 'Tanya Linska',
     github: 'https://github.com/linska',
@@ -55,7 +65,7 @@ const people = [
     email: 'linskatanya@gmail.com',
   },
   {
-    id: 5,
+    id: 6,
     avatar: viper,
     fullName: 'Yana Karpovych',
     github: 'https://github.com/yana-karpovych',
@@ -64,7 +74,7 @@ const people = [
     email: 'yanakarpovych0707@gmail.com',
   },
   {
-    id: 6,
+    id: 7,
     avatar: monkey,
     fullName: 'Yevhenii Olkhhovskyi',
     github: 'https://github.com/Evgeniy45',

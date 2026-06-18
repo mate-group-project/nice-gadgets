@@ -5,6 +5,7 @@ import type { PickupPoint } from '../types/PickupPoint';
 import { getPickupPoints } from '../api/getPickupPoints.ts';
 import { PickupPointsMap } from './PickupPointsMap.tsx';
 import { useTranslation } from '@/features/translations/hooks/useTranslation';
+import { PickupPointsMapSkeleton } from './PickupPointsMapSkeleton.tsx';
 
 export const PickupPointsSection = () => {
   const { language } = useTranslation();
@@ -18,9 +19,6 @@ export const PickupPointsSection = () => {
 
   const mapRef = useRef<HTMLDivElement | null>(null);
 
-  const getCurrentLanguage = (): 'en' | 'ua' => {
-    return localStorage.getItem('app_lang') === 'ua' ? 'ua' : 'en';
-  };
   const handleToggleMap = () => {
     setIsOpen((currentIsOpen) => !currentIsOpen);
   };
@@ -62,13 +60,14 @@ export const PickupPointsSection = () => {
 
   useEffect(() => {
     if (!isOpen) return;
-    if (pickupPoints.length === 0) return;
 
-    mapRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
+    requestAnimationFrame(() => {
+      mapRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
     });
-  }, [isOpen, pickupPoints]);
+  }, [isOpen]);
 
   return (
     <>
@@ -81,9 +80,9 @@ export const PickupPointsSection = () => {
 
       {isOpen && (
         <div ref={mapRef}>
-          {loading && <p>Loading...</p>}
+          {loading && <PickupPointsMapSkeleton />}
 
-          {error && <p>{error}</p>}
+          {error && <PickupPointsMapSkeleton />}
 
           {!loading && !error && <PickupPointsMap points={pickupPoints} />}
         </div>

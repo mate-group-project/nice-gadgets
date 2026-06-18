@@ -2,7 +2,7 @@ import React from 'react';
 import './Carousel.scss';
 
 import { Icon } from '../Icon';
-import heroBanner from './../../../assets/img/Screenshot_3.png';
+import { BASE_URL } from '@/shared/api/endpoints';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -10,8 +10,14 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { useNavigate } from 'react-router-dom';
+import type { SlideLang } from '@/shared/hooks/useHomeData.ts';
 
-export const Carousel: React.FC = () => {
+type Props = {
+  slides: SlideLang[];
+  lang: string;
+};
+
+export const Carousel: React.FC<Props> = ({ slides, lang }) => {
   const navigate = useNavigate();
 
   return (
@@ -39,81 +45,42 @@ export const Carousel: React.FC = () => {
           }}
           scrollbar={{ draggable: true }}
         >
-          <SwiperSlide>
-            <div className="carousel__slide">
-              <div className="carousel__content">
-                <h2 className="carousel__title">
-                  <span className="gradient">Now available in our store</span>
-                  <span className="emoji">👌</span>
-                </h2>
-                <p className="carousel__text">Be the first!</p>
-                <button
-                  className="button carousel__button"
-                  style={{ width: '180px' }}
-                  onClick={() => navigate('/catalog?category=phones')}
-                >
-                  Order now
-                </button>
-              </div>
 
-              <div className="carousel__image">
-                <img
-                  src={heroBanner}
-                  alt="hero Banner"
-                />
-              </div>
-            </div>
-          </SwiperSlide>
+          {slides.map((slide, index) => (
+            <SwiperSlide key={index}>
+              <div className="carousel__slide">
+                <div className="carousel__content">
+                  <h2 className="carousel__title">
+                    <span className="gradient">
+                      {lang === "en" ? slide.title.en : slide.title.uk}
+                    </span>
+                    <span className="emoji">👌</span>
+                  </h2>
+                  <p className="carousel__text">
+                    {lang === "en" ? slide.text.en : slide.text.uk}
+                  </p>
+                  <button
+                    className="button carousel__button"
+                    style={{ width: '180px' }}
+                    onClick={() => navigate('/catalog')}
+                  >
+                    {lang === "en" ? slide.button.en : slide.button.uk}
+                  </button>
+                </div>
 
-          <SwiperSlide>
-            <div className="carousel__slide">
-              <div className="carousel__content">
-                <h2 className="carousel__title">
-                  <span className="gradient">Now available in our store</span>
-                  <span className="emoji">👌</span>
-                </h2>
-                <p className="carousel__text">Be the first!</p>
-                <button
-                  className="button carousel__button"
-                  style={{ width: '180px' }}
-                >
-                  Order now
-                </button>
+                <div className="carousel__image">
+                  <video
+                    src={`${BASE_URL}${slide.video}`}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </div>
               </div>
-
-              <div className="carousel__image">
-                <img
-                  src={heroBanner}
-                  alt="hero Banner"
-                />
-              </div>
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <div className="carousel__slide">
-              <div className="carousel__content">
-                <h2 className="carousel__title">
-                  <span className="gradient">Now available in our store</span>
-                  <span className="emoji">👌</span>
-                </h2>
-                <p className="carousel__text">Be the first!</p>
-                <button
-                  className="button carousel__button"
-                  style={{ width: '180px' }}
-                >
-                  Order now
-                </button>
-              </div>
-
-              <div className="carousel__image">
-                <img
-                  src={heroBanner}
-                  alt="hero Banner"
-                />
-              </div>
-            </div>
-          </SwiperSlide>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
 

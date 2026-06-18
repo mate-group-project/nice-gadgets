@@ -5,7 +5,7 @@ import { Icon } from '@/shared/components/Icon';
 import type { Product } from '../../types/Product';
 import { BASE_URL } from '@/shared/api/endpoints';
 import classNames from 'classnames';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useCart, useFavorites } from '../../hooks/useLocalStorageList';
 import { useTranslation } from '@/features/translations/hooks/useTranslation';
 
@@ -18,6 +18,9 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   const { items: favorites, saveItems: saveFavorites } = useFavorites();
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   const isAdded = cart.map((item) => item.id).includes(product.id);
 
@@ -43,7 +46,10 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
   return (
     <article className="product__card">
-      <Link to={`/product/${product.id}`}>
+      <Link 
+        to={`/product/${product.id}`}
+        state={isHome ? { fromHome: true } : undefined}
+      >
         <img
           src={`${BASE_URL}/${product.image}`}
           alt={product.name}
@@ -54,6 +60,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
       <Link
         className="product__card__link"
         to={`/product/${product.id}`}
+        state={isHome ? { fromHome: true } : undefined}
         target="_blank"
         rel="noreferrer"
       >
