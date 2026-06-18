@@ -1,5 +1,5 @@
 import './ProductNotFoundPage.scss';
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from 'react-router-dom';
 
 const getCatalogPath = (slug = '') => {
   const normalizedSlug = slug.toLowerCase();

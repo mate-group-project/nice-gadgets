@@ -9,5 +9,5 @@ export const ENDPOINTS = {
   favorites: '/favorites',
   orders: '/orders',
   pickupPoints: '/pickup-points',
-  stores: '/stores/en',
+  stores: '/stores',
 } as const;

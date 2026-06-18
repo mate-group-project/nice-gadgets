@@ -12,6 +12,7 @@ import { Breadcrumbs, type Crumb } from './Breadcrumbs';
 import { ProductCard } from '@/features/products/components/ProductCard';
 import { useProductsList } from '@/features/products/hooks/useProductsList';
 import { ProductNotFoundPage } from './ProductNotFoundPage';
+import { ProductPageSkeleton } from './ProductPageSkeleton';
 import { useTranslation } from '@/features/translations/hooks/useTranslation';
 
 const TITLES = {
@@ -36,13 +37,12 @@ export const ProductPage = () => {
     });
 
   if (isLoading) {
+    return <ProductPageSkeleton />;
     return <div className="product-page__loading">{t('common.loading') || 'Loading...'}</div>;
   }
 
   if (error || !product) {
-    return (
-      <ProductNotFoundPage />
-    );
+    return <ProductNotFoundPage />;
   }
 
   const categoryTitle = t(`categoryPage.categoriesTitle.${product.category}`) || TITLES[product.category as keyof typeof TITLES] || product.category;

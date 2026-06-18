@@ -11,7 +11,7 @@ $space-x-lg: 26px;
   padding: 24px 16px;
   gap: 16px;
 
-  @include sm-and-up {
+  @include md-and-up {
     height: 100%;
     flex-direction: row;
     align-items: stretch;

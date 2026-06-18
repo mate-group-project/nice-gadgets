@@ -7,12 +7,12 @@ import { client } from '@/shared/api/client';
 type UserDelivery =
   | { type: 'pickup'; storeId: string }
   | {
-      type: 'delivery';
-      city: string;
-      cityRef: string;
-      warehouse: string;
-      warehouseRef: string;
-    };
+    type: 'delivery';
+    city: string;
+    cityRef: string;
+    warehouse: string;
+    warehouseRef: string;
+  };
 
 interface UserCustomer {
   firstName: string;
@@ -53,6 +53,8 @@ export const AuthPage = () => {
     isLoginMode ? 'Dont have an account ?' : 'Already have an account?';
   const formToggleLink = isLoginMode ? 'Register' : 'Log In';
   const formMode = isLoginMode ? 'register' : 'login';
+
+  const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_+\-=[\]\\/`~;])\S{8,}$/;
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -104,8 +106,7 @@ export const AuthPage = () => {
           } else {
             setErrors((prev) => ({
               ...prev,
-              email: 'Invalid email or password',
-              password: 'Invalid email or password',
+              password: 'Wrong password',
             }));
           }
         }
@@ -141,6 +142,14 @@ export const AuthPage = () => {
           setErrors((prev) => ({
             ...prev,
             email: 'User with this email already exists',
+          }));
+          return;
+        }
+
+        if (!passwordRegex.test(formInputs.password)) {
+          setErrors(prev => ({
+            ...prev,
+            password: 'Password must be at least 8 characters, contain letters, numbers, special characters, and no spaces.'
           }));
           return;
         }
@@ -234,6 +243,8 @@ export const AuthPage = () => {
             style={{ borderColor: errors.password ? '#ff4d4f' : '' }}
             value={formInputs.password}
             onChange={handleChange}
+            minLength={8}
+            autoComplete={isLoginMode ? "current-password" : "new-password"}
           />
           {errors.password && (
             <span className="auth-form__field-error">{errors.password}</span>
@@ -246,6 +257,7 @@ export const AuthPage = () => {
                 placeholder="Confirm Password"
                 name="confirmPassword"
                 required
+                autoComplete="new-password"
                 style={{ borderColor: errors.confirmPassword ? '#ff4d4f' : '' }}
                 value={formInputs.confirmPassword}
                 onChange={handleChange}
