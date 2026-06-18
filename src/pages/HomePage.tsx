@@ -6,13 +6,11 @@ import { CategoryCard } from '@/features/categories/components/CategoryCard';
 import { useProductsList } from '@/features/products/hooks/useProductsList.ts';
 import { Link } from 'react-router-dom';
 import { ProductCartSkeleton } from '@/features/products/components/ProductCard/ProductCartSkeleton.tsx';
-import { useCategories } from '@/features/categories/api/useCategories';
 import { useTranslation } from '@/features/translations/hooks/useTranslation.ts';
 import { useHomeData } from '@/shared/hooks/useHomeData.ts';
 
 export const HomePage: React.FC = () => {
   const { products } = useProductsList();
-  const { categories } = useCategories();
   const { t } = useTranslation();
   const { slides, categories: categoriesLang, language } = useHomeData();
 
@@ -57,12 +55,6 @@ export const HomePage: React.FC = () => {
     accessories: 'https://i.ibb.co/rftBtp2v/Phone.png',
   };
 
-  const DISPLAY_NAMES: Record<string, string> = {
-    phones: 'Mobile phones',
-    tablets: 'Tablets',
-    accessories: 'Accessories',
-  };
-
   return (
     <>
       <div className="hero">
@@ -89,15 +81,15 @@ export const HomePage: React.FC = () => {
 
       <Section title={t('homePage.categories')}>
         <div className="categories">
-          {categories.map((category) => (
+          {categoriesLang.map((category) => (
             <Link
-              key={category.id}
+              key={category.name}
               to={`/catalog?category=${category.name}`}
               style={{ flex: 1 }}
             >
               <CategoryCard
                 image={IMAGE_BY_CATEGORY[category.name] ?? category.image}
-                title={DISPLAY_NAMES[category.name] ?? category.name}
+                title={category?.title[language] ?? ''}
                 count={COUNT_BY_CATEGORY[category.name] ?? 0}
               />
             </Link>
