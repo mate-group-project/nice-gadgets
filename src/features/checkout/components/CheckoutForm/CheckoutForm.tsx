@@ -6,9 +6,8 @@ import './CheckoutForm.scss';
 import { Dropdown } from '@/shared/components/Dropdown';
 import { useStores } from '@/shared/hooks/useStoresList';
 import { useCheckout } from '@/shared/hooks/useCheckout';
-import { useCart } from '@/features/products/hooks/useLocalStorageList';
-import { useProductsList } from '@/features/products/hooks/useProductsList';
 import { SuccessModal } from '../SuccessModal';
+import { useCartProducts } from '@/features/cart/hooks/useCartProducts';
 
 type DeliveryType = 'pickup' | 'delivery';
 
@@ -125,13 +124,13 @@ export const CheckoutForm = () => {
       .finally(() => setLoadingWarehouses(false));
   }, [selectedCity?.Ref]);
 
-  // get cart items ids
-  const { items: cartIds, saveItems } = useCart();
-  const { products } = useProductsList();
+  // get cart items
+  const { products: cartItems, clearCart } = useCartProducts();
 
-  const cartItems = products.filter((p) => cartIds.includes(p.id));
-
-  const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
+  );
 
   // sending order to server
   const { submitOrder } = useCheckout();
@@ -159,6 +158,7 @@ export const CheckoutForm = () => {
         };
 
     const order = {
+      email: form.email,
       customer: form,
       delivery,
       items: cartItems.map((item) => ({
@@ -170,7 +170,7 @@ export const CheckoutForm = () => {
     };
 
     await submitOrder(order);
-    saveItems([]);
+    clearCart();
     resetForm();
 
     setIsOpen(true);
@@ -264,31 +264,35 @@ export const CheckoutForm = () => {
 
   return (
     <>
-      <form 
+      <form
         onSubmit={handleSubmit}
-        className='order_form'
+        className="order_form"
       >
         {/*  CUSTOMER */}
         <h2>Contact information</h2>
 
         <div className="field">
-          <input 
-            name="firstName" 
-            placeholder="First name" 
+          <input
+            name="firstName"
+            placeholder="First name"
             value={form.firstName}
             onChange={handleChange}
             className="form__field"
           />
-          {errors.firstName && <p 
-            className="error"
-            ref={errors.firstName ? firstErrorRef : null}
-          >{errors.firstName}</p>}
+          {errors.firstName && (
+            <p
+              className="error"
+              ref={errors.firstName ? firstErrorRef : null}
+            >
+              {errors.firstName}
+            </p>
+          )}
         </div>
-              
+
         <div className="field">
-          <input 
-            name="lastName" 
-            placeholder="Last name" 
+          <input
+            name="lastName"
+            placeholder="Last name"
             value={form.lastName}
             onChange={handleChange}
             className="form__field"
@@ -297,22 +301,22 @@ export const CheckoutForm = () => {
         </div>
 
         <div className="field">
-          <input 
-            name="email" 
-            placeholder="Email" 
+          <input
+            name="email"
+            placeholder="Email"
             value={form.email}
-            onChange={handleChange} 
+            onChange={handleChange}
             className="form__field"
           />
           {errors.email && <p className="error">{errors.email}</p>}
         </div>
-        
+
         <div className="field">
-          <input 
-            name="phone" 
-            placeholder="Phone" 
+          <input
+            name="phone"
+            placeholder="Phone"
             value={form.phone}
-            onChange={handleChange} 
+            onChange={handleChange}
             className="form__field"
           />
           {errors.phone && <p className="error">{errors.phone}</p>}
@@ -321,7 +325,7 @@ export const CheckoutForm = () => {
         {/*  DELIVERY */}
         <h2>Delivery method</h2>
 
-        <div className='delivery__method'>
+        <div className="delivery__method">
           <label
             className={`radio__item ${
               deliveryType === 'pickup' ? 'radio__item--active' : ''
@@ -338,7 +342,7 @@ export const CheckoutForm = () => {
           </label>
 
           {deliveryType === 'pickup' && (
-            <div className='delivery__dropdown-nogap'>
+            <div className="delivery__dropdown-nogap">
               <Dropdown
                 label="Select store"
                 value={storeId}
@@ -356,8 +360,8 @@ export const CheckoutForm = () => {
             </div>
           )}
         </div>
-        
-        <div className='delivery__method'>
+
+        <div className="delivery__method">
           <label
             className={`radio__item ${
               deliveryType === 'delivery' ? 'radio__item--active' : ''
@@ -369,12 +373,12 @@ export const CheckoutForm = () => {
               checked={deliveryType === 'delivery'}
               onChange={() => setDeliveryType('delivery')}
             />
-            
+
             <span className="radio__label">Nova Poshta delivery</span>
           </label>
 
           {deliveryType === 'delivery' && (
-            <div className='delivery__dropdown'>
+            <div className="delivery__dropdown">
               {/* CITY SEARCH */}
               <p className="delivery__title">Search city</p>
 
@@ -402,7 +406,9 @@ export const CheckoutForm = () => {
                 <div className="delivery__list">
                   {cities
                     .filter((c) =>
-                      (c.Present || '').toLowerCase().includes(citySearch.toLowerCase())
+                      (c.Present || '')
+                        .toLowerCase()
+                        .includes(citySearch.toLowerCase()),
                     )
                     .map((city) => {
                       const label = city.Present || '';
@@ -424,10 +430,10 @@ export const CheckoutForm = () => {
 
                             setCitySearch(label);
 
-                              setErrors(prev => ({
-                                ...prev,
-                                city: '',
-                              }));
+                            setErrors((prev) => ({
+                              ...prev,
+                              city: '',
+                            }));
                           }}
                         >
                           {label}
@@ -458,7 +464,8 @@ export const CheckoutForm = () => {
                     />
 
                     {errors.warehouse && (
-                      <p className="error">{errors.warehouse}</p>)}
+                      <p className="error">{errors.warehouse}</p>
+                    )}
                   </div>
 
                   {loadingWarehouses && <p>Loading...</p>}
@@ -468,8 +475,8 @@ export const CheckoutForm = () => {
                       {warehouses
                         .filter((w) =>
                           w.Description.toLowerCase().includes(
-                            warehouseSearch.toLowerCase()
-                          )
+                            warehouseSearch.toLowerCase(),
+                          ),
                         )
                         .map((w) => {
                           const isActive = selectedWarehouse?.Ref === w.Ref;
@@ -484,10 +491,10 @@ export const CheckoutForm = () => {
                                 setSelectedWarehouse(w);
                                 setWarehouseSearch(w.Description);
 
-                                  setErrors(prev => ({
-                                    ...prev,
-                                    warehouse: '',
-                                  }));
+                                setErrors((prev) => ({
+                                  ...prev,
+                                  warehouse: '',
+                                }));
                               }}
                             >
                               {w.Description}
@@ -503,8 +510,8 @@ export const CheckoutForm = () => {
         </div>
 
         {/* SUBMIT */}
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="button"
           style={{ width: '180px' }}
         >
@@ -512,7 +519,10 @@ export const CheckoutForm = () => {
         </button>
       </form>
 
-      <SuccessModal isOpen={isOpen} onClose={handleClose} />
+      <SuccessModal
+        isOpen={isOpen}
+        onClose={handleClose}
+      />
     </>
   );
 };

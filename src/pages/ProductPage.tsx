@@ -11,6 +11,7 @@ import { Icon } from '@/shared/components/Icon';
 import { Breadcrumbs, type Crumb } from './Breadcrumbs';
 import { ProductCard } from '@/features/products/components/ProductCard';
 import { useProductsList } from '@/features/products/hooks/useProductsList';
+import { ProductNotFoundPage } from './ProductNotFoundPage';
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -32,7 +33,7 @@ export const ProductPage = () => {
 
   if (error || !product) {
     return (
-      <div className="product-page__error">Error loading product details.</div>
+      <ProductNotFoundPage />
     );
   }
 

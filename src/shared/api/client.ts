@@ -1,6 +1,6 @@
 import { BASE_URL } from './endpoints';
 
-type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
+type RequestMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 async function request<TResponse>(
   endpoint: string,
@@ -33,6 +33,9 @@ export const client = {
 
   put: <TResponse>(url: string, data: unknown) =>
     request<TResponse>(url, 'PUT', data),
+
+patch: <TResponse>(url: string, data: unknown) =>
+  request<TResponse>(url, 'PATCH', data),
 
   delete: (url: string) => request<void>(url, 'DELETE'),
 };
