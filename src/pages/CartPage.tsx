@@ -5,8 +5,10 @@ import '../features/cart/CartPage.scss';
 import { useCartProducts } from '@/features/cart/hooks/useCartProducts.ts';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumbs } from './Breadcrumbs';
+import { useTranslation } from '@/features/translations/hooks/useTranslation.ts';
 
 export const CartPage: React.FC = () => {
+  const { t } = useTranslation();
   const { products: cartProducts, deleteItem, changeCount } = useCartProducts();
 
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ export const CartPage: React.FC = () => {
     <div className="cart-page">
       <Breadcrumbs crumbs={[{ label: 'Cart' }]} />
 
-      <h1 className="cart-page__title">Cart</h1>
+      <h1 className="cart-page__title">{t('cart.title')}</h1>
 
       <div className="cart-page__content">
         <section className="cart-page__list-section">

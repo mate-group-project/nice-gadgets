@@ -1,8 +1,10 @@
 import { useCartProducts } from '@/features/cart/hooks/useCartProducts';
 import './OrderSummary.scss';
+import { useTranslation } from '@/features/translations/hooks/useTranslation.ts';
 
 export const OrderSummary = () => {
   const { products: cartItems } = useCartProducts();
+  const { t } = useTranslation();
 
   const total = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -11,7 +13,7 @@ export const OrderSummary = () => {
 
   return (
     <aside className="checkout_summary">
-      <h2 className="checkout_summary__title">Order summary</h2>
+      <h2 className="checkout_summary__title">{t('cart.orderSummary')}</h2>
 
       <div className="checkout_summary__list">
         {cartItems.map((product) => (
@@ -41,7 +43,7 @@ export const OrderSummary = () => {
 
       <div className="checkout_summary__footer">
         <div className="checkout_summary__row">
-          <span>Total</span>
+          <span>{t('cart.totalFor')}</span>
           <span>
             <strong>${total}</strong>
           </span>
