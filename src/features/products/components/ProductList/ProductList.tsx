@@ -30,7 +30,7 @@ export const ProductList = ({ products, isLoading, errorMessage }: Props) => {
     return (
       <div className="models__empty">
         <p className="models__empty-title">No items found</p>
-        <p className="models__empty-text">You haven't added anything yet</p>
+        <p className="models__empty-text">{`You haven't added anything yet`}</p>
       </div>
     );
   }

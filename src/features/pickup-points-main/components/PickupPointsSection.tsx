@@ -13,13 +13,19 @@ export const PickupPointsSection = () => {
   const [hasLoaded, setHasLoaded] = useState(false);
   const mapRef = useRef<HTMLDivElement | null>(null);
 
+  const getCurrentLanguage = (): 'en' | 'ua' => {
+  return localStorage.getItem('app_lang') === 'ua'
+    ? 'ua'
+    : 'en';
+};
+
   const loadPickupPoints = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      // const language: 'en' | 'uk' = 'en';
-      const response = await getPickupPoints();
+      const language = getCurrentLanguage();
+      const response = await getPickupPoints(language);
 
       setPickupPoints(response);
       setHasLoaded(true);
