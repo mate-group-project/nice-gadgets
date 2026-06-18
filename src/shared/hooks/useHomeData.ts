@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { client } from '@/shared/api/client.ts';
 
 export function useHomeData() {
   const [data, setData] = useState();
@@ -9,8 +10,16 @@ export function useHomeData() {
     const loadData = async () => {
       setIsLoading(true);
       setError('');
+
+      try {
+        const res = await client.get('home')
+
+        console.log(res)
+      }
     };
 
     loadData().then(() => {});
   }, []);
+
+  return { isLoading, error };
 }
