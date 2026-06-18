@@ -1,118 +1,219 @@
+$space-8: 8px;
+$space-12: 12px;
+$space-16: 16px;
+$space-32: 32px;
+
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+
+$font-weight-regular: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$color-accent: #3111d6; 
+$color-accent-hover: #230bb0;
+
 .account-page {
-  max-width: 1100px;
+  max-width: 1140px;
   margin: 0 auto;
-  padding: 48px 20px;
+  padding: 48px 24px;
   font-family: system-ui, sans-serif;
-  color: #111;
-  background: #fafafa;
+  color: var(--primary, #111);             
+  background-color: transparent; 
+
+  &__title {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+    margin-bottom: 32px;
+    color: var(--primary, #111);
+  }
+
+  &__content {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+
+    @media (max-width: 990px) {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+  }
+
+  &__products {
+    flex-grow: 1;
+    width: 100%;
+    
+    h2 {
+      margin-bottom: 24px;
+      color: var(--primary, #111);
+    }
+
+    p {
+      color: var(--secondary, #666);
+    }
+  }
+
+  &__products-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 270px));
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+
+    @media (max-width: 640px) {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+
+    li {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+
+      :global {
+        img {
+          display: block !important;
+          margin: 0 auto !important;
+          max-width: 100% !important;
+          object-fit: contain !important;
+        }
+      }
+    }
+  }
+
+  &__password {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 360px;
+    flex-shrink: 0;
+    background-color: var(--bg-surface, #fff); 
+    border-radius: 8px;
+    padding: $space-32; 
+    border: 1px solid var(--elements, #eee);     
+    transition: transform 0.3s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 72px; 
+
+    @media (max-width: 990px) {
+      margin-top: 0;
+    }
+
+    &:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary, #ddd);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
+    }
+
+    h2 {
+      margin: 0 0 $space-16 0;
+      font-size: 16px; 
+      font-weight: $font-weight-bold;
+      color: var(--primary, #111);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: $space-12; 
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 24px; 
+      border: 1px solid var(--elements, #ddd);
+      background-color: var(--bg-page, #fff); 
+      color: var(--primary, #111);
+      outline: none;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-regular;
+      transition: border-color 0.2s ease;
+
+      &:focus {
+        border-color: $color-accent; 
+      }
+      
+      &::placeholder {
+        color: var(--secondary, #999);
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 24px; 
+      border: none;
+      background-color: $color-accent; 
+      color: #fff; 
+      font-weight: $font-weight-bold;
+      font-size: $font-size-sm;
+      cursor: pointer;
+      transition: background-color 0.2s ease, opacity 0.2s ease;
+      margin-top: $space-8;
+
+      &:hover {
+        background-color: $color-accent-hover;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__toast {
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $space-16;
+    animation: accountFadeIn 0.3s ease;
+
+    &--error {
+      background-color: var(--bg-error, #fde8e8);
+      color: #d12d35; 
+      border: 1px solid var(--border-error, #f8b4b4);
+    }
+
+    &--success {
+      background-color: var(--bg-success, #def7ec);
+      color: #03543f;
+      border: 1px solid var(--border-success, #bcf0da);
+    }
+  }
+
+  &__error {
+    margin-top: 10px;
+    color: #d12d35;
+    font-size: 13px;
+  }
+
+  &__header {
+    margin-bottom: 32px; 
+  }
+
+  &__title {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+    margin-bottom: 4px; 
+    color: var(--primary, #111);
+  }
+
+
+  &__email {
+    font-size: 16px;
+    color: var(--secondary, #666);
+    margin: 0;
+  }
 }
 
-
-
-.account-page__title {
-  font-size: 32px;
-  font-weight: 800;
-  letter-spacing: -0.6px;
+@keyframes accountFadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-
-.account-page__products {
-  margin-bottom: 50px;
-}
-
-.account-page__products-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.account-page__product {
-  border-radius: 12px;
-  background: #fff;
-  border: 1px solid #eee;
-  overflow: hidden;
-
-  transition: 0.2s ease;
-}
-
-.account-page__product:hover {
-  transform: translateY(-3px);
-  border-color: #ddd;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-}
-
-.account-page__product img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  display: block;
-}
-
-.account-page__product span {
-  display: block;
-  padding: 6px 10px;
-  font-size: 14px;
-}
-
-.account-page__product span:last-child {
-  font-weight: 600;
-}
-
-.account-page__password {
-  max-width: 360px;
-  padding: 16px;
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 12px;
-}
-
-
-.account-page__password form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-
-.account-page__password input {
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  outline: none;
-  font-size: 14px;
-}
-
-.account-page__password input:focus {
-  border-color: #111;
-}
-
-
-.account-page__password button {
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: none;
-  background: #111;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.account-page__password button:hover {
-  background: #333;
-}
-
-.account-page__password button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-
-.account-page__error {
-  margin-top: 10px;
-  color: #d12d35;
-  font-size: 13px;
-}

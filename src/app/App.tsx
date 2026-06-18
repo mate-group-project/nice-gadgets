@@ -10,11 +10,13 @@ function App() {
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem('app-theme');
 
-    return (savedTheme === 'dark' || savedTheme === 'light') ? savedTheme : 'light';
+    return savedTheme === 'dark' || savedTheme === 'light' ?
+        savedTheme
+      : 'light';
   });
 
   useEffect(() => {
-    const root = document.documentElement; 
+    const root = document.documentElement;
 
     root.setAttribute('data-theme', theme);
 

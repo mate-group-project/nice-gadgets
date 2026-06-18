@@ -4,6 +4,9 @@
 
 .breadcrumbs {
   display: flex;
+  .container {
+    justify-content: flex-start;
+  }
 }
 
 .icon {

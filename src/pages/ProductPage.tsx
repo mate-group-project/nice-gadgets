@@ -12,6 +12,7 @@ import { Breadcrumbs, type Crumb } from './Breadcrumbs';
 import { ProductCard } from '@/features/products/components/ProductCard';
 import { useProductsList } from '@/features/products/hooks/useProductsList';
 import { ProductNotFoundPage } from './ProductNotFoundPage';
+import { ProductPageSkeleton } from './ProductPageSkeleton';
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -28,13 +29,11 @@ export const ProductPage = () => {
     });
 
   if (isLoading) {
-    return <div className="product-page__loading">Loading...</div>;
+    return <ProductPageSkeleton />;
   }
 
   if (error || !product) {
-    return (
-      <ProductNotFoundPage />
-    );
+    return <ProductNotFoundPage />;
   }
 
   const TITLES = {

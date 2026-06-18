@@ -10,9 +10,11 @@ import { Actions } from '@/shared/components/Header/Actions.tsx';
 
 interface Props {
   className?: string;
+  theme: string;
+  onToggleTheme: () => void;
 }
 
-export const Menu = ({ className = '' }: Props) => {
+export const Menu = ({ className = '' , theme, onToggleTheme}: Props) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -43,13 +45,22 @@ export const Menu = ({ className = '' }: Props) => {
 
         <Dialog.Popup className="menu__popup">
           <div className="menu__header">
-            <img
-              src="/logo.png"
-              alt="logo"
-              width="404"
-              height="145"
-              className="logo"
-            />
+            {theme === 'light' ?
+          <img
+            src="/dark-logo.png"
+            alt="logo"
+            width="404"
+            height="145"
+            className="logo"
+          />
+        : <img
+            src="/light-logo.png"
+            alt="logo"
+            width="404"
+            height="145"
+            className="logo"
+          />
+        }
             <Dialog.Close className="menu__close">
               <Icon name="close" />
             </Dialog.Close>
@@ -59,8 +70,8 @@ export const Menu = ({ className = '' }: Props) => {
             <div className="menu__footer">
               <Actions
                 onNavigate={() => setOpen(false)}
-                onToggleTheme={() => {}}
-                theme={''}
+                onToggleTheme={onToggleTheme}
+                theme={theme}
               />
             </div>
           </div>
