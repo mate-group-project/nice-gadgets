@@ -14,10 +14,6 @@ export const HomePage: React.FC = () => {
   const { t } = useTranslation();
   const { slides, categories: categoriesLang, language } = useHomeData();
 
-  console.log(slides);
-  console.log(categoriesLang);
-  console.log(language);
-
   const maxYear = Math.max(...products.map((p) => p.year));
 
   const brandNewProducts = products.filter(

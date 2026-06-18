@@ -35,6 +35,7 @@ export const AuthPage = () => {
     password: '',
     confirmPassword: '',
     name: '',
+    lastName: '',
   });
   const [errors, setErrors] = useState({
     email: '',
@@ -103,6 +104,7 @@ export const AuthPage = () => {
               password: '',
               confirmPassword: '',
               name: '',
+              lastName: '',
             });
           } else {
             setErrors((prev) => ({
@@ -159,7 +161,7 @@ export const AuthPage = () => {
         const newUser: User = {
           customer: {
             firstName: formInputs.name,
-            lastName: '',
+            lastName: formInputs.lastName,
             email: formInputs.email,
             phone: '',
             password: formInputs.password,
@@ -180,6 +182,7 @@ export const AuthPage = () => {
           password: '',
           confirmPassword: '',
           name: '',
+          lastName: '',
         });
       } catch (err) {
         setErrors((prev) => ({
@@ -215,14 +218,24 @@ export const AuthPage = () => {
           className="auth-form"
         >
           {!isLoginMode && (
-            <input
-              type="text"
-              placeholder="Name"
-              name="name"
-              required
-              value={formInputs.name}
-              onChange={handleChange}
-            />
+            <>
+              <input
+                type="text"
+                placeholder="First name"
+                name="name"
+                required
+                value={formInputs.name}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                placeholder="Last name"
+                name="lastName"
+                required
+                value={formInputs.lastName}
+                onChange={handleChange}
+              />
+            </>
           )}
 
           <input
