@@ -7,41 +7,76 @@ import {
 import { getProductsList } from '@/features/products/api/products';
 import type { Product } from '@/features/products/types/Product';
 
+type ProfileData = {
+  firstName: string;
+  lastName: string;
+  phone: string;
+};
+
 export const useAccount = () => {
   const [user, setUser] = useState<StoredUser | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem('currentUser');
-    const currentUser: StoredUser | null = stored ? JSON.parse(stored) : null;
+    try {
+      const stored = localStorage.getItem('currentUser');
+      const currentUser: StoredUser | null = stored ? JSON.parse(stored) : null;
 
-    if (!currentUser) {
+      if (!currentUser) {
+        setIsLoading(false);
+        return;
+      }
+
+      setUser(currentUser);
+
+      getOrdersByEmail(currentUser.customer.email)
+        .then((orders) => {
+          setOrders(orders);
+          const productIds = new Set(
+            orders.flatMap((order) =>
+              order.items.map((item) => item.productId),
+            ),
+          );
+
+          return getProductsList({ perPage: '1000' }).then((allProducts) => {
+            const data =
+              Array.isArray(allProducts) ? allProducts : allProducts.data;
+
+            setProducts(data.filter((product) => productIds.has(product.id)));
+          });
+        })
+        .catch((err) => {
+          console.log('Error:', err);
+          setError('Unable to load account data');
+        })
+        .finally(() => setIsLoading(false));
+    } catch {
+      setError('Unable to load account data');
       setIsLoading(false);
+    }
+  }, []);
+
+  const updateProfile = (data: ProfileData) => {
+    if (!user) {
       return;
     }
 
-    setUser(currentUser);
+    const updatedUser = {
+      ...user,
+      customer: {
+        ...user.customer,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phone: data.phone,
+      },
+    };
 
-    getOrdersByEmail(currentUser.customer.email)
-      .then((orders) => {
-        const productIds = new Set(
-          orders.flatMap((order) => order.items.map((item) => item.productId)),
-        );
-
-        return getProductsList({ perPage: '1000' }).then((allProducts) => {
-          const data =
-            Array.isArray(allProducts) ? allProducts : allProducts.data;
-          setProducts(data.filter((product) => productIds.has(product.id)));
-        });
-      })
-      .catch((err) => {
-        console.log('Error:', err);
-        setError('Unable to load account data');
-      })
-      .finally(() => setIsLoading(false));
-  }, []);
+    setUser(updatedUser);
+    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+  };
 
   const changePassword = (newPassword: string) => {
     if (!user) return;
@@ -55,6 +90,7 @@ export const useAccount = () => {
           ...user,
           customer: { ...user.customer, password: newPassword },
         };
+
         setUser(updated);
         localStorage.setItem('currentUser', JSON.stringify(updated));
       })
@@ -62,5 +98,13 @@ export const useAccount = () => {
       .finally(() => setIsLoading(false));
   };
 
-  return { user, products, isLoading, error, changePassword };
+  return {
+    user,
+    products,
+    isLoading,
+    error,
+    orders,
+    changePassword,
+    updateProfile,
+  };
 };
