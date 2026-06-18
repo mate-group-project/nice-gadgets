@@ -21,14 +21,14 @@ export const useFavoriteProducts = () => {
       setError('');
 
       try {
-       const result: PromiseSettledResult<Product>[] =
-  await Promise.allSettled(
-    favoritesLocal.map((id: string) => getFavouriteProduct(id)),
-  );
+        const result: PromiseSettledResult<Product>[] =
+          await Promise.allSettled(
+            favoritesLocal.map((id: string) => getFavouriteProduct(id)),
+          );
 
-  const fulfilled = result
-  .filter((item) => item.status === 'fulfilled')
-  .map((item) => (item as PromiseFulfilledResult<Product>).value);
+        const fulfilled = result
+          .filter((item) => item.status === 'fulfilled')
+          .map((item) => (item as PromiseFulfilledResult<Product>).value);
 
         setFavoritesProducts(fulfilled);
       } catch {
@@ -38,7 +38,7 @@ export const useFavoriteProducts = () => {
       }
     };
 
-   loadProductCart().then(() => {});
+    loadProductCart().then(() => {});
   }, []);
 
   return {

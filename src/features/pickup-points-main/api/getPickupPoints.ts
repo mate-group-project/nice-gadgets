@@ -10,9 +10,7 @@ type StoresResponse = {
 };
 
 export const getPickupPoints = async () => {
-  const response = await client.get<StoresResponse>(
-    `${ENDPOINTS.stores}`,
-  );
+  const response = await client.get<StoresResponse>(`${ENDPOINTS.stores}`);
 
   console.log('getPickupPoints response:', response);
 

@@ -44,8 +44,8 @@
       background: transparent;
       border-color: var(--elements);
 
-      &:not(:disabled):hover  {
-        box-shadow: 0 3px 13px 0 var(--elements); 
+      &:not(:disabled):hover {
+        box-shadow: 0 3px 13px 0 var(--elements);
       }
     }
   }
@@ -57,11 +57,11 @@
     border-radius: 16px;
 
     @include sm-and-up {
-      max-width: 45%;    
+      max-width: 45%;
       padding: 20px;
     }
 
-    @include lg-and-up { 
+    @include lg-and-up {
       padding: 50px;
     }
   }
@@ -74,13 +74,9 @@
     @include lg-and-up {
       font-size: 40px;
     }
-    
+
     .gradient {
-      background: linear-gradient(
-        45deg,
-        var(--accent) 0%,
-        #b09be3 100%
-      );
+      background: linear-gradient(45deg, var(--accent) 0%, #b09be3 100%);
       background-size: 100% 100%;
       background-repeat: no-repeat;
       -webkit-background-clip: text;
