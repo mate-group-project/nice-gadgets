@@ -12,11 +12,19 @@ import { Breadcrumbs, type Crumb } from './Breadcrumbs';
 import { ProductCard } from '@/features/products/components/ProductCard';
 import { useProductsList } from '@/features/products/hooks/useProductsList';
 import { ProductNotFoundPage } from './ProductNotFoundPage';
+import { useTranslation } from '@/features/translations/hooks/useTranslation';
+
+const TITLES = {
+  phones: 'Mobile phones',
+  tablets: 'Tablets',
+  accessories: 'Accessories',
+} as const;
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const { product, isLoading, error } = useProduct(slug);
   const { products } = useProductsList();
+  const { t } = useTranslation();
 
   const hotPriceProducts = [...products]
     .filter((product) => product.fullPrice > product.price)
@@ -28,7 +36,7 @@ export const ProductPage = () => {
     });
 
   if (isLoading) {
-    return <div className="product-page__loading">Loading...</div>;
+    return <div className="product-page__loading">{t('common.loading') || 'Loading...'}</div>;
   }
 
   if (error || !product) {
@@ -37,15 +45,11 @@ export const ProductPage = () => {
     );
   }
 
-  const TITLES = {
-    phones: 'Mobile phones',
-    tablets: 'Tablets',
-    accessories: 'Accessories',
-  } as const;
+  const categoryTitle = t(`categoryPage.categoriesTitle.${product.category}`) || TITLES[product.category as keyof typeof TITLES] || product.category;
 
   const crumbs: Crumb[] = [
     {
-      label: TITLES[product.category],
+      label: categoryTitle,
       url: '/catalog?category=' + product.category,
     },
     {
@@ -63,7 +67,7 @@ export const ProductPage = () => {
           className="product-page__back-link"
         >
           <Icon name="chevronLeft" />
-          <span>Back</span>
+          <span>{t('productPage.back') || 'Back'}</span>
         </Link>
 
         <div className="product-page__container">
@@ -88,7 +92,7 @@ export const ProductPage = () => {
 
       {hotPriceProducts.length > 0 && (
         <Section
-          title="You may also like"
+          title={t('product.mayAlsoLike') || 'You may also like'}
           isSlide
         >
           {hotPriceProducts.map((product) => (

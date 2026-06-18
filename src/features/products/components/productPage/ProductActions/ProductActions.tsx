@@ -8,6 +8,7 @@ import '../../ProductCard/ProductCard.scss';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useCart, useFavorites } from '../../../hooks/useLocalStorageList';
+import { useTranslation } from '@/features/translations/hooks/useTranslation';
 
 type ProductActionsProps = {
   product: ProductDetails;
@@ -35,6 +36,7 @@ export const ProductActions = ({ product }: ProductActionsProps) => {
   const { items: cart, saveItems } = useCart();
   const { items: favorites, saveItems: saveFavorites } = useFavorites();
   const specsConfig = formatProdductSpecs(product);
+  const { t } = useTranslation();
 
   const isAdded = cart.map((item) => item.id).includes(product.id);
   const isFavorite = favorites.includes(product.id);
@@ -65,13 +67,21 @@ export const ProductActions = ({ product }: ProductActionsProps) => {
     saveFavorites([...favorites, product.id]);
   };
 
+  const getSpecLabel = (label: string) => {
+    const lowerLabel = label.toLowerCase();
+    if (lowerLabel === 'capacity') {
+      return t('product.capacityLabel') || t('product.capacity') || label;
+    }
+    return t(`product.${lowerLabel}`) || label;
+  };
+
   return (
     <div className="product-page__actions product-actions">
       <div className="product-actions__content">
         <div className="product-actions__selection">
           <div className="product-actions__selection-header">
             <span className="product-actions__selection-title">
-              Available colors
+              {t('product.colors') || 'Available colors'}
             </span>
             <span className="product-actions__id">ID: {product.id}</span>
           </div>
@@ -102,7 +112,7 @@ export const ProductActions = ({ product }: ProductActionsProps) => {
 
         <div className="product-actions__selection">
           <span className="product-actions__selection-title">
-            Select capacity
+            {t('product.selectCapacity') || 'Select capacity'}
           </span>
 
           <div className="product-actions__capacity-options">
@@ -152,7 +162,9 @@ export const ProductActions = ({ product }: ProductActionsProps) => {
               })}
               onClick={addToCart}
             >
-              {isAdded ? 'Added to cart' : 'Add to cart'}
+              {isAdded 
+                ? (t('product.addedToCart') || 'Added to cart') 
+                : (t('product.addToCart') || 'Add to cart')}
             </Button>
 
             <Button
@@ -175,7 +187,7 @@ export const ProductActions = ({ product }: ProductActionsProps) => {
                   key={spec.label}
                   className="short-specs__item"
                 >
-                  <span className="short-specs__name">{spec.label}</span>
+                  <span className="short-specs__name">{getSpecLabel(spec.label)}</span>
                   <span className="short-specs__value">{spec.value}</span>
                 </li>
               );
