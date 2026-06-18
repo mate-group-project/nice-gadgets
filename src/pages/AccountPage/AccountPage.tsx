@@ -75,46 +75,45 @@ export const AccountPage = () => {
         </ul>
       </section>
 
-        <section className="account-page__password">
-          <h2>Change password</h2>
+      <section className="account-page__password">
+        <h2>Change password</h2>
 
-          {message && (
-            <div
-              className={`account-page__toast account-page__toast--${message.type}`}
-            >
-              {message.text}
-            </div>
-          )}
+        {message && (
+          <div
+            className={`account-page__toast account-page__toast--${message.type}`}
+          >
+            {message.text}
+          </div>
+        )}
 
-          <form onSubmit={hundlePasswordChange}>
-            <input
-              type="password"
-              placeholder="Current password"
-              name="currentPassword"
-              required
-            />
-            <input
-              type="password"
-              placeholder="New password"
-              name="newPassword"
-              required
-            />
-            <input
-              type="password"
-              placeholder="Confirm new password"
-              name="confirmPassword"
-              required
-            />
-            <button
-              type="submit"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Saving...' : 'Save'}
-            </button>
-          </form>
-          {error && <p className="account-page__error">{error}</p>}
-        </section>
-      </div>
+        <form onSubmit={hundlePasswordChange}>
+          <input
+            type="password"
+            placeholder="Current password"
+            name="currentPassword"
+            required
+          />
+          <input
+            type="password"
+            placeholder="New password"
+            name="newPassword"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Confirm new password"
+            name="confirmPassword"
+            required
+          />
+          <button
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Saving...' : 'Save'}
+          </button>
+        </form>
+        {error && <p className="account-page__error">{error}</p>}
+      </section>
     </div>
   );
 };
