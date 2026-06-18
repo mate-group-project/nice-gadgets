@@ -20,9 +20,6 @@ type Props = {
 export const Carousel: React.FC<Props> = ({ slides, lang }) => {
   const navigate = useNavigate();
 
-  console.log(slides);
-  console.log(lang);
-
   return (
     <div className="carousel carousel-hero">
       <div className="swiper_wrapper">
