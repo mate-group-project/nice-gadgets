@@ -40,15 +40,7 @@ export const AccountPage = () => {
             <ProductCard
               key={product.id}
               product={product}
-              className="account-page__product"
-            >
-              <img
-                src={product.image}
-                alt={product.name}
-              />
-              <span>{product.name}</span>
-              <span>${product.price}</span>
-            </ProductCard>
+            ></ProductCard>
           ))}
         </ul>
       </section>
