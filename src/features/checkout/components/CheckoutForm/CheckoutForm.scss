@@ -39,9 +39,20 @@
 
   .delivery__dropdown {
     margin-top: 20px;
+  }
+
+  .delivery__method {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--icons);
+    border-radius: 8px;
 
     @include lg-and-up {
       width: 80%;
+    }
+
+    &:has(.radio__item--active) {
+      border-color: var(--primary);
     }
   }
 
@@ -50,22 +61,14 @@
       display: flex;
       align-items: center;
       gap: 10px;
-
       padding: 10px 12px;
-
-      border: 1px solid var(--icons);
       border-radius: 8px;
       background-color: var(--bg-surface);
-
       cursor: pointer;
       transition: 0.2s;
 
       &:hover {
         border-color: var(--secondary);
-      }
-
-      &--active {
-        border-color: var(--primary);
       }
 
       @include lg-and-up {
@@ -127,10 +130,6 @@
     &__dropdown-nogap {
       margin-top: 15px;
       width: 100%;
-
-      @include lg-and-up {
-        width: 80%;
-      }
     }
 
     &__list {
@@ -143,6 +142,7 @@
 
     &__item {
       padding: 8px 12px;
+      margin: 0;
       cursor: pointer;
       color: var(--secondary);
 

@@ -1,17 +1,16 @@
-import { useCart } from '@/features/products/hooks/useLocalStorageList';
-import { useProductsList } from '@/features/products/hooks/useProductsList';
+
+import { useCartProducts } from '@/features/cart/hooks/useCartProducts';
 import './OrderSummary.scss';
 
 export const OrderSummary = () => {
-  const { items: cartIds } = useCart();
-  const { products } = useProductsList();
+  const { products: cartItems } = useCartProducts();
 
-  const cartItems = products.filter((p) =>
-    cartIds.map((item) => item.id).includes(p.id),
+  console.log(cartItems);
+
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
   );
-  console.log(products);
-
-  const total = cartItems.reduce((sum, item) => sum + item.price, 0);
 
   return (
     <aside className="checkout_summary">
@@ -24,19 +23,22 @@ export const OrderSummary = () => {
             className="checkout_summary__item"
           >
             <div className="checkout_summary__info">
-              <div className="checkout_summary__name">{product.name}</div>
+              <div className="checkout_summary__name">
+                {product.name}
+              </div>
 
               <div className="checkout_summary__meta">
-                {product.color} • {product.capacity}
+                <span>
+                  {product.color} • {product.capacity} 
+                </span>
+                <span>
+                  ${product.price} x {product.quantity}
+                </span>
               </div>
             </div>
 
             <div className="checkout_summary__price">
-              <span>${product.price}</span>
-
-              {product.price !== product.fullPrice && (
-                <span className="checkout_summary__price-old">{`$${product.fullPrice}`}</span>
-              )}
+              <span>${product.price * product.quantity}</span>
             </div>
           </div>
         ))}
