@@ -24,11 +24,11 @@ const TITLES = {
 
 export const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  
+
   const { product: productDetails, isLoading, error } = useProduct(slug);
   const { products } = useProductsList();
   const { t } = useTranslation();
-  
+
   const location = useLocation();
   const cameFromHome = location.state?.fromHome === true;
 
@@ -60,21 +60,21 @@ export const ProductPage = () => {
     capacity: productDetails.capacity,
     ram: productDetails.ram,
     image: productDetails.images?.[0] || '',
-    color: productDetails.color, 
-    year: 2026, 
+    color: productDetails.color,
+    year: 2026,
   };
 
   const categoryTitle = t(`categoryPage.categoriesTitle.${productDetails.category}`) || TITLES[productDetails.category as keyof typeof TITLES] || productDetails.category;
 
   const crumbs: Crumb[] = [];
-  
+
   if (!cameFromHome) {
     crumbs.push({
       label: categoryTitle,
       url: '/catalog?category=' + productDetails.category,
     });
   }
-  
+
   crumbs.push({
     label: productDetails.name,
   });
@@ -101,8 +101,8 @@ export const ProductPage = () => {
                 product={productDetails}
                 key={productDetails.id}
               />
-              <ProductActions 
-                product={basicProduct} 
+              <ProductActions
+                product={basicProduct}
                 productDetails={productDetails}
               />
             </div>
