@@ -29,7 +29,7 @@
     padding: 14px;
     margin: -6px 0;
 
-    @include lg-and-up {
+    @media screen and (min-width: 1260px) {
       margin: -6px -14px;
     }
   }
