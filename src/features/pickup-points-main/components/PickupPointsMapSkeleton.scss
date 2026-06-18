@@ -1,0 +1,25 @@
+.map-loader {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(60deg, #eaeded 25%, #f3f4f6 50%, #eaeded 75%);
+  background-size: 200% 100%;
+  animation: map-loader-loading 2s infinite;
+}
+
+@keyframes map-loader-loading {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.map-wrapper {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  margin-top: 16px;
+}
