@@ -11,9 +11,7 @@ export const About = ({ productDescription }: AboutProps) => {
 
   return (
     <div className="product-page__about about">
-      <h2 className="about__title">
-        {t('product.about') || 'About'}
-      </h2>
+      <h2 className="about__title">{t('product.about') || 'About'}</h2>
 
       <div className="about__content">
         {productDescription.map((desc, index) => (

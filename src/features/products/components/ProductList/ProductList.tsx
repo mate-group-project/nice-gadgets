@@ -32,8 +32,12 @@ export const ProductList = ({ products, isLoading, errorMessage }: Props) => {
   if (products.length === 0) {
     return (
       <div className="models__empty">
-        <p className="models__empty-title">{t('products.notFound') || 'No items found'}</p>
-        <p className="models__empty-text">{t('products.emptyList') || "You haven't added anything yet"}</p>
+        <p className="models__empty-title">
+          {t('products.notFound') || 'No items found'}
+        </p>
+        <p className="models__empty-text">
+          {t('products.emptyList') || "You haven't added anything yet"}
+        </p>
       </div>
     );
   }

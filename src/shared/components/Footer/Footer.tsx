@@ -65,7 +65,7 @@ export const Footer = ({ theme }: FooterProps) => {
       </div>
       <div className="footer__container">
         <a
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => document.body.scrollTo({ top: 0, behavior: 'smooth' })}
           style={{ cursor: 'pointer' }}
           className="back"
         >
@@ -73,10 +73,9 @@ export const Footer = ({ theme }: FooterProps) => {
         </a>
         <Button
           className="button__icon button--lg"
-           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => document.body.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          {' '}
-          <Icon name="chevronUp" />{' '}
+          <Icon name="chevronUp" />
         </Button>
       </div>
     </div>

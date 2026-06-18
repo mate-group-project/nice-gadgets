@@ -81,22 +81,21 @@ export const Actions = ({
           )}
         </NavLink>
       </li>
-      {user ? (
+      {user ?
         <li className="actions__item actions__profile">
           <NavLink
             to="/account"
-            className={cn("actions__link actions__profile-trigger", {
-              "actions__link--active": isAccountPage
+            className={cn('actions__link actions__profile-trigger', {
+              'actions__link--active': isAccountPage,
             })}
             onClick={onNavigate}
           >
-            {user.customer?.firstName ? (
+            {user.customer?.firstName ?
               <div className="actions__avatar">
-                {user.customer.firstName[0]}{user.customer.lastName?.[0]}
+                {user.customer.firstName[0]}
+                {user.customer.lastName?.[0]}
               </div>
-            ) : (
-              <Icon name="user" />
-            )}
+            : <Icon name="user" />}
           </NavLink>
 
           <div className="actions__dropdown">
@@ -122,8 +121,7 @@ export const Actions = ({
             </button>
           </div>
         </li>
-      ) : (
-        <li className="actions__item">
+      : <li className="actions__item">
           <NavLink
             to="/auth?mode=login"
             className="actions__link"
@@ -132,7 +130,7 @@ export const Actions = ({
             <Icon name="user" />
           </NavLink>
         </li>
-      )}
+      }
     </ul>
   );
 };

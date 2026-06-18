@@ -76,12 +76,16 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
       <section className="product__card__specs">
         <p className="product__card__spec">
-          <span className="product__card__spec-label">{t('product.screen')}</span>
+          <span className="product__card__spec-label">
+            {t('product.screen')}
+          </span>
           <span className="product__card__spec-value">{product.screen}</span>
         </p>
 
         <p className="product__card__spec">
-          <span className="product__card__spec-label">{t('product.capacityLabel') || 'Capacity'}</span>
+          <span className="product__card__spec-label">
+            {t('product.capacityLabel') || 'Capacity'}
+          </span>
           <span className="product__card__spec-value">{product.capacity}</span>
         </p>
 

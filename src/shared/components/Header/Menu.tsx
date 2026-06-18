@@ -14,7 +14,7 @@ interface Props {
   onToggleTheme: () => void;
 }
 
-export const Menu = ({ className = '' , theme, onToggleTheme}: Props) => {
+export const Menu = ({ className = '', theme, onToggleTheme }: Props) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -46,21 +46,21 @@ export const Menu = ({ className = '' , theme, onToggleTheme}: Props) => {
         <Dialog.Popup className="menu__popup">
           <div className="menu__header">
             {theme === 'light' ?
-          <img
-            src="/dark-logo.png"
-            alt="logo"
-            width="404"
-            height="145"
-            className="logo"
-          />
-        : <img
-            src="/light-logo.png"
-            alt="logo"
-            width="404"
-            height="145"
-            className="logo"
-          />
-        }
+              <img
+                src="/dark-logo.png"
+                alt="logo"
+                width="404"
+                height="145"
+                className="logo"
+              />
+            : <img
+                src="/light-logo.png"
+                alt="logo"
+                width="404"
+                height="145"
+                className="logo"
+              />
+            }
             <Dialog.Close className="menu__close">
               <Icon name="close" />
             </Dialog.Close>
