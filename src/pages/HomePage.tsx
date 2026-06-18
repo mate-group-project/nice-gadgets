@@ -50,7 +50,7 @@ export const HomePage: React.FC = () => {
 
       {brandNewProducts.length > 0 ?
         <Section
-          title="Brand new models"
+          title={t('homePage.newModels')}
           isSlide
         >
           {brandNewProducts.map((product) => (
@@ -62,7 +62,7 @@ export const HomePage: React.FC = () => {
         </Section>
       : <Section>{loader}</Section>}
 
-      <Section title="Shop by category">
+      <Section title={t('homePage.categories')}>
         <div className="categories">
           {categories.map((category, index) => (
             <Link
@@ -78,7 +78,7 @@ export const HomePage: React.FC = () => {
 
       {hotPriceProducts.length > 0 ?
         <Section
-          title="Hot prices"
+          title={t('homePage.hotPrices')}
           isSlide
         >
           {hotPriceProducts.map((product) => (

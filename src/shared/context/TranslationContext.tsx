@@ -53,7 +53,7 @@ export const TranslationProvider = ({ children }: Props) => {
     loadTranslations().then(() => {});
   }, [language]);
 
-  const t = useCallback(
+const t = useCallback(
     (key: string) => {
       const value = key.split('.').reduce<unknown>((acc, part) => {
         if (acc && typeof acc === 'object' && part in acc) {
@@ -62,12 +62,10 @@ export const TranslationProvider = ({ children }: Props) => {
 
         return undefined;
       }, translations);
-
-      return typeof value === 'string' ? value : key;
+      return typeof value === 'string' ? value : '';
     },
     [translations],
   );
-
   const value = useMemo(
     () => ({
       language,

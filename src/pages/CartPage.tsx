@@ -5,12 +5,14 @@ import type { CartItemType } from '../features/cart/types';
 import '../features/cart/CartPage.scss';
 import { useCartProducts } from '@/features/cart/hooks/useCartProducts.ts';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from '@/features/translations/hooks/useTranslation'; // Подключаем переводы
 
 export const CartPage: React.FC = () => {
   const { cartProducts, isLoading } = useCartProducts();
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
   // const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
+  const { t } = useTranslation(); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,6 +38,7 @@ export const CartPage: React.FC = () => {
         quantity: savedQuantities[product.id] || 1,
       }));
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCartItems(validProducts);
   }, [cartProducts]);
 
@@ -99,7 +102,7 @@ export const CartPage: React.FC = () => {
   if (isLoading && cartItems.length === 0) {
     return (
       <div className="cart-page">
-        <h1 className="cart-page__title">Loading...</h1>
+        <h1 className="cart-page__title">{t('cart.loading') || 'Loading...'}</h1>
       </div>
     );
   }
@@ -110,9 +113,9 @@ export const CartPage: React.FC = () => {
         href="/"
         className="cart-page__back-link"
       >
-        Back
+        {t('buttons.back') || 'Back'}
       </a>
-      <h1 className="cart-page__title">Cart</h1>
+      <h1 className="cart-page__title">{t('cart.title') || 'Cart'}</h1>
 
       <div className="cart-page__content">
         <section className="cart-page__list-section">
