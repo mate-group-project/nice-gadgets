@@ -1,4 +1,3 @@
-
 import { useCartProducts } from '@/features/cart/hooks/useCartProducts';
 import './OrderSummary.scss';
 
@@ -23,13 +22,11 @@ export const OrderSummary = () => {
             className="checkout_summary__item"
           >
             <div className="checkout_summary__info">
-              <div className="checkout_summary__name">
-                {product.name}
-              </div>
+              <div className="checkout_summary__name">{product.name}</div>
 
               <div className="checkout_summary__meta">
                 <span>
-                  {product.color} • {product.capacity} 
+                  {product.color} • {product.capacity}
                 </span>
                 <span>
                   ${product.price} x {product.quantity}

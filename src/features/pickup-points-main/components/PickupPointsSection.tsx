@@ -14,10 +14,8 @@ export const PickupPointsSection = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
 
   const getCurrentLanguage = (): 'en' | 'ua' => {
-  return localStorage.getItem('app_lang') === 'ua'
-    ? 'ua'
-    : 'en';
-};
+    return localStorage.getItem('app_lang') === 'ua' ? 'ua' : 'en';
+  };
 
   const loadPickupPoints = async () => {
     setLoading(true);

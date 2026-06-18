@@ -7,12 +7,12 @@ import { client } from '@/shared/api/client';
 type UserDelivery =
   | { type: 'pickup'; storeId: string }
   | {
-    type: 'delivery';
-    city: string;
-    cityRef: string;
-    warehouse: string;
-    warehouseRef: string;
-  };
+      type: 'delivery';
+      city: string;
+      cityRef: string;
+      warehouse: string;
+      warehouseRef: string;
+    };
 
 interface UserCustomer {
   firstName: string;
@@ -54,7 +54,8 @@ export const AuthPage = () => {
   const formToggleLink = isLoginMode ? 'Register' : 'Log In';
   const formMode = isLoginMode ? 'register' : 'login';
 
-  const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_+\-=[\]\\/`~;])\S{8,}$/;
+  const passwordRegex =
+    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_+\-=[\]\\/`~;])\S{8,}$/;
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -147,9 +148,10 @@ export const AuthPage = () => {
         }
 
         if (!passwordRegex.test(formInputs.password)) {
-          setErrors(prev => ({
+          setErrors((prev) => ({
             ...prev,
-            password: 'Password must be at least 8 characters, contain letters, numbers, special characters, and no spaces.'
+            password:
+              'Password must be at least 8 characters, contain letters, numbers, special characters, and no spaces.',
           }));
           return;
         }
@@ -244,7 +246,7 @@ export const AuthPage = () => {
             value={formInputs.password}
             onChange={handleChange}
             minLength={8}
-            autoComplete={isLoginMode ? "current-password" : "new-password"}
+            autoComplete={isLoginMode ? 'current-password' : 'new-password'}
           />
           {errors.password && (
             <span className="auth-form__field-error">{errors.password}</span>
