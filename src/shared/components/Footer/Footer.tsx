@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { useTranslation } from '@/features/translations/hooks/useTranslation.ts';
 
 const scrollToTop = () => {
-  document.scrollingElement?.scrollTo({
+  window.scrollTo({
     top: 0,
     behavior: 'smooth',
   });
