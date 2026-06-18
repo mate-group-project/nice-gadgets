@@ -14,7 +14,15 @@ export const useStores = () => {
       try {
         const res = await getStores();
 
-        setStores(res.data);
+        const language = localStorage.getItem('language') || 'en';
+
+        const block = res.find((item) => item.id === language);
+
+        if (block) {
+          setStores(block.data);
+        } else {
+          setStores([]);
+        }
       } catch {
         setError('Unable to load stores');
       } finally {

@@ -55,7 +55,7 @@ export const CheckoutForm = () => {
 
   const { stores } = useStores();
 
-  const storeOptions = stores.map((store) => ({
+  const storeOptions = (stores ?? []).map((store) => ({
     label: store.name,
     value: String(store.id),
   }));
@@ -143,7 +143,6 @@ export const CheckoutForm = () => {
     await submitOrder(order);
     clearCart();
     resetForm();
-
     setIsOpen(true);
 
     console.log('ORDER:', order);
