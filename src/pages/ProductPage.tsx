@@ -4,7 +4,7 @@ import { Gallery } from '../features/products/components/productPage/Gallery';
 import { ProductActions } from '../features/products/components/productPage/ProductActions';
 import { About } from '../features/products/components/productPage/About';
 import { TechSpecs } from '../features/products/components/productPage/TechSpecs';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import { useProduct } from '@/features/products/hooks/useProduct';
 import { Section } from '@/shared/components/Section';
 import { Icon } from '@/shared/components/Icon';
@@ -27,6 +27,9 @@ export const ProductPage = () => {
   const { products } = useProductsList();
   const { t } = useTranslation();
 
+  const location = useLocation();
+  const cameFromHome = location.state?.fromHome === true;
+
   const hotPriceProducts = [...products]
     .filter((product) => product.fullPrice > product.price)
     .sort((a, b) => {
@@ -38,7 +41,6 @@ export const ProductPage = () => {
 
   if (isLoading) {
     return <ProductPageSkeleton />;
-    return <div className="product-page__loading">{t('common.loading') || 'Loading...'}</div>;
   }
 
   if (error || !product) {
@@ -47,15 +49,18 @@ export const ProductPage = () => {
 
   const categoryTitle = t(`categoryPage.categoriesTitle.${product.category}`) || TITLES[product.category as keyof typeof TITLES] || product.category;
 
-  const crumbs: Crumb[] = [
-    {
+  const crumbs: Crumb[] = [];
+
+  if (!cameFromHome) {
+    crumbs.push({
       label: categoryTitle,
       url: '/catalog?category=' + product.category,
-    },
-    {
-      label: product.name,
-    },
-  ];
+    });
+  }
+
+  crumbs.push({
+    label: product.name,
+  });
 
   return (
     <>
