@@ -9,8 +9,12 @@
 .categories {
   display: flex;
   justify-content: center;
-  max-width: 1360px;
   gap: 16px;
+  padding: 0 14px;
+
+  @media screen and (min-width: 1260px) {
+    padding: 0;
+  }
 }
 
 .phone {
