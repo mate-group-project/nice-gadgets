@@ -31,14 +31,14 @@ export const CustomerFormFields = ({
         <input
           name={name}
           placeholder={placeholder}
-          value={form[name]}
+          value={form[name] ?? ''}
           onChange={handleChange}
           className="form__field"
         />
         {errors[name] && (
           <p
             className="error"
-            ref={errors[name] && name === 'firstName' ? firstErrorRef : null}
+            ref={name === Object.keys(errors)[0] ? firstErrorRef : null}
           >
             {errors[name]}
           </p>
