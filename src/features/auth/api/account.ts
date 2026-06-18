@@ -1,5 +1,5 @@
-import { client } from "@/shared/api/client";
-import { ENDPOINTS } from "@/shared/api/endpoints";
+import { client } from '@/shared/api/client';
+import { ENDPOINTS } from '@/shared/api/endpoints';
 
 export type StoredUser = {
   id: string;
@@ -37,13 +37,17 @@ export const findUserByEmail = (email: string) => {
   return client
     .get<StoredUser[]>(`${ENDPOINTS.users}?customer.email=${email}`)
     .then((users) => users[0] ?? null);
-}
+};
 
 export const getOrdersByEmail = (email: string) => {
-  return client.get<Order[]>(`${ENDPOINTS.orders}?email=${email}`)
-}
+  return client.get<Order[]>(`${ENDPOINTS.orders}?email=${email}`);
+};
 
-export const updateUserPassword = (userId: string, newPassword: string, currentUser: StoredUser) => {
+export const updateUserPassword = (
+  userId: string,
+  newPassword: string,
+  currentUser: StoredUser,
+) => {
   return client.patch(`${ENDPOINTS.users}/${userId}`, {
     customer: { ...currentUser.customer, password: newPassword },
   });

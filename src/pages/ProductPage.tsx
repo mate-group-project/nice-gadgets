@@ -32,9 +32,7 @@ export const ProductPage = () => {
   }
 
   if (error || !product) {
-    return (
-      <ProductNotFoundPage />
-    );
+    return <ProductNotFoundPage />;
   }
 
   const TITLES = {

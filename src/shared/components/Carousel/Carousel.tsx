@@ -39,19 +39,15 @@ export const Carousel: React.FC = () => {
           }}
           scrollbar={{ draggable: true }}
         >
-
           <SwiperSlide>
             <div className="carousel__slide">
-
               <div className="carousel__content">
                 <h2 className="carousel__title">
                   <span className="gradient">Now available in our store</span>
                   <span className="emoji">👌</span>
                 </h2>
-                <p className="carousel__text">
-                  Be the first!
-                </p>
-                <button 
+                <p className="carousel__text">Be the first!</p>
+                <button
                   className="button carousel__button"
                   style={{ width: '180px' }}
                   onClick={() => navigate('/catalog?category=phones')}
@@ -61,23 +57,23 @@ export const Carousel: React.FC = () => {
               </div>
 
               <div className="carousel__image">
-                <img src={heroBanner} alt="hero Banner" />
+                <img
+                  src={heroBanner}
+                  alt="hero Banner"
+                />
               </div>
             </div>
           </SwiperSlide>
 
           <SwiperSlide>
             <div className="carousel__slide">
-
               <div className="carousel__content">
                 <h2 className="carousel__title">
                   <span className="gradient">Now available in our store</span>
                   <span className="emoji">👌</span>
                 </h2>
-                <p className="carousel__text">
-                  Be the first!
-                </p>
-                <button 
+                <p className="carousel__text">Be the first!</p>
+                <button
                   className="button carousel__button"
                   style={{ width: '180px' }}
                 >
@@ -86,23 +82,23 @@ export const Carousel: React.FC = () => {
               </div>
 
               <div className="carousel__image">
-                <img src={heroBanner} alt="hero Banner" />
+                <img
+                  src={heroBanner}
+                  alt="hero Banner"
+                />
               </div>
             </div>
           </SwiperSlide>
 
           <SwiperSlide>
             <div className="carousel__slide">
-
               <div className="carousel__content">
                 <h2 className="carousel__title">
                   <span className="gradient">Now available in our store</span>
                   <span className="emoji">👌</span>
                 </h2>
-                <p className="carousel__text">
-                  Be the first!
-                </p>
-                <button 
+                <p className="carousel__text">Be the first!</p>
+                <button
                   className="button carousel__button"
                   style={{ width: '180px' }}
                 >
@@ -111,11 +107,13 @@ export const Carousel: React.FC = () => {
               </div>
 
               <div className="carousel__image">
-                <img src={heroBanner} alt="hero Banner" />
+                <img
+                  src={heroBanner}
+                  alt="hero Banner"
+                />
               </div>
             </div>
           </SwiperSlide>
-
         </Swiper>
       </div>
 
