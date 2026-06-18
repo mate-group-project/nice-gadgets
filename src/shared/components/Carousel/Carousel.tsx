@@ -10,9 +10,18 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { useNavigate } from 'react-router-dom';
+import type { SlideLang } from '@/shared/hooks/useHomeData.ts';
 
-export const Carousel: React.FC = () => {
+type Props = {
+  slides: SlideLang[];
+  lang: string;
+};
+
+export const Carousel: React.FC<Props> = ({ slides, lang }) => {
   const navigate = useNavigate();
+
+  console.log(slides);
+  console.log(lang);
 
   return (
     <div className="carousel carousel-hero">

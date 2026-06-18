@@ -6,10 +6,11 @@ export type Store = {
   name: string;
 };
 
-type StoresResponse = {
+export type StoresResponse = {
+  id: string;
   data: Store[];
 };
 
 export const getStores = () => {
-  return client.get<StoresResponse>(ENDPOINTS.stores);
+  return client.get<StoresResponse[]>(ENDPOINTS.stores);
 };
