@@ -50,7 +50,6 @@ export const HomePage: React.FC = () => {
     tablets: 'https://i.ibb.co/LDW8zcC9/Phones.png',
     accessories: 'https://i.ibb.co/rftBtp2v/Phone.png',
   };
-  const CATEGORIES = ['phones', 'tablets', 'accessories'];
 
   const DISPLAY_NAMES: Record<string, string> = {
     phones: 'Mobile phones',
