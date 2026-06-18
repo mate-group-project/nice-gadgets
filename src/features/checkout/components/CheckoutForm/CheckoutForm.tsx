@@ -7,6 +7,8 @@ import { useStores } from '@/shared/hooks/useStoresList';
 import { useCheckout } from '@/shared/hooks/useCheckout';
 import { SuccessModal } from '../SuccessModal';
 import { useCartProducts } from '@/features/cart/hooks/useCartProducts';
+import { useTranslation } from '@/features/translations/hooks/useTranslation.ts';
+import { PickupPointsSection } from '@/features/pickup-points-main/components/PickupPointsSection.tsx';
 
 type DeliveryType = 'pickup' | 'delivery';
 
@@ -34,6 +36,7 @@ interface GetWarehousesResponse {
 }
 
 export const CheckoutForm = () => {
+  const { t } = useTranslation();
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
@@ -210,7 +213,7 @@ export const CheckoutForm = () => {
 
   const handleClose = () => {
     setIsOpen(false);
-    navigate('/catalog');
+    navigate('/catalog?category=phones');
   };
 
   // reset form fields
@@ -296,12 +299,12 @@ export const CheckoutForm = () => {
         className="order_form"
       >
         {/*  CUSTOMER */}
-        <h2>Contact information</h2>
+        <h2>{t('checkout.contactInformation')}</h2>
 
         <div className="field">
           <input
             name="firstName"
-            placeholder="First name"
+            placeholder={t('checkout.firstName')}
             value={form.firstName}
             onChange={handleChange}
             className="form__field"
@@ -319,7 +322,7 @@ export const CheckoutForm = () => {
         <div className="field">
           <input
             name="lastName"
-            placeholder="Last name"
+            placeholder={t('checkout.lastName')}
             value={form.lastName}
             onChange={handleChange}
             className="form__field"
@@ -341,7 +344,7 @@ export const CheckoutForm = () => {
         <div className="field">
           <input
             name="phone"
-            placeholder="Phone"
+            placeholder={t('checkout.phone')}
             value={form.phone}
             onChange={handleChange}
             className="form__field"
@@ -350,7 +353,7 @@ export const CheckoutForm = () => {
         </div>
 
         {/*  DELIVERY */}
-        <h2>Delivery method</h2>
+        <h2>{t('checkout.delivery')}</h2>
 
         <div className="delivery__method">
           <label
@@ -365,13 +368,14 @@ export const CheckoutForm = () => {
               onChange={() => setDeliveryType('pickup')}
             />
 
-            <span className="radio__label">Pickup (store)</span>
+            <span className="radio__label">{t('checkout.pickup')}</span>
           </label>
+          <PickupPointsSection />
 
           {deliveryType === 'pickup' && (
             <div className="delivery__dropdown-nogap">
               <Dropdown
-                label="Select store"
+                label={t('checkout.selectStore')}
                 value={storeId}
                 options={storeOptions}
                 onChange={(value) => {
@@ -401,17 +405,17 @@ export const CheckoutForm = () => {
               onChange={() => setDeliveryType('delivery')}
             />
 
-            <span className="radio__label">Nova Poshta delivery</span>
+            <span className="radio__label">{t('checkout.novaPoshta')}</span>
           </label>
 
           {deliveryType === 'delivery' && (
             <div className="delivery__dropdown">
               {/* CITY SEARCH */}
-              <p className="delivery__title">Search city</p>
+              <p className="delivery__title">{t('checkout.city')}</p>
 
               <div>
                 <input
-                  placeholder="Search city"
+                  placeholder={t('checkout.city')}
                   value={citySearch}
                   className="form__field"
                   onChange={(e) => {
@@ -473,11 +477,11 @@ export const CheckoutForm = () => {
               {/* WAREHOUSE SEARCH */}
               {selectedCity?.Ref && (
                 <>
-                  <p className="delivery__title">Search warehouse</p>
+                  <p className="delivery__title">{t('checkout.warehouse')}</p>
 
                   <div>
                     <input
-                      placeholder="Search warehouse"
+                      placeholder={t('checkout.warehouse')}
                       value={warehouseSearch}
                       className="form__field"
                       onChange={(e) => {
@@ -540,9 +544,9 @@ export const CheckoutForm = () => {
         <button
           type="submit"
           className="button"
-          style={{ width: '180px' }}
+          style={{ width: '280px' }}
         >
-          Place order
+          {t('checkout.placeOrder')}
         </button>
       </form>
 

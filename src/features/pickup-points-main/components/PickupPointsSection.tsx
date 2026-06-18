@@ -9,6 +9,7 @@ import { PickupPointsMapSkeleton } from './PickupPointsMapSkeleton.tsx';
 
 export const PickupPointsSection = () => {
   const { language } = useTranslation();
+  const { t } = useTranslation();
 
   const pickupPointsLanguage: 'en' | 'uk' = language === 'uk' ? 'uk' : 'en';
 
@@ -75,7 +76,7 @@ export const PickupPointsSection = () => {
         className="button about__button"
         onClick={handleToggleMap}
       >
-        Pickup points
+        {t('about.points')}
       </Button>
 
       {isOpen && (
