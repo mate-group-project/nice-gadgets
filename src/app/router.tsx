@@ -11,6 +11,7 @@ import { RightPage } from '@/pages/RightPage';
 import { CheckoutPage } from '@/pages/CheckoutPage';
 import { AboutUs } from '@/pages/AboutUsPage/AboutUs';
 import { AuthPage } from '@/pages/AuthPage/AuthPage';
+import { AccountPage } from '@/pages/AccountPage/AccountPage';
 
 // routes
 export const router = createBrowserRouter([
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
       {
         path: 'auth',
         element: <AuthPage />,
+      },
+      {
+        path: '/account',
+        element: <AccountPage />,
       },
     ],
   },

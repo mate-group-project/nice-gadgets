@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import cn from 'classnames';
 import './LanguageSwitcher.scss';
-
-type Language = 'en' | 'ua';
+import { useTranslation } from '@/features/translations/hooks/useTranslation'; // Проверь этот путь к хуку
+import type { Language } from '@/features/translations/api/translation'; // Импортируем типы 'en' | 'uk'
 
 interface LanguageSwitcherProps {
   onLanguageSelect?: () => void;
@@ -12,9 +12,9 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   onLanguageSelect,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState<Language>(() => {
-    return (localStorage.getItem('app_lang') as Language) || 'en';
-  });
+  
+  const { language, setLanguage } = useTranslation();
+  const currentLang = language as Language;
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -32,8 +32,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   }, []);
 
   const handleLangChange = (lang: Language) => {
-    setCurrentLang(lang);
-    localStorage.setItem('app_lang', lang);
+    setLanguage(lang); 
     setIsOpen(false);
     if (onLanguageSelect) {
       onLanguageSelect();
@@ -45,7 +44,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
       label: 'English',
       flagUrl: 'https://hatscripts.github.io/circle-flags/flags/gb.svg',
     },
-    ua: {
+    uk: {
       label: 'Українська',
       flagUrl: 'https://hatscripts.github.io/circle-flags/flags/ua.svg',
     },
@@ -64,7 +63,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         onClick={() => setIsOpen(!isOpen)}
       >
         <img
-          src={languages[currentLang].flagUrl}
+          src={languages[currentLang]?.flagUrl || languages.en.flagUrl}
           alt={currentLang}
           className="lang-switcher__current-flag"
         />

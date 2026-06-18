@@ -7,12 +7,12 @@ import { client } from '@/shared/api/client';
 type UserDelivery =
   | { type: 'pickup'; storeId: string }
   | {
-      type: 'delivery';
-      city: string;
-      cityRef: string;
-      warehouse: string;
-      warehouseRef: string;
-    };
+    type: 'delivery';
+    city: string;
+    cityRef: string;
+    warehouse: string;
+    warehouseRef: string;
+  };
 
 interface UserCustomer {
   firstName: string;
@@ -34,6 +34,7 @@ export const AuthPage = () => {
     email: '',
     password: '',
     confirmPassword: '',
+    name: '',
   });
   const [errors, setErrors] = useState({
     email: '',
@@ -52,6 +53,8 @@ export const AuthPage = () => {
     isLoginMode ? 'Dont have an account ?' : 'Already have an account?';
   const formToggleLink = isLoginMode ? 'Register' : 'Log In';
   const formMode = isLoginMode ? 'register' : 'login';
+
+  const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_+\-=[\]\\/`~;])\S{8,}$/;
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -90,23 +93,20 @@ export const AuthPage = () => {
           const foundUser = users[0];
 
           if (foundUser.customer.password === formInputs.password) {
-            const sessionDuration = 24 * 60 * 60 * 1000;
-            const expiresAt = Date.now() + sessionDuration;
-
-            const authData = {
-              user: foundUser,
-              expiresAt: expiresAt,
-            };
-
-            localStorage.setItem('currentUser', JSON.stringify(authData));
+            localStorage.setItem('currentUser', JSON.stringify(foundUser));
+            window.dispatchEvent(new Event('authChange'));
 
             navigate('/');
-            setFormInputs({ email: '', password: '', confirmPassword: '' });
+            setFormInputs({
+              email: '',
+              password: '',
+              confirmPassword: '',
+              name: '',
+            });
           } else {
             setErrors((prev) => ({
               ...prev,
-              email: 'Invalid email or password',
-              password: 'Invalid email or password',
+              password: 'Wrong password',
             }));
           }
         }
@@ -146,9 +146,17 @@ export const AuthPage = () => {
           return;
         }
 
+        if (!passwordRegex.test(formInputs.password)) {
+          setErrors(prev => ({
+            ...prev,
+            password: 'Password must be at least 8 characters, contain letters, numbers, special characters, and no spaces.'
+          }));
+          return;
+        }
+
         const newUser: User = {
           customer: {
-            firstName: '',
+            firstName: formInputs.name,
             lastName: '',
             email: formInputs.email,
             phone: '',
@@ -163,8 +171,14 @@ export const AuthPage = () => {
         const createdUser = await client.post<User>('/users', newUser);
 
         localStorage.setItem('currentUser', JSON.stringify(createdUser));
+        window.dispatchEvent(new Event('authChange'));
         navigate('/');
-        setFormInputs({ email: '', password: '', confirmPassword: '' });
+        setFormInputs({
+          email: '',
+          password: '',
+          confirmPassword: '',
+          name: '',
+        });
       } catch (err) {
         setErrors((prev) => ({
           ...prev,
@@ -183,6 +197,7 @@ export const AuthPage = () => {
       email: '',
       password: '',
       confirmPassword: '',
+      name: '',
     }));
     setErrors({ email: '', password: '', confirmPassword: '', form: '' });
   };
@@ -197,6 +212,17 @@ export const AuthPage = () => {
           onSubmit={handleSubmit}
           className="auth-form"
         >
+          {!isLoginMode && (
+            <input
+              type="text"
+              placeholder="Name"
+              name="name"
+              required
+              value={formInputs.name}
+              onChange={handleChange}
+            />
+          )}
+
           <input
             type="email"
             placeholder="Email"
@@ -217,6 +243,8 @@ export const AuthPage = () => {
             style={{ borderColor: errors.password ? '#ff4d4f' : '' }}
             value={formInputs.password}
             onChange={handleChange}
+            minLength={8}
+            autoComplete={isLoginMode ? "current-password" : "new-password"}
           />
           {errors.password && (
             <span className="auth-form__field-error">{errors.password}</span>
@@ -229,6 +257,7 @@ export const AuthPage = () => {
                 placeholder="Confirm Password"
                 name="confirmPassword"
                 required
+                autoComplete="new-password"
                 style={{ borderColor: errors.confirmPassword ? '#ff4d4f' : '' }}
                 value={formInputs.confirmPassword}
                 onChange={handleChange}
