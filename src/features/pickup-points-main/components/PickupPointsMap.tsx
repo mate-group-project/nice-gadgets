@@ -3,6 +3,7 @@ import './PickupPointsMap.scss';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import type { PickupPoint } from '../types/PickupPoint';
 import { AutoFitBounds } from './AutoFitBounds';
+import './leaflet-icons';
 
 type Props = {
   points: PickupPoint[];

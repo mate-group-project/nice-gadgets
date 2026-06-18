@@ -44,7 +44,7 @@ export const Menu = ({ className = '' }: Props) => {
         <Dialog.Popup className="menu__popup">
           <div className="menu__header">
             <img
-              src="/logo.png"
+              src="/dark-logo.png"
               alt="logo"
               width="404"
               height="145"
