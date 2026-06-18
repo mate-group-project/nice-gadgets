@@ -2,6 +2,7 @@ import React from 'react';
 import { CartItem } from '../CartItem/CartItem';
 import './CartList.scss';
 import type { ProductCart } from '@/features/cart/types.ts';
+import { useTranslation } from '@/features/translations/hooks/useTranslation.ts';
 
 interface CartListProps {
   items: ProductCart[];
@@ -14,10 +15,12 @@ export const CartList: React.FC<CartListProps> = ({
   onRemove,
   onUpdateQuantity,
 }) => {
+  const { t } = useTranslation();
+
   if (items.length === 0) {
     return (
       <div className="cart-list__empty">
-        <p>Your cart is empty</p>
+        <p>{t('cart.empty') || 'Your cart is empty'}</p>
       </div>
     );
   }

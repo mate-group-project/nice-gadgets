@@ -6,6 +6,7 @@ import panda from './images/panda.png';
 import tigresse from './images/tigresse.png';
 import monkey from './images/monkey.png';
 import { Breadcrumbs } from '../Breadcrumbs';
+import { useTranslation } from '@/features/translations/hooks/useTranslation';
 
 export type Person = {
   id: number;
@@ -74,11 +75,13 @@ const people = [
 ];
 
 export const Contacts: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <main className="contacts">
       <div className="contacts__container">
-        <Breadcrumbs crumbs={[{ label: 'Contacts' }]} />
-        <h1 className="contacts__title">Contacts</h1>
+        <Breadcrumbs crumbs={[{ label: t('footer.contacts') || 'Contacts' }]} />
+        <h1 className="contacts__title">{t('footer.contacts') || 'Contacts'}</h1>
         <div className="contacts__list">
           {people.map((person) => (
             <article
@@ -101,7 +104,7 @@ export const Contacts: React.FC = () => {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    GitHub profile
+                    {t('contacts.githubProfile') || 'GitHub profile'}
                   </a>
                 </li>
 
@@ -112,7 +115,7 @@ export const Contacts: React.FC = () => {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    LinkedIn profile
+                    {t('contacts.linkedinProfile') || 'LinkedIn profile'}
                   </a>
                 </li>
 
