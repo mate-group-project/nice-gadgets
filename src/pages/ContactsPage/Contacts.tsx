@@ -81,7 +81,9 @@ export const Contacts: React.FC = () => {
     <main className="contacts">
       <div className="contacts__container">
         <Breadcrumbs crumbs={[{ label: t('footer.contacts') || 'Contacts' }]} />
-        <h1 className="contacts__title">{t('footer.contacts') || 'Contacts'}</h1>
+        <h1 className="contacts__title">
+          {t('footer.contacts') || 'Contacts'}
+        </h1>
         <div className="contacts__list">
           {people.map((person) => (
             <article

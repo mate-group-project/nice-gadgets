@@ -30,7 +30,10 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
       <div className="cart-summary__price-container">
         <span className="cart-summary__total-price">${totalPrice}</span>
         <span className="cart-summary__count">
-          {t('cart.totalFor')} {totalItems} {totalItems === 1 ? (t('cart.item') || 'item') : (t('cart.items') || 'items')}
+          {t('cart.totalFor')} {totalItems}{' '}
+          {totalItems === 1 ?
+            t('cart.item') || 'item'
+          : t('cart.items') || 'items'}
         </span>
       </div>
 

@@ -47,7 +47,9 @@ export const DeliveryOptions = ({
 
     {/* Pickup */}
     <div className="delivery__method">
-      <label className={`radio__item ${deliveryType === 'pickup' ? 'radio__item--active' : ''}`}>
+      <label
+        className={`radio__item ${deliveryType === 'pickup' ? 'radio__item--active' : ''}`}
+      >
         <input
           type="radio"
           className="radio__input"
@@ -75,7 +77,9 @@ export const DeliveryOptions = ({
 
     {/* Delivery */}
     <div className="delivery__method">
-      <label className={`radio__item ${deliveryType === 'delivery' ? 'radio__item--active' : ''}`}>
+      <label
+        className={`radio__item ${deliveryType === 'delivery' ? 'radio__item--active' : ''}`}
+      >
         <input
           type="radio"
           className="radio__input"
@@ -110,13 +114,17 @@ export const DeliveryOptions = ({
             <div className="delivery__list">
               {cities.map((city) => {
                 const label = city.Present || '';
-                const isActive = selectedCity?.Ref === (city.DeliveryCity || city.Ref);
+                const isActive =
+                  selectedCity?.Ref === (city.DeliveryCity || city.Ref);
                 return (
                   <div
                     key={city.Ref}
                     className={`delivery__item ${isActive ? 'delivery__item--active' : ''}`}
                     onClick={() => {
-                      setSelectedCity({ Ref: city.DeliveryCity || city.Ref, Present: label });
+                      setSelectedCity({
+                        Ref: city.DeliveryCity || city.Ref,
+                        Present: label,
+                      });
                       setCitySearch(label);
                       setErrors((prev) => ({ ...prev, city: '' }));
                     }}
@@ -145,7 +153,9 @@ export const DeliveryOptions = ({
                     }
                   }}
                 />
-                {errors.warehouse && <p className="error">{errors.warehouse}</p>}
+                {errors.warehouse && (
+                  <p className="error">{errors.warehouse}</p>
+                )}
               </div>
 
               {loadingWarehouses && <p>Loading...</p>}

@@ -162,9 +162,9 @@ export const ProductActions = ({ product }: ProductActionsProps) => {
               })}
               onClick={addToCart}
             >
-              {isAdded 
-                ? (t('product.addedToCart') || 'Added to cart') 
-                : (t('product.addToCart') || 'Add to cart')}
+              {isAdded ?
+                t('product.addedToCart') || 'Added to cart'
+              : t('product.addToCart') || 'Add to cart'}
             </Button>
 
             <Button
@@ -187,7 +187,9 @@ export const ProductActions = ({ product }: ProductActionsProps) => {
                   key={spec.label}
                   className="short-specs__item"
                 >
-                  <span className="short-specs__name">{getSpecLabel(spec.label)}</span>
+                  <span className="short-specs__name">
+                    {getSpecLabel(spec.label)}
+                  </span>
                   <span className="short-specs__value">{spec.value}</span>
                 </li>
               );

@@ -10,7 +10,10 @@ interface CustomerFormFieldsProps {
   firstErrorRef: React.RefObject<HTMLDivElement | null>;
 }
 
-const fields: { name: keyof CustomerFormFieldsProps['form']; placeholder: string }[] = [
+const fields: {
+  name: keyof CustomerFormFieldsProps['form'];
+  placeholder: string;
+}[] = [
   { name: 'firstName', placeholder: 'First name' },
   { name: 'lastName', placeholder: 'Last name' },
   { name: 'email', placeholder: 'Email' },
@@ -27,7 +30,10 @@ export const CustomerFormFields = ({
     <h2>Contact information</h2>
 
     {fields.map(({ name, placeholder }) => (
-      <div className="field" key={name}>
+      <div
+        className="field"
+        key={name}
+      >
         <input
           name={name}
           placeholder={placeholder}

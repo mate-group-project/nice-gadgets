@@ -38,14 +38,21 @@ export const ProductPage = () => {
 
   if (isLoading) {
     return <ProductPageSkeleton />;
-    return <div className="product-page__loading">{t('common.loading') || 'Loading...'}</div>;
+    return (
+      <div className="product-page__loading">
+        {t('common.loading') || 'Loading...'}
+      </div>
+    );
   }
 
   if (error || !product) {
     return <ProductNotFoundPage />;
   }
 
-  const categoryTitle = t(`categoryPage.categoriesTitle.${product.category}`) || TITLES[product.category as keyof typeof TITLES] || product.category;
+  const categoryTitle =
+    t(`categoryPage.categoriesTitle.${product.category}`) ||
+    TITLES[product.category as keyof typeof TITLES] ||
+    product.category;
 
   const crumbs: Crumb[] = [
     {

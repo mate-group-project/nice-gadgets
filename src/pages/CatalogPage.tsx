@@ -38,17 +38,16 @@ export const CatalogPage: React.FC = () => {
     });
   }, [currentPage]);
 
-  const displayTitle = t(`categoryPage.categoriesTitle.${category}`) || TITLES[category as keyof typeof TITLES] || category;
+  const displayTitle =
+    t(`categoryPage.categoriesTitle.${category}`) ||
+    TITLES[category as keyof typeof TITLES] ||
+    category;
 
   return (
     <div className="catalog">
-      <Breadcrumbs
-        crumbs={[{ label: displayTitle }]}
-      />
+      <Breadcrumbs crumbs={[{ label: displayTitle }]} />
 
-      <h1 className="catalog_title">
-        {displayTitle}
-      </h1>
+      <h1 className="catalog_title">{displayTitle}</h1>
 
       <p className="catalog_count">
         {total} {t('categoryPage.models') || 'models'}
@@ -60,9 +59,15 @@ export const CatalogPage: React.FC = () => {
           value={sort}
           options={[
             { label: t('categoryPage.newest') || 'Newest', value: '-year' },
-            { label: t('categoryPage.alphabetically') || 'Alphabetically', value: 'name' },
+            {
+              label: t('categoryPage.alphabetically') || 'Alphabetically',
+              value: 'name',
+            },
             { label: t('categoryPage.cheapest') || 'Cheapest', value: 'price' },
-            { label: t('categoryPage.discount') || 'Biggest discount', value: 'fullPrice' },
+            {
+              label: t('categoryPage.discount') || 'Biggest discount',
+              value: 'fullPrice',
+            },
           ]}
           onChange={(value) => {
             const params = new URLSearchParams(searchParams);
