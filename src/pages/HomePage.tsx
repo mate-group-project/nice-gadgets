@@ -20,6 +20,18 @@ export const HomePage: React.FC = () => {
     (product) => product.year === maxYear,
   );
 
+  const { total: phonesTotal } = useProductsList({ category: 'phones' });
+  const { total: tabletsTotal } = useProductsList({ category: 'tablets' });
+  const { total: accessoriesTotal } = useProductsList({
+    category: 'accessories',
+  });
+
+  const COUNT_BY_CATEGORY: Record<string, number> = {
+    phones: phonesTotal,
+    tablets: tabletsTotal,
+    accessories: accessoriesTotal,
+  };
+
   const hotPriceProducts = [...products]
     .filter((product) => product.fullPrice > product.price)
     .sort((a, b) => {
@@ -33,13 +45,17 @@ export const HomePage: React.FC = () => {
     .fill(null)
     .map((_, i) => <ProductCartSkeleton key={i} />);
 
-  const IMAGES = [
-    'https://i.ibb.co/gFwSBpht/Phones.png',
-    'https://i.ibb.co/zHD5rcYd/Tablets.png',
-    'https://i.ibb.co/DyL6gQR/Accessories.png',
-  ];
+  const IMAGE_BY_CATEGORY: Record<string, string> = {
+    phones: 'https://i.ibb.co/0RkY91SC/Phones-3x.png',
+    tablets: 'https://i.ibb.co/LDW8zcC9/Phones.png',
+    accessories: 'https://i.ibb.co/rftBtp2v/Phone.png',
+  };
 
-  const CATEGORIES = ['phones', 'tablets', 'accessories'];
+  const DISPLAY_NAMES: Record<string, string> = {
+    phones: 'Mobile phones',
+    tablets: 'Tablets',
+    accessories: 'Accessories',
+  };
 
   return (
     <>
@@ -64,13 +80,17 @@ export const HomePage: React.FC = () => {
 
       <Section title={t('homePage.categories')}>
         <div className="categories">
-          {categories.map((category, index) => (
+          {categories.map((category) => (
             <Link
               key={category.id}
-              to={`/catalog?category=${CATEGORIES[index]}`}
+              to={`/catalog?category=${category.name}`}
               style={{ flex: 1 }}
             >
-              <CategoryCard image={IMAGES[index]} />
+              <CategoryCard
+                image={IMAGE_BY_CATEGORY[category.name] ?? category.image}
+                title={DISPLAY_NAMES[category.name] ?? category.name}
+                count={COUNT_BY_CATEGORY[category.name] ?? 0}
+              />
             </Link>
           ))}
         </div>
