@@ -46,7 +46,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
   return (
     <article className="product__card">
-      <Link 
+      <Link
         to={`/product/${product.id}`}
         state={isHome ? { fromHome: true } : undefined}
       >

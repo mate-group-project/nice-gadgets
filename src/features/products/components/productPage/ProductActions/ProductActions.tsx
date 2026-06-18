@@ -1,7 +1,10 @@
 import { Button } from '@base-ui/react';
 import { Icon } from '@/shared/components/Icon';
 import './productAction.scss';
-import type { Product, ProductDetails } from '@/features/products/types/Product';
+import type {
+  Product,
+  ProductDetails,
+} from '@/features/products/types/Product';
 import { formatProdductSpecs } from '@/features/products/utils/productSpecs';
 import '../../ProductCard/ProductCard.scss';
 
@@ -33,7 +36,10 @@ const PRODUCT_COLORS: Record<string, string> = {
   'sky-blue': '#def0f9',
 };
 
-export const ProductActions = ({ productDetails, product }: ProductActionsProps) => {
+export const ProductActions = ({
+  productDetails,
+  product,
+}: ProductActionsProps) => {
   const { items: cart, saveItems } = useCart();
   const { items: favorites, saveItems: saveFavorites } = useFavorites();
   const specsConfig = formatProdductSpecs(productDetails);
@@ -121,7 +127,10 @@ export const ProductActions = ({ productDetails, product }: ProductActionsProps)
                     className={classNames(
                       'product-actions__capacity-option',
                       'capacity-btn',
-                      { 'capacity-btn--active': productDetails.id === capacity.id },
+                      {
+                        'capacity-btn--active':
+                          productDetails.id === capacity.id,
+                      },
                     )}
                     title={capacity.name}
                   >

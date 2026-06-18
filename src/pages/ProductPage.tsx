@@ -49,7 +49,9 @@ export const ProductPage = () => {
     return <ProductNotFoundPage />;
   }
 
-  const basicProduct: Product = products.find((p) => p.id === productDetails.id) || {
+  const basicProduct: Product = products.find(
+    (p) => p.id === productDetails.id,
+  ) || {
     id: productDetails.id,
     itemId: productDetails.id,
     category: productDetails.category,
@@ -64,7 +66,10 @@ export const ProductPage = () => {
     year: 2026,
   };
 
-  const categoryTitle = t(`categoryPage.categoriesTitle.${productDetails.category}`) || TITLES[productDetails.category as keyof typeof TITLES] || productDetails.category;
+  const categoryTitle =
+    t(`categoryPage.categoriesTitle.${productDetails.category}`) ||
+    TITLES[productDetails.category as keyof typeof TITLES] ||
+    productDetails.category;
 
   const crumbs: Crumb[] = [];
 
