@@ -81,8 +81,8 @@ export const ProductPageSkeleton = () => (
         <div className="product-page__details">
           <div className="product-page-skeleton__about">
             <div className="product-page-skeleton__section-heading">
-  <div className="product-page-skeleton__section-title" />
-</div>
+              <div className="product-page-skeleton__section-title" />
+            </div>
 
             <div className="product-page-skeleton__about-block">
               <div className="product-page-skeleton__subtitle" />
@@ -100,8 +100,8 @@ export const ProductPageSkeleton = () => (
 
           <div className="product-page-skeleton__tech">
             <div className="product-page-skeleton__section-heading product-page-skeleton__section-heading--tech">
-  <div className="product-page-skeleton__section-title" />
-</div>
+              <div className="product-page-skeleton__section-title" />
+            </div>
 
             <div className="product-page-skeleton__tech-list">
               <span className="product-page-skeleton__tech-row" />

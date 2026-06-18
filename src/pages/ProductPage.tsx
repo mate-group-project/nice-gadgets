@@ -29,13 +29,11 @@ export const ProductPage = () => {
     });
 
   if (isLoading) {
-    return <ProductPageSkeleton />
+    return <ProductPageSkeleton />;
   }
 
   if (error || !product) {
-    return (
-      <ProductNotFoundPage />
-    );
+    return <ProductNotFoundPage />;
   }
 
   const TITLES = {

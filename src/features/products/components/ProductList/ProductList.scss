@@ -17,21 +17,18 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 
-
   &__empty {
     text-align: center;
     padding: 80px 0;
   }
 
-  &__empty-title{
+  &__empty-title {
     font-size: 24px;
     font-weight: 700;
   }
 
-  &__empty-text{
+  &__empty-text {
     color: #89939a;
     margin-top: 8px;
   }
 }
-
-
