@@ -45,26 +45,25 @@ export const Carousel: React.FC<Props> = ({ slides, lang }) => {
           }}
           scrollbar={{ draggable: true }}
         >
-
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
               <div className="carousel__slide">
                 <div className="carousel__content">
                   <h2 className="carousel__title">
                     <span className="gradient">
-                      {lang === "en" ? slide.title.en : slide.title.uk}
+                      {lang === 'en' ? slide.title.en : slide.title.uk}
                     </span>
                     <span className="emoji">👌</span>
                   </h2>
                   <p className="carousel__text">
-                    {lang === "en" ? slide.text.en : slide.text.uk}
+                    {lang === 'en' ? slide.text.en : slide.text.uk}
                   </p>
                   <button
                     className="button carousel__button"
                     style={{ width: '180px' }}
                     onClick={() => navigate('/catalog')}
                   >
-                    {lang === "en" ? slide.button.en : slide.button.uk}
+                    {lang === 'en' ? slide.button.en : slide.button.uk}
                   </button>
                 </div>
 
@@ -75,7 +74,11 @@ export const Carousel: React.FC<Props> = ({ slides, lang }) => {
                     muted
                     loop
                     playsInline
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
                   />
                 </div>
               </div>
