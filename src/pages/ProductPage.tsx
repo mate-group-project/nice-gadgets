@@ -4,10 +4,9 @@ import { Gallery } from '../features/products/components/productPage/Gallery';
 import { ProductActions } from '../features/products/components/productPage/ProductActions';
 import { About } from '../features/products/components/productPage/About';
 import { TechSpecs } from '../features/products/components/productPage/TechSpecs';
-import { Link, useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useProduct } from '@/features/products/hooks/useProduct';
 import { Section } from '@/shared/components/Section';
-import { Icon } from '@/shared/components/Icon';
 import { Breadcrumbs, type Crumb } from './Breadcrumbs';
 import { ProductCard } from '@/features/products/components/ProductCard';
 import { useProductsList } from '@/features/products/hooks/useProductsList';
@@ -88,14 +87,6 @@ export const ProductPage = () => {
     <>
       <section className="product-page">
         <Breadcrumbs crumbs={crumbs} />
-
-        <Link
-          to=".."
-          className="product-page__back-link"
-        >
-          <Icon name="chevronLeft" />
-          <span>{t('productPage.back') || 'Back'}</span>
-        </Link>
 
         <div className="product-page__container">
           <h1 className="product-page__title">{productDetails.name}</h1>

@@ -61,7 +61,6 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
         className="product__card__link"
         to={`/product/${product.id}`}
         state={isHome ? { fromHome: true } : undefined}
-        target="_blank"
         rel="noreferrer"
       >
         <h3 className="product__card__title">{product.name}</h3>
